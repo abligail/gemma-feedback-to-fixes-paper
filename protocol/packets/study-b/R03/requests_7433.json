@@ -1,0 +1,1435 @@
+{
+  "schema_version": 1,
+  "instance_id": "requests_7433",
+  "frozen_draft": {
+    "path": "inputs/requests_7433/draft.patch",
+    "available": true,
+    "sha256": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9",
+    "bytes": 739,
+    "text": "diff --git a/src/requests/models.py b/src/requests/models.py\nindex 4142f2a4..f271e7e6 100644\n--- a/src/requests/models.py\n+++ b/src/requests/models.py\n@@ -596,9 +596,9 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):\n             if not isinstance(body, bytes):\n                 body = body.encode(\"utf-8\")\n \n-        if isinstance(data, Iterable) and not isinstance(\n-            data, (str, bytes, list, tuple, Mapping)\n-        ):\n+        if (\n+            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\n             try:\n                 length = super_len(data)\n             except (TypeError, AttributeError, UnsupportedOperation):\n"
+  },
+  "frozen_check": {
+    "available": false,
+    "reason": "no_final_response"
+  },
+  "frozen_execution": {
+    "available": false,
+    "reason": "check_unavailable",
+    "logical_tool_opportunities_used": 0
+  },
+  "mechanical_comparisons": {
+    "frozen_draft_file_matches_record": true,
+    "frozen_draft_matches_returned_draft": true,
+    "input_draft_sha256": {
+      "checker": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9",
+      "probe": null,
+      "control": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9",
+      "feedback": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9"
+    },
+    "same_frozen_draft_in_all_followup_sandboxes": null,
+    "branch_runtime_input_hashes_match_frozen": {
+      "control": true,
+      "feedback": true
+    },
+    "starting_source_tree_sha256": {
+      "checker": "89d85313f1115eafea484929d6207abd3133b7c8f21833b57fd739412aa0940f",
+      "probe": null,
+      "control": "89d85313f1115eafea484929d6207abd3133b7c8f21833b57fd739412aa0940f",
+      "feedback": "89d85313f1115eafea484929d6207abd3133b7c8f21833b57fd739412aa0940f"
+    },
+    "control_feedback_starting_source_equal": true,
+    "all_followup_starting_source_equal": null,
+    "common_material_equal": true,
+    "visibility": {
+      "control": {
+        "common_sha256_recomputed": "3599137f888c0d1ae801099f76d4821dd4a3a8c3e8a2ff627a155d016a687c25",
+        "common_sha256_declared": "3599137f888c0d1ae801099f76d4821dd4a3a8c3e8a2ff627a155d016a687c25",
+        "common_hash_matches_declared": true,
+        "problem_hash_matches_saved_input": true,
+        "execution_field": "Not supplied in this condition. This absence is not evidence that the draft or proposed check is correct or incorrect.",
+        "execution_field_matches_frozen_receipt": true,
+        "first_wire_request": 1,
+        "first_wire_line": 1,
+        "entire_public_problem_in_first_wire": true,
+        "common_material_in_first_wire": true,
+        "execution_section_in_first_wire": true,
+        "frozen_execution_available": false,
+        "expected_information_kind": "withheld",
+        "expected_information_visible_in_first_wire": true,
+        "actual_execution_result_visible_in_first_wire": false,
+        "unavailable_notice_visible_in_first_wire": false
+      },
+      "feedback": {
+        "common_sha256_recomputed": "3599137f888c0d1ae801099f76d4821dd4a3a8c3e8a2ff627a155d016a687c25",
+        "common_sha256_declared": "3599137f888c0d1ae801099f76d4821dd4a3a8c3e8a2ff627a155d016a687c25",
+        "common_hash_matches_declared": true,
+        "problem_hash_matches_saved_input": true,
+        "execution_field": "{\"available\": false, \"duration_seconds\": null, \"exit_code\": null, \"reason\": \"check_unavailable\", \"source_unchanged\": null, \"tested_source_tree_sha256\": null, \"timed_out\": null}",
+        "execution_field_matches_frozen_receipt": true,
+        "first_wire_request": 1,
+        "first_wire_line": 1,
+        "entire_public_problem_in_first_wire": true,
+        "common_material_in_first_wire": true,
+        "execution_section_in_first_wire": true,
+        "frozen_execution_available": false,
+        "expected_information_kind": "unavailable_notice",
+        "expected_information_visible_in_first_wire": true,
+        "actual_execution_result_visible_in_first_wire": false,
+        "unavailable_notice_visible_in_first_wire": true
+      }
+    },
+    "check_available": false,
+    "execution_available": false,
+    "final_patch_changed_from_draft": {
+      "control": true,
+      "feedback": true
+    },
+    "literal_proposed_command_reexecution_count": {
+      "control": null,
+      "feedback": null
+    }
+  },
+  "manual_annotations": {
+    "public_basis_supports_expected_behavior": "pending",
+    "correct_entry_reached": "pending",
+    "execution_semantic_interpretation": "pending",
+    "feedback_used_for_source_revision": "pending",
+    "unjustified_source_change": "pending",
+    "last_check_covers_final_source": "pending",
+    "notes": "pending"
+  },
+  "stages": {
+    "draft": {
+      "agent_patch": {
+        "path": "drafts/jobs/requests_7433/2026101403/draft/agent.patch",
+        "available": true,
+        "sha256": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9",
+        "bytes": 739,
+        "text": "diff --git a/src/requests/models.py b/src/requests/models.py\nindex 4142f2a4..f271e7e6 100644\n--- a/src/requests/models.py\n+++ b/src/requests/models.py\n@@ -596,9 +596,9 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):\n             if not isinstance(body, bytes):\n                 body = body.encode(\"utf-8\")\n \n-        if isinstance(data, Iterable) and not isinstance(\n-            data, (str, bytes, list, tuple, Mapping)\n-        ):\n+        if (\n+            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\n             try:\n                 length = super_len(data)\n             except (TypeError, AttributeError, UnsupportedOperation):\n"
+      },
+      "official_tool_events": {
+        "path": "drafts/jobs/requests_7433/2026101403/draft/official/traces/trace_requests_7433.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"def prepare_body\" src/requests"
+                },
+                "extra": {
+                  "elapsed_s": 33.38150095939636,
+                  "timestamp": 1791928498.7236378,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"src/requests/models.py:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 33.46900725364685,
+                "timestamp": 1791928498.811144,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 33.38150095939636,
+              "timestamp": 1791928498.7236378,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 35.75472903251648,
+                  "timestamp": 1791928501.096866,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.models\\n~~~~~~~~~~~~~~~\\n\\nThis module contains the primary objects that power Requests.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport datetime\\n\\n# Import encoding now, to avoid implicit import later.\\n# Implicit import within threads may cause LookupError when standard library is in a ZIP,\\n# such as in Embedded Python. See https://github.com/psf/requests/issues/3578.\\nimport encodings.idna  # noqa: F401  # type: ignore[reportUnusedImport]\\nfrom collections.abc import Callable, Generator, Iterable, Iterator, Mapping\\nfrom io import UnsupportedOperation\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Final,\\n    Literal,\\n    cast,\\n    overload,\\n)\\n\\nfrom urllib3.exceptions import (\\n    DecodeError,\\n    LocationParseError,\\n    ProtocolError,\\n    ReadTimeoutError,\\n    SSLError,\\n)\\nfrom urllib3.fields import RequestField\\nfrom urllib3.filepost import encode_multipart_formdata\\nfrom urllib3.util import parse_url\\n\\nfrom ._internal_utils import to_native_string, unicode_is_ascii\\nfrom ._types import SupportsRead as _SupportsRead\\nfrom .auth import HTTPBasicAuth\\nfrom .compat import (\\n    JSONDecodeError,\\n    basestring,\\n    builtin_str,\\n    chardet,\\n    cookielib,\\n    urlencode,\\n    urlsplit,\\n    urlunparse,\\n)\\nfrom .compat import json as complexjson\\nfrom .cookies import (\\n    _copy_cookie_jar,  # type: ignore[reportPrivateUsage]\\n    cookiejar_from_dict,\\n    get_cookie_header,\\n)\\nfrom .exceptions import (\\n    ChunkedEncodingError,\\n    ConnectionError,\\n    ContentDecodingError,\\n    HTTPError,\\n    InvalidJSONError,\\n    InvalidURL,\\n    MissingSchema,\\n    StreamConsumedError,\\n)\\nfrom .exceptions import JSONDecodeError as RequestsJSONDecodeError\\nfrom .exceptions import SSLError as RequestsSSLError\\nfrom .hooks import default_hooks\\nfrom .status_codes import codes\\nfrom .structures import CaseInsensitiveDict\\nfrom .utils import (\\n    check_header_validity,\\n    get_auth_from_url,\\n    guess_filename,\\n    guess_json_utf,\\n    iter_slices,\\n    parse_header_links,\\n    requote_uri,\\n    stream_decode_response_unicode,\\n    super_len,\\n    to_key_val_list,\\n)\\n\\nif TYPE_CHECKING:\\n    from http.cookiejar import CookieJar\\n\\n    from typing_extensions import Self\\n\\n    from . import _types as _t\\n    from .adapters import HTTPAdapter\\n    from .cookies import RequestsCookieJar\\n\\n#: The set of HTTP status codes that indicate an automatically\\n#: processable redirect.\\nREDIRECT_STATI: Final[tuple[int, ...]] = (  # type: ignore[assignment]\\n    codes.moved,  # 301\\n    codes.found,  # 302\\n    codes.other,  # 303\\n    codes.temporary_redirect,  # 307\\n    codes.permanent_redirect,  # 308\\n)\\n\\nDEFAULT_REDIRECT_LIMIT: int = 30\\nCONTENT_CHUNK_SIZE: int = 10 * 1024\\nITER_CHUNK_SIZE: int = 512\\n\\n\\nclass RequestEncodingMixin:\\n    url: str | None\\n\\n    @property\\n    def path_url(self) -> str:\\n        \\\"\\\"\\\"Build the path URL to use.\\\"\\\"\\\"\\n\\n        url: list[str] = []\\n\\n        p = urlsplit(cast(str, self.url))\\n\\n        path = p.path\\n        if not path:\\n            path = \\\"/\\\"\\n\\n        url.append(path)\\n\\n        query = p.query\\n        if query:\\n            url.append(\\\"?\\\")\\n            url.append(query)\\n\\n        return \\\"\\\".join(url)\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: str) -> str: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: bytes) -> bytes: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(\\n        data: _t.SupportsRead[str | bytes],\\n    ) -> _t.SupportsRead[str | bytes]: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: _t.KVDataType) -> str: ...\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1180, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 35.851901054382324,
+                "timestamp": 1791928501.194038,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 35.75472903251648,
+              "timestamp": 1791928501.096866,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"def prepare_body\" src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 37.68314814567566,
+                  "timestamp": 1791928503.025285,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"574:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 37.7548348903656,
+                "timestamp": 1791928503.0969718,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 37.68314814567566,
+              "timestamp": 1791928503.025285,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "start_line": 574,
+                  "end_line": 650
+                },
+                "extra": {
+                  "elapsed_s": 39.431793212890625,
+                  "timestamp": 1791928504.77393,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"    def prepare_body(\\n        self, data: _t.DataType, files: _t.FilesType, json: _t.JsonType = None\\n    ) -> None:\\n        \\\"\\\"\\\"Prepares the given HTTP body data.\\\"\\\"\\\"\\n\\n        # Check if file, fo, generator, iterator.\\n        # If not, run through normal process.\\n\\n        # Nottin' on you.\\n        body = None\\n        content_type = None\\n\\n        if not data and json is not None:\\n            # urllib3 requires a bytes-like body. Python 2's json.dumps\\n            # provides this natively, but Python 3 gives a Unicode string.\\n            content_type = \\\"application/json\\\"\\n\\n            try:\\n                body = complexjson.dumps(json, allow_nan=False)\\n            except ValueError as ve:\\n                raise InvalidJSONError(ve, request=self)\\n\\n            if not isinstance(body, bytes):\\n                body = body.encode(\\\"utf-8\\\")\\n\\n        if isinstance(data, Iterable) and not isinstance(\\n            data, (str, bytes, list, tuple, Mapping)\\n        ):\\n            try:\\n                length = super_len(data)\\n            except (TypeError, AttributeError, UnsupportedOperation):\\n                length = None\\n\\n            body = data\\n\\n            if getattr(body, \\\"tell\\\", None) is not None:\\n                # Record the current file position before reading.\\n                # This will allow us to rewind a file in the event\\n                # of a redirect.\\n                try:\\n                    self._body_position = body.tell()  # type: ignore[union-attr]  # guarded by getattr check\\n                except OSError:\\n                    # This differentiates from None, allowing us to catch\\n                    # a failed `tell()` later when trying to rewind the body\\n                    self._body_position = object()\\n\\n            if files:\\n                raise NotImplementedError(\\n                    \\\"Streamed bodies and files are mutually exclusive.\\\"\\n                )\\n\\n            if length:\\n                self.headers[\\\"Content-Length\\\"] = builtin_str(length)\\n            else:\\n                self.headers[\\\"Transfer-Encoding\\\"] = \\\"chunked\\\"\\n        else:\\n            # After is_stream filtering, remaining data is raw (not streamed)\\n            raw_data = cast(\\\"_t.RawDataType | None\\\", data)\\n\\n            # Multi-part file uploads.\\n            if files:\\n                (body, content_type) = self._encode_files(files, raw_data)\\n            else:\\n                if raw_data:\\n                    body = self._encode_params(raw_data)\\n                    if isinstance(data, basestring) or isinstance(data, _SupportsRead):\\n                        content_type = None\\n                    else:\\n                        content_type = \\\"application/x-www-form-urlencoded\\\"\\n\\n            self.prepare_content_length(body)\\n\\n            # Add content-type if it wasn't explicitly provided.\\n            if content_type and (\\\"content-type\\\" not in self.headers):\\n                self.headers[\\\"Content-Type\\\"] = content_type\\n\\n        self.body = body  # type: ignore[assignment]  # body transforms from DataType to BodyType\", \"start_line\": 574, \"end_line\": 650, \"total_lines\": 1180, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 39.50666332244873,
+                "timestamp": 1791928504.8488002,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 39.431793212890625,
+              "timestamp": 1791928504.77393,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "edit_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "new_string": "        if (\n            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):",
+                  "old_string": "        if isinstance(data, Iterable) and not isinstance(\n            data, (str, bytes, list, tuple, Mapping)\n        ):"
+                },
+                "extra": {
+                  "elapsed_s": 43.74507975578308,
+                  "timestamp": 1791928509.0872166,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/src/requests/models.py\\n+++ b/src/requests/models.py\\n@@ -596,9 +596,9 @@\\n             if not isinstance(body, bytes):\\n                 body = body.encode(\\\"utf-8\\\")\\n \\n-        if isinstance(data, Iterable) and not isinstance(\\n-            data, (str, bytes, list, tuple, Mapping)\\n-        ):\\n+        if (\\n+            isinstance(data, Iterable) or hasattr(data, \\\"__iter__\\\")\\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\\n             try:\\n                 length = super_len(data)\\n             except (TypeError, AttributeError, UnsupportedOperation):\\n\", \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "edit_file",
+                "elapsed_s": 44.03226661682129,
+                "timestamp": 1791928509.3744035,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 43.74507975578308,
+              "timestamp": 1791928509.0872166,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "\nimport requests\nfrom collections.abc import Iterable\n\nclass ProxyIterable:\n    def __getattr__(self, name):\n        if name == \"__iter__\":\n            return iter([1, 2, 3])\n        raise AttributeError(name)\n\ndef test_proxy_iterable():\n    data = ProxyIterable()\n    print(f\"isinstance(data, Iterable): {isinstance(data, Iterable)}\")\n    print(f\"hasattr(data, '__iter__'): {hasattr(data, '__iter__')}\")\n    \n    req = requests.Request('POST', 'http://httpbin.org/post', data=data)\n    prepared = req.prepare()\n    \n    # If it's detected as a stream, Transfer-Encoding should be 'chunked' \n    # (unless it has a length)\n    print(f\"Headers: {prepared.headers}\")\n    \n    if prepared.headers.get('Transfer-Encoding') == 'chunked':\n        print(\"SUCCESS: Detected as stream\")\n    else:\n        print(\"FAILURE: Not detected as stream\")\n\nif __name__ == \"__main__\":\n    test_proxy_iterable()\n",
+                  "filepath": "repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 54.75363063812256,
+                  "timestamp": 1791928520.0957675,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro.py\", \"size\": 891}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 55.047823905944824,
+                "timestamp": 1791928520.3899608,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 54.75363063812256,
+              "timestamp": 1791928520.0957675,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 56.26403212547302,
+                  "timestamp": 1791928521.606169,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"isinstance(data, Iterable): False\\nhasattr(data, '__iter__'): True\\nHeaders: {'Transfer-Encoding': 'chunked'}\\nSUCCESS: Detected as stream\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 56.628347396850586,
+                "timestamp": 1791928521.9704843,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 56.26403212547302,
+              "timestamp": 1791928521.606169,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "find tests -name \"*test_models*\""
+                },
+                "extra": {
+                  "elapsed_s": 60.1316282749176,
+                  "timestamp": 1791928525.4737651,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 60.21019649505615,
+                "timestamp": 1791928525.5523334,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 60.1316282749176,
+              "timestamp": 1791928525.4737651,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "find tests -name \"*models*\""
+                },
+                "extra": {
+                  "elapsed_s": 61.71821308135986,
+                  "timestamp": 1791928527.06035,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 61.791239500045776,
+                "timestamp": 1791928527.1333764,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 61.71821308135986,
+              "timestamp": 1791928527.06035,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"prepare_body\" tests/"
+                },
+                "extra": {
+                  "elapsed_s": 63.25027418136597,
+                  "timestamp": 1791928528.592411,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"tests/test_requests.py:    def test_prepare_body_position_non_stream(self):\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 63.338624238967896,
+                "timestamp": 1791928528.680761,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 63.25027418136597,
+              "timestamp": 1791928528.592411,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/12",
+            "step_id": 13,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_33",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "pytest tests/test_requests.py -k \"test_prepare_body\""
+                },
+                "extra": {
+                  "elapsed_s": 64.62263941764832,
+                  "timestamp": 1791928529.9647763,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"============================= test session starts ==============================\\nplatform linux -- Python 3.13.16, pytest-9.1.1, pluggy-1.6.0\\nrootdir: /workspace\\nconfigfile: pytest.ini (WARNING: ignoring pytest config in pyproject.toml!)\\nplugins: httpbin-2.1.0, timeout-2.1.0\\ncollected 338 items / 337 deselected / 1 selected\\n\\ntests/test_requests.py .                                                 [100%]\\n\\n====================== 1 passed, 337 deselected in 0.75s =======================\\n\", \"stderr\": \"/opt/gemma-dependencies/d34f515446dcfacf50f7b0645b4b17459e87d31a60b2641f4507270fcece428a/fd8a0b7e53668a8dd4bdbcd7f5d191582a373852cf84c5ea33a06fa1f1187291/httpbin/helpers.py:32: SyntaxWarning: invalid escape sequence '\\\\_'\\n  \\\\_;`\\\"---\\\"`|//\\n/opt/gemma-dependencies/d34f515446dcfacf50f7b0645b4b17459e87d31a60b2641f4507270fcece428a/fd8a0b7e53668a8dd4bdbcd7f5d191582a373852cf84c5ea33a06fa1f1187291/httpbin/helpers.py:78: SyntaxWarning: invalid escape sequence '\\\\ '\\n  \\\\  .-\\\"`  `\\\"-.  /\\n/opt/gemma-dependencies/d34f515446dcfacf50f7b0645b4b17459e87d31a60b2641f4507270fcece428a/fd8a0b7e53668a8dd4bdbcd7f5d191582a373852cf84c5ea33a06fa1f1187291/httpbin/helpers.py:438: SyntaxWarning: invalid escape sequence '\\\\s'\\n  match = re.search('\\\\s*(W/)?\\\\\\\"?([^\\\"]*)\\\\\\\"?\\\\s*', part)\\n\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 67.28867745399475,
+                "timestamp": 1791928532.6308143,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 64.62263941764832,
+              "timestamp": 1791928529.9647763,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/13",
+            "step_id": 14,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_36",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "rm repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 68.94783210754395,
+                  "timestamp": 1791928534.289969,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 69.03836417198181,
+                "timestamp": 1791928534.380501,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 68.94783210754395,
+              "timestamp": 1791928534.289969,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/14",
+            "step_id": 15,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_39",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 69.79852199554443,
+                  "timestamp": 1791928535.1406589,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 739, \"files_changed\": 1}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 70.01119494438171,
+                "timestamp": 1791928535.3533318,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 69.79852199554443,
+              "timestamp": 1791928535.1406589,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "checker": {
+      "agent_patch": {
+        "path": "checks/jobs/requests_7433/2026101413/checker/agent.patch",
+        "available": true,
+        "sha256": "5234fb58ec31473e302347731a9b0e8b70cacbfeedd12f5733452f86db22cbe9",
+        "bytes": 739,
+        "text": "diff --git a/src/requests/models.py b/src/requests/models.py\nindex 4142f2a4..f271e7e6 100644\n--- a/src/requests/models.py\n+++ b/src/requests/models.py\n@@ -596,9 +596,9 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):\n             if not isinstance(body, bytes):\n                 body = body.encode(\"utf-8\")\n \n-        if isinstance(data, Iterable) and not isinstance(\n-            data, (str, bytes, list, tuple, Mapping)\n-        ):\n+        if (\n+            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\n             try:\n                 length = super_len(data)\n             except (TypeError, AttributeError, UnsupportedOperation):\n"
+      },
+      "official_tool_events": {
+        "path": "checks/jobs/requests_7433/2026101413/checker/official/traces/trace_requests_7433.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "start_line": 580,
+                  "end_line": 620
+                },
+                "extra": {
+                  "elapsed_s": 50.96161150932312,
+                  "timestamp": 1791929915.8088868,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"        # If not, run through normal process.\\n\\n        # Nottin' on you.\\n        body = None\\n        content_type = None\\n\\n        if not data and json is not None:\\n            # urllib3 requires a bytes-like body. Python 2's json.dumps\\n            # provides this natively, but Python 3 gives a Unicode string.\\n            content_type = \\\"application/json\\\"\\n\\n            try:\\n                body = complexjson.dumps(json, allow_nan=False)\\n            except ValueError as ve:\\n                raise InvalidJSONError(ve, request=self)\\n\\n            if not isinstance(body, bytes):\\n                body = body.encode(\\\"utf-8\\\")\\n\\n        if (\\n            isinstance(data, Iterable) or hasattr(data, \\\"__iter__\\\")\\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\\n            try:\\n                length = super_len(data)\\n            except (TypeError, AttributeError, UnsupportedOperation):\\n                length = None\\n\\n            body = data\\n\\n            if getattr(body, \\\"tell\\\", None) is not None:\\n                # Record the current file position before reading.\\n                # This will allow us to rewind a file in the event\\n                # of a redirect.\\n                try:\\n                    self._body_position = body.tell()  # type: ignore[union-attr]  # guarded by getattr check\\n                except OSError:\\n                    # This differentiates from None, allowing us to catch\\n                    # a failed `tell()` later when trying to rewind the body\\n                    self._body_position = object()\\n\\n            if files:\", \"start_line\": 580, \"end_line\": 620, \"total_lines\": 1180, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 51.04280877113342,
+                "timestamp": 1791929915.890084,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 50.96161150932312,
+              "timestamp": 1791929915.8088868,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 650,
+                  "filepath": "src/requests/models.py",
+                  "start_line": 620
+                },
+                "extra": {
+                  "elapsed_s": 77.80243945121765,
+                  "timestamp": 1791929942.6497147,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (1 calls)\"}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 77.80521607398987,
+                "timestamp": 1791929942.6524913,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 77.80243945121765,
+              "timestamp": 1791929942.6497147,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 144.50417041778564,
+                  "timestamp": 1791930009.3514457,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 739, \"files_changed\": 1}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 144.6978600025177,
+                "timestamp": 1791930009.5451353,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 144.50417041778564,
+              "timestamp": 1791930009.3514457,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "control": {
+      "agent_patch": {
+        "path": "continuations/jobs/requests_7433/2026101423/control/agent.patch",
+        "available": true,
+        "sha256": "82d3cf0535054ec0e5339ff819022d78f2ec88059ec673821d7c17e07c7de9d4",
+        "bytes": 2217,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 00000000..33f40667\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,42 @@\n+\n+import requests\n+from collections.abc import Iterable\n+\n+class MockFile:\n+    def __getattr__(self, name):\n+        if name == \"__iter__\":\n+            return lambda: iter([b\"data\"])\n+        raise AttributeError(name)\n+    \n+    def read(self):\n+        return b\"data\"\n+    \n+    def __len__(self):\n+        return 4\n+\n+def test_getattr_stream():\n+    session = requests.Session()\n+    # We want to see if prepare_body treats this as a stream\n+    # In prepare_body, if it's a stream, it sets Transfer-Encoding: chunked (if length is None)\n+    # or Content-Length (if length is present).\n+    \n+    # Let's use a Request object directly to see how prepare_body behaves\n+    req = requests.Request('POST', 'http://httpbin.org/post', data=MockFile())\n+    prepared = session.prepare_request(req)\n+    \n+    print(f\"Headers: {prepared.headers}\")\n+    print(f\"Body: {prepared.body}\")\n+    \n+    # If it's treated as a stream, prepared.body should be the MockFile instance\n+    assert isinstance(prepared.body, MockFile)\n+    assert \"Content-Length\" in prepared.headers or \"Transfer-Encoding\" in prepared.headers\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_getattr_stream()\n+        print(\"Test passed!\")\n+    except Exception as e:\n+        print(f\"Test failed: {e}\")\n+        import traceback\n+        traceback.print_exc()\n+        exit(1)\ndiff --git a/src/requests/models.py b/src/requests/models.py\nindex 4142f2a4..f271e7e6 100644\n--- a/src/requests/models.py\n+++ b/src/requests/models.py\n@@ -596,9 +596,9 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):\n             if not isinstance(body, bytes):\n                 body = body.encode(\"utf-8\")\n \n-        if isinstance(data, Iterable) and not isinstance(\n-            data, (str, bytes, list, tuple, Mapping)\n-        ):\n+        if (\n+            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\n             try:\n                 length = super_len(data)\n             except (TypeError, AttributeError, UnsupportedOperation):\n"
+      },
+      "official_tool_events": {
+        "path": "continuations/jobs/requests_7433/2026101423/control/official/traces/trace_requests_7433.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"def prepare_body\" src/requests"
+                },
+                "extra": {
+                  "elapsed_s": 33.954517126083374,
+                  "timestamp": 1791931504.3908145,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"src/requests/models.py:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 34.03025674819946,
+                "timestamp": 1791931504.4665542,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 33.954517126083374,
+              "timestamp": 1791931504.3908145,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 35.50455451011658,
+                  "timestamp": 1791931505.940852,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.models\\n~~~~~~~~~~~~~~~\\n\\nThis module contains the primary objects that power Requests.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport datetime\\n\\n# Import encoding now, to avoid implicit import later.\\n# Implicit import within threads may cause LookupError when standard library is in a ZIP,\\n# such as in Embedded Python. See https://github.com/psf/requests/issues/3578.\\nimport encodings.idna  # noqa: F401  # type: ignore[reportUnusedImport]\\nfrom collections.abc import Callable, Generator, Iterable, Iterator, Mapping\\nfrom io import UnsupportedOperation\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Final,\\n    Literal,\\n    cast,\\n    overload,\\n)\\n\\nfrom urllib3.exceptions import (\\n    DecodeError,\\n    LocationParseError,\\n    ProtocolError,\\n    ReadTimeoutError,\\n    SSLError,\\n)\\nfrom urllib3.fields import RequestField\\nfrom urllib3.filepost import encode_multipart_formdata\\nfrom urllib3.util import parse_url\\n\\nfrom ._internal_utils import to_native_string, unicode_is_ascii\\nfrom ._types import SupportsRead as _SupportsRead\\nfrom .auth import HTTPBasicAuth\\nfrom .compat import (\\n    JSONDecodeError,\\n    basestring,\\n    builtin_str,\\n    chardet,\\n    cookielib,\\n    urlencode,\\n    urlsplit,\\n    urlunparse,\\n)\\nfrom .compat import json as complexjson\\nfrom .cookies import (\\n    _copy_cookie_jar,  # type: ignore[reportPrivateUsage]\\n    cookiejar_from_dict,\\n    get_cookie_header,\\n)\\nfrom .exceptions import (\\n    ChunkedEncodingError,\\n    ConnectionError,\\n    ContentDecodingError,\\n    HTTPError,\\n    InvalidJSONError,\\n    InvalidURL,\\n    MissingSchema,\\n    StreamConsumedError,\\n)\\nfrom .exceptions import JSONDecodeError as RequestsJSONDecodeError\\nfrom .exceptions import SSLError as RequestsSSLError\\nfrom .hooks import default_hooks\\nfrom .status_codes import codes\\nfrom .structures import CaseInsensitiveDict\\nfrom .utils import (\\n    check_header_validity,\\n    get_auth_from_url,\\n    guess_filename,\\n    guess_json_utf,\\n    iter_slices,\\n    parse_header_links,\\n    requote_uri,\\n    stream_decode_response_unicode,\\n    super_len,\\n    to_key_val_list,\\n)\\n\\nif TYPE_CHECKING:\\n    from http.cookiejar import CookieJar\\n\\n    from typing_extensions import Self\\n\\n    from . import _types as _t\\n    from .adapters import HTTPAdapter\\n    from .cookies import RequestsCookieJar\\n\\n#: The set of HTTP status codes that indicate an automatically\\n#: processable redirect.\\nREDIRECT_STATI: Final[tuple[int, ...]] = (  # type: ignore[assignment]\\n    codes.moved,  # 301\\n    codes.found,  # 302\\n    codes.other,  # 303\\n    codes.temporary_redirect,  # 307\\n    codes.permanent_redirect,  # 308\\n)\\n\\nDEFAULT_REDIRECT_LIMIT: int = 30\\nCONTENT_CHUNK_SIZE: int = 10 * 1024\\nITER_CHUNK_SIZE: int = 512\\n\\n\\nclass RequestEncodingMixin:\\n    url: str | None\\n\\n    @property\\n    def path_url(self) -> str:\\n        \\\"\\\"\\\"Build the path URL to use.\\\"\\\"\\\"\\n\\n        url: list[str] = []\\n\\n        p = urlsplit(cast(str, self.url))\\n\\n        path = p.path\\n        if not path:\\n            path = \\\"/\\\"\\n\\n        url.append(path)\\n\\n        query = p.query\\n        if query:\\n            url.append(\\\"?\\\")\\n            url.append(query)\\n\\n        return \\\"\\\".join(url)\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: str) -> str: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: bytes) -> bytes: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(\\n        data: _t.SupportsRead[str | bytes],\\n    ) -> _t.SupportsRead[str | bytes]: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: _t.KVDataType) -> str: ...\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1180, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 35.595606565475464,
+                "timestamp": 1791931506.031904,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 35.50455451011658,
+              "timestamp": 1791931505.940852,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"def prepare_body\" src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 37.404229164123535,
+                  "timestamp": 1791931507.8405266,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"574:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 37.484530210494995,
+                "timestamp": 1791931507.9208276,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 37.404229164123535,
+              "timestamp": 1791931507.8405266,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "start_line": 574,
+                  "end_line": 650
+                },
+                "extra": {
+                  "elapsed_s": 38.84670424461365,
+                  "timestamp": 1791931509.2830017,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"    def prepare_body(\\n        self, data: _t.DataType, files: _t.FilesType, json: _t.JsonType = None\\n    ) -> None:\\n        \\\"\\\"\\\"Prepares the given HTTP body data.\\\"\\\"\\\"\\n\\n        # Check if file, fo, generator, iterator.\\n        # If not, run through normal process.\\n\\n        # Nottin' on you.\\n        body = None\\n        content_type = None\\n\\n        if not data and json is not None:\\n            # urllib3 requires a bytes-like body. Python 2's json.dumps\\n            # provides this natively, but Python 3 gives a Unicode string.\\n            content_type = \\\"application/json\\\"\\n\\n            try:\\n                body = complexjson.dumps(json, allow_nan=False)\\n            except ValueError as ve:\\n                raise InvalidJSONError(ve, request=self)\\n\\n            if not isinstance(body, bytes):\\n                body = body.encode(\\\"utf-8\\\")\\n\\n        if (\\n            isinstance(data, Iterable) or hasattr(data, \\\"__iter__\\\")\\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\\n            try:\\n                length = super_len(data)\\n            except (TypeError, AttributeError, UnsupportedOperation):\\n                length = None\\n\\n            body = data\\n\\n            if getattr(body, \\\"tell\\\", None) is not None:\\n                # Record the current file position before reading.\\n                # This will allow us to rewind a file in the event\\n                # of a redirect.\\n                try:\\n                    self._body_position = body.tell()  # type: ignore[union-attr]  # guarded by getattr check\\n                except OSError:\\n                    # This differentiates from None, allowing us to catch\\n                    # a failed `tell()` later when trying to rewind the body\\n                    self._body_position = object()\\n\\n            if files:\\n                raise NotImplementedError(\\n                    \\\"Streamed bodies and files are mutually exclusive.\\\"\\n                )\\n\\n            if length:\\n                self.headers[\\\"Content-Length\\\"] = builtin_str(length)\\n            else:\\n                self.headers[\\\"Transfer-Encoding\\\"] = \\\"chunked\\\"\\n        else:\\n            # After is_stream filtering, remaining data is raw (not streamed)\\n            raw_data = cast(\\\"_t.RawDataType | None\\\", data)\\n\\n            # Multi-part file uploads.\\n            if files:\\n                (body, content_type) = self._encode_files(files, raw_data)\\n            else:\\n                if raw_data:\\n                    body = self._encode_params(raw_data)\\n                    if isinstance(data, basestring) or isinstance(data, _SupportsRead):\\n                        content_type = None\\n                    else:\\n                        content_type = \\\"application/x-www-form-urlencoded\\\"\\n\\n            self.prepare_content_length(body)\\n\\n            # Add content-type if it wasn't explicitly provided.\\n            if content_type and (\\\"content-type\\\" not in self.headers):\\n                self.headers[\\\"Content-Type\\\"] = content_type\\n\\n        self.body = body  # type: ignore[assignment]  # body transforms from DataType to BodyType\", \"start_line\": 574, \"end_line\": 650, \"total_lines\": 1180, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 38.942654848098755,
+                "timestamp": 1791931509.3789523,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 38.84670424461365,
+              "timestamp": 1791931509.2830017,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "\nimport requests\nfrom collections.abc import Iterable\n\nclass MockFile:\n    def __getattr__(self, name):\n        if name == \"__iter__\":\n            return lambda: iter([b\"data\"])\n        raise AttributeError(name)\n    \n    def read(self):\n        return b\"data\"\n    \n    def __len__(self):\n        return 4\n\ndef test_getattr_stream():\n    session = requests.Session()\n    # We want to see if prepare_body treats this as a stream\n    # In prepare_body, if it's a stream, it sets Transfer-Encoding: chunked (if length is None)\n    # or Content-Length (if length is present).\n    \n    # Let's use a Request object directly to see how prepare_body behaves\n    req = requests.Request('POST', 'http://httpbin.org/post', data=MockFile())\n    prepared = session.prepare_request(req)\n    \n    print(f\"Headers: {prepared.headers}\")\n    print(f\"Body: {prepared.body}\")\n    \n    # If it's treated as a stream, prepared.body should be the MockFile instance\n    assert prepared.body is isinstance(prepared.body, MockFile) # This is wrong syntax\n    # Correct:\n    assert isinstance(prepared.body, MockFile)\n    assert \"Content-Length\" in prepared.headers or \"Transfer-Encoding\" in prepared.headers\n\nif __name__ == \"__main__\":\n    try:\n        test_getattr_stream()\n        print(\"Test passed!\")\n    except Exception as e:\n        print(f\"Test failed: {e}\")\n        import traceback\n        traceback.print_exc()\n        exit(1)\n",
+                  "filepath": "repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 53.38156700134277,
+                  "timestamp": 1791931523.8178644,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro.py\", \"size\": 1413}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 53.69935584068298,
+                "timestamp": 1791931524.1356533,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 53.38156700134277,
+              "timestamp": 1791931523.8178644,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "edit_file",
+                "arguments": {
+                  "filepath": "repro.py",
+                  "new_string": "    assert isinstance(prepared.body, MockFile)",
+                  "old_string": "    assert prepared.body is isinstance(prepared.body, MockFile) # This is wrong syntax\n    # Correct:\n    assert isinstance(prepared.body, MockFile)"
+                },
+                "extra": {
+                  "elapsed_s": 56.22865676879883,
+                  "timestamp": 1791931526.6649542,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/repro.py\\n+++ b/repro.py\\n@@ -28,8 +28,6 @@\\n     print(f\\\"Body: {prepared.body}\\\")\\n     \\n     # If it's treated as a stream, prepared.body should be the MockFile instance\\n-    assert prepared.body is isinstance(prepared.body, MockFile) # This is wrong syntax\\n-    # Correct:\\n     assert isinstance(prepared.body, MockFile)\\n     assert \\\"Content-Length\\\" in prepared.headers or \\\"Transfer-Encoding\\\" in prepared.headers\\n \\n\", \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "edit_file",
+                "elapsed_s": 56.585354804992676,
+                "timestamp": 1791931527.0216522,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 56.22865676879883,
+              "timestamp": 1791931526.6649542,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 57.4130859375,
+                  "timestamp": 1791931527.8493834,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"Headers: {'User-Agent': 'python-requests/2.34.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '4'}\\nBody: <__main__.MockFile object at 0x76ab0a62fb60>\\nTest passed!\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 57.87429356575012,
+                "timestamp": 1791931528.310591,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 57.4130859375,
+              "timestamp": 1791931527.8493834,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "\nfrom collections.abc import Iterable\n\nclass MockFile:\n    def __getattr__(self, name):\n        if name == \"__iter__\":\n            return lambda: iter([b\"data\"])\n        raise AttributeError(name)\n\nf = MockFile()\nprint(f\"isinstance(f, Iterable): {isinstance(f, Iterable)}\")\nprint(f\"hasattr(f, '__iter__'): {hasattr(f, '__iter__')}\")\n",
+                  "filepath": "test_iterable.py"
+                },
+                "extra": {
+                  "elapsed_s": 62.436469316482544,
+                  "timestamp": 1791931532.8727667,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"test_iterable.py\", \"size\": 333}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 62.75650095939636,
+                "timestamp": 1791931533.1927984,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 62.436469316482544,
+              "timestamp": 1791931532.8727667,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 test_iterable.py"
+                },
+                "extra": {
+                  "elapsed_s": 63.491838216781616,
+                  "timestamp": 1791931533.9281356,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 63.49466800689697,
+                "timestamp": 1791931533.9309654,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 63.491838216781616,
+              "timestamp": 1791931533.9281356,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 65.78058528900146,
+                  "timestamp": 1791931536.2168827,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 2217, \"files_changed\": 2}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 65.9601137638092,
+                "timestamp": 1791931536.3964112,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 65.78058528900146,
+              "timestamp": 1791931536.2168827,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "feedback": {
+      "agent_patch": {
+        "path": "continuations/jobs/requests_7433/2026101423/feedback/agent.patch",
+        "available": true,
+        "sha256": "48cdd5600250d33c3239ddc37b3bd182474197fc07e5ddc9c17cfabe3996a166",
+        "bytes": 1785,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 00000000..08ac5130\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,28 @@\n+\n+from collections.abc import Iterable\n+from requests import Request\n+\n+class ProxyIterable:\n+    def __getattr__(self, name):\n+        if name == \"__iter__\":\n+            return iter([b\"data\"])\n+        raise AttributeError(name)\n+\n+def test_proxy_iterable():\n+    data = ProxyIterable()\n+    print(f\"isinstance(data, Iterable): {isinstance(data, Iterable)}\")\n+    print(f\"hasattr(data, '__iter__'): {hasattr(data, '__iter__')}\")\n+    \n+    req = Request('POST', 'http://httpbin.org/post', data=data)\n+    prep = req.prepare()\n+    \n+    # If it's detected as a stream, it should have Transfer-Encoding: chunked \n+    # (unless it has a length, but ProxyIterable doesn't have __len__)\n+    print(f\"Headers: {prep.headers}\")\n+    if prep.headers.get('Transfer-Encoding') == 'chunked':\n+        print(\"SUCCESS: Detected as stream\")\n+    else:\n+        print(\"FAILURE: Not detected as stream\")\n+\n+if __name__ == \"__main__\":\n+    test_proxy_iterable()\ndiff --git a/src/requests/models.py b/src/requests/models.py\nindex 4142f2a4..10c23d93 100644\n--- a/src/requests/models.py\n+++ b/src/requests/models.py\n@@ -596,9 +596,9 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):\n             if not isinstance(body, bytes):\n                 body = body.encode(\"utf-8\")\n \n-        if isinstance(data, Iterable) and not isinstance(\n-            data, (str, bytes, list, tuple, Mapping)\n-        ):\n+        if (\n+            isinstance(data, Iterable)\n+        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\n             try:\n                 length = super_len(data)\n             except (TypeError, AttributeError, UnsupportedOperation):\n"
+      },
+      "official_tool_events": {
+        "path": "continuations/jobs/requests_7433/2026101423/feedback/official/traces/trace_requests_7433.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"def prepare_body\" src/requests"
+                },
+                "extra": {
+                  "elapsed_s": 34.23446488380432,
+                  "timestamp": 1791931504.693246,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"src/requests/models.py:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 34.32720160484314,
+                "timestamp": 1791931504.7859826,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 34.23446488380432,
+              "timestamp": 1791931504.693246,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 35.79244112968445,
+                  "timestamp": 1791931506.2512221,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.models\\n~~~~~~~~~~~~~~~\\n\\nThis module contains the primary objects that power Requests.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport datetime\\n\\n# Import encoding now, to avoid implicit import later.\\n# Implicit import within threads may cause LookupError when standard library is in a ZIP,\\n# such as in Embedded Python. See https://github.com/psf/requests/issues/3578.\\nimport encodings.idna  # noqa: F401  # type: ignore[reportUnusedImport]\\nfrom collections.abc import Callable, Generator, Iterable, Iterator, Mapping\\nfrom io import UnsupportedOperation\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Final,\\n    Literal,\\n    cast,\\n    overload,\\n)\\n\\nfrom urllib3.exceptions import (\\n    DecodeError,\\n    LocationParseError,\\n    ProtocolError,\\n    ReadTimeoutError,\\n    SSLError,\\n)\\nfrom urllib3.fields import RequestField\\nfrom urllib3.filepost import encode_multipart_formdata\\nfrom urllib3.util import parse_url\\n\\nfrom ._internal_utils import to_native_string, unicode_is_ascii\\nfrom ._types import SupportsRead as _SupportsRead\\nfrom .auth import HTTPBasicAuth\\nfrom .compat import (\\n    JSONDecodeError,\\n    basestring,\\n    builtin_str,\\n    chardet,\\n    cookielib,\\n    urlencode,\\n    urlsplit,\\n    urlunparse,\\n)\\nfrom .compat import json as complexjson\\nfrom .cookies import (\\n    _copy_cookie_jar,  # type: ignore[reportPrivateUsage]\\n    cookiejar_from_dict,\\n    get_cookie_header,\\n)\\nfrom .exceptions import (\\n    ChunkedEncodingError,\\n    ConnectionError,\\n    ContentDecodingError,\\n    HTTPError,\\n    InvalidJSONError,\\n    InvalidURL,\\n    MissingSchema,\\n    StreamConsumedError,\\n)\\nfrom .exceptions import JSONDecodeError as RequestsJSONDecodeError\\nfrom .exceptions import SSLError as RequestsSSLError\\nfrom .hooks import default_hooks\\nfrom .status_codes import codes\\nfrom .structures import CaseInsensitiveDict\\nfrom .utils import (\\n    check_header_validity,\\n    get_auth_from_url,\\n    guess_filename,\\n    guess_json_utf,\\n    iter_slices,\\n    parse_header_links,\\n    requote_uri,\\n    stream_decode_response_unicode,\\n    super_len,\\n    to_key_val_list,\\n)\\n\\nif TYPE_CHECKING:\\n    from http.cookiejar import CookieJar\\n\\n    from typing_extensions import Self\\n\\n    from . import _types as _t\\n    from .adapters import HTTPAdapter\\n    from .cookies import RequestsCookieJar\\n\\n#: The set of HTTP status codes that indicate an automatically\\n#: processable redirect.\\nREDIRECT_STATI: Final[tuple[int, ...]] = (  # type: ignore[assignment]\\n    codes.moved,  # 301\\n    codes.found,  # 302\\n    codes.other,  # 303\\n    codes.temporary_redirect,  # 307\\n    codes.permanent_redirect,  # 308\\n)\\n\\nDEFAULT_REDIRECT_LIMIT: int = 30\\nCONTENT_CHUNK_SIZE: int = 10 * 1024\\nITER_CHUNK_SIZE: int = 512\\n\\n\\nclass RequestEncodingMixin:\\n    url: str | None\\n\\n    @property\\n    def path_url(self) -> str:\\n        \\\"\\\"\\\"Build the path URL to use.\\\"\\\"\\\"\\n\\n        url: list[str] = []\\n\\n        p = urlsplit(cast(str, self.url))\\n\\n        path = p.path\\n        if not path:\\n            path = \\\"/\\\"\\n\\n        url.append(path)\\n\\n        query = p.query\\n        if query:\\n            url.append(\\\"?\\\")\\n            url.append(query)\\n\\n        return \\\"\\\".join(url)\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: str) -> str: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: bytes) -> bytes: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(\\n        data: _t.SupportsRead[str | bytes],\\n    ) -> _t.SupportsRead[str | bytes]: ...\\n\\n    @overload\\n    @staticmethod\\n    def _encode_params(data: _t.KVDataType) -> str: ...\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1180, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 35.86898183822632,
+                "timestamp": 1791931506.3277628,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 35.79244112968445,
+              "timestamp": 1791931506.2512221,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"def prepare_body\" src/requests/models.py"
+                },
+                "extra": {
+                  "elapsed_s": 37.456931352615356,
+                  "timestamp": 1791931507.9157124,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"574:    def prepare_body(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 37.54649353027344,
+                "timestamp": 1791931508.0052745,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 37.456931352615356,
+              "timestamp": 1791931507.9157124,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "start_line": 574,
+                  "end_line": 650
+                },
+                "extra": {
+                  "elapsed_s": 39.041146755218506,
+                  "timestamp": 1791931509.4999278,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"    def prepare_body(\\n        self, data: _t.DataType, files: _t.FilesType, json: _t.JsonType = None\\n    ) -> None:\\n        \\\"\\\"\\\"Prepares the given HTTP body data.\\\"\\\"\\\"\\n\\n        # Check if file, fo, generator, iterator.\\n        # If not, run through normal process.\\n\\n        # Nottin' on you.\\n        body = None\\n        content_type = None\\n\\n        if not data and json is not None:\\n            # urllib3 requires a bytes-like body. Python 2's json.dumps\\n            # provides this natively, but Python 3 gives a Unicode string.\\n            content_type = \\\"application/json\\\"\\n\\n            try:\\n                body = complexjson.dumps(json, allow_nan=False)\\n            except ValueError as ve:\\n                raise InvalidJSONError(ve, request=self)\\n\\n            if not isinstance(body, bytes):\\n                body = body.encode(\\\"utf-8\\\")\\n\\n        if (\\n            isinstance(data, Iterable) or hasattr(data, \\\"__iter__\\\")\\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\\n            try:\\n                length = super_len(data)\\n            except (TypeError, AttributeError, UnsupportedOperation):\\n                length = None\\n\\n            body = data\\n\\n            if getattr(body, \\\"tell\\\", None) is not None:\\n                # Record the current file position before reading.\\n                # This will allow us to rewind a file in the event\\n                # of a redirect.\\n                try:\\n                    self._body_position = body.tell()  # type: ignore[union-attr]  # guarded by getattr check\\n                except OSError:\\n                    # This differentiates from None, allowing us to catch\\n                    # a failed `tell()` later when trying to rewind the body\\n                    self._body_position = object()\\n\\n            if files:\\n                raise NotImplementedError(\\n                    \\\"Streamed bodies and files are mutually exclusive.\\\"\\n                )\\n\\n            if length:\\n                self.headers[\\\"Content-Length\\\"] = builtin_str(length)\\n            else:\\n                self.headers[\\\"Transfer-Encoding\\\"] = \\\"chunked\\\"\\n        else:\\n            # After is_stream filtering, remaining data is raw (not streamed)\\n            raw_data = cast(\\\"_t.RawDataType | None\\\", data)\\n\\n            # Multi-part file uploads.\\n            if files:\\n                (body, content_type) = self._encode_files(files, raw_data)\\n            else:\\n                if raw_data:\\n                    body = self._encode_params(raw_data)\\n                    if isinstance(data, basestring) or isinstance(data, _SupportsRead):\\n                        content_type = None\\n                    else:\\n                        content_type = \\\"application/x-www-form-urlencoded\\\"\\n\\n            self.prepare_content_length(body)\\n\\n            # Add content-type if it wasn't explicitly provided.\\n            if content_type and (\\\"content-type\\\" not in self.headers):\\n                self.headers[\\\"Content-Type\\\"] = content_type\\n\\n        self.body = body  # type: ignore[assignment]  # body transforms from DataType to BodyType\", \"start_line\": 574, \"end_line\": 650, \"total_lines\": 1180, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 39.114455223083496,
+                "timestamp": 1791931509.5732362,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 39.041146755218506,
+              "timestamp": 1791931509.4999278,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "\nfrom collections.abc import Iterable\nfrom requests import Request\n\nclass ProxyIterable:\n    def __getattr__(self, name):\n        if name == \"__iter__\":\n            return iter([b\"data\"])\n        raise AttributeError(name)\n\ndef test_proxy_iterable():\n    data = ProxyIterable()\n    print(f\"isinstance(data, Iterable): {isinstance(data, Iterable)}\")\n    print(f\"hasattr(data, '__iter__'): {hasattr(data, '__iter__')}\")\n    \n    req = Request('POST', 'http://httpbin.org/post', data=data)\n    prep = req.prepare()\n    \n    # If it's detected as a stream, it should have Transfer-Encoding: chunked \n    # (unless it has a length, but ProxyIterable doesn't have __len__)\n    print(f\"Headers: {prep.headers}\")\n    if prep.headers.get('Transfer-Encoding') == 'chunked':\n        print(\"SUCCESS: Detected as stream\")\n    else:\n        print(\"FAILURE: Not detected as stream\")\n\nif __name__ == \"__main__\":\n    test_proxy_iterable()\n",
+                  "filepath": "repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 52.85053992271423,
+                  "timestamp": 1791931523.309321,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro.py\", \"size\": 922}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 53.22925639152527,
+                "timestamp": 1791931523.6880374,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 52.85053992271423,
+              "timestamp": 1791931523.309321,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 54.280678033828735,
+                  "timestamp": 1791931524.739459,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"isinstance(data, Iterable): False\\nhasattr(data, '__iter__'): True\\nHeaders: {'Transfer-Encoding': 'chunked'}\\nSUCCESS: Detected as stream\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 54.696483850479126,
+                "timestamp": 1791931525.1552649,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 54.280678033828735,
+              "timestamp": 1791931524.739459,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "edit_file",
+                "arguments": {
+                  "filepath": "src/requests/models.py",
+                  "new_string": "        if (\n            isinstance(data, Iterable)\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):",
+                  "old_string": "        if (\n            isinstance(data, Iterable) or hasattr(data, \"__iter__\")\n        ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):"
+                },
+                "extra": {
+                  "elapsed_s": 58.20138096809387,
+                  "timestamp": 1791931528.660162,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/src/requests/models.py\\n+++ b/src/requests/models.py\\n@@ -597,7 +597,7 @@\\n                 body = body.encode(\\\"utf-8\\\")\\n \\n         if (\\n-            isinstance(data, Iterable) or hasattr(data, \\\"__iter__\\\")\\n+            isinstance(data, Iterable)\\n         ) and not isinstance(data, (str, bytes, list, tuple, Mapping)):\\n             try:\\n                 length = super_len(data)\\n\", \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "edit_file",
+                "elapsed_s": 58.53566074371338,
+                "timestamp": 1791931528.9944417,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 58.20138096809387,
+              "timestamp": 1791931528.660162,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 59.37514114379883,
+                  "timestamp": 1791931529.8339221,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"CommandError\", \"error_message\": \"Traceback (most recent call last):\\n  File \\\"/workspace/repro.py\\\", line 28, in <module>\\n    test_proxy_iterable()\\n    ~~~~~~~~~~~~~~~~~~~^^\\n  File \\\"/workspace/repro.py\\\", line 17, in test_proxy_iterable\\n    prep = req.prepare()\\n  File \\\"/workspace/src/requests/models.py\\\", line 361, in prepare\\n    p.prepare(\\n    ~~~~~~~~~^\\n        method=self.method,\\n        ^^^^^^^^^^^^^^^^^^^\\n    ...<8 lines>...\\n        hooks=self.hooks,\\n        ^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/workspace/src/requests/models.py\\\", line 442, in prepare\\n    self.prepare_body(data, files, json)\\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\\n  File \\\"/workspace/src/requests/models.py\\\", line 638, in prepare_body\\n    body = self._encode_params(raw_data)\\n  File \\\"/workspace/src/requests/models.py\\\", line 168, in _encode_params\\n    for k, vs in to_key_val_list(data):\\n                 ~~~~~~~~~~~~~~~^^^^^^\\n  File \\\"/workspace/src/requests/utils.py\\\", line 404, in to_key_val_list\\n    return list(value)\\nTypeError: 'ProxyIterable' object is not iterable\\n\", \"details\": {\"stdout\": \"isinstance(data, Iterable): False\\nhasattr(data, '__iter__'): True\\n\", \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/workspace/repro.py\\\", line 28, in <module>\\n    test_proxy_iterable()\\n    ~~~~~~~~~~~~~~~~~~~^^\\n  File \\\"/workspace/repro.py\\\", line 17, in test_proxy_iterable\\n    prep = req.prepare()\\n  File \\\"/workspace/src/requests/models.py\\\", line 361, in prepare\\n    p.prepare(\\n    ~~~~~~~~~^\\n        method=self.method,\\n        ^^^^^^^^^^^^^^^^^^^\\n    ...<8 lines>...\\n        hooks=self.hooks,\\n        ^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/workspace/src/requests/models.py\\\", line 442, in prepare\\n    self.prepare_body(data, files, json)\\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\\n  File \\\"/workspace/src/requests/models.py\\\", line 638, in prepare_body\\n    body = self._encode_params(raw_data)\\n  File \\\"/workspace/src/requests/models.py\\\", line 168, in _encode_params\\n    for k, vs in to_key_val_list(data):\\n                 ~~~~~~~~~~~~~~~^^^^^^\\n  File \\\"/workspace/src/requests/utils.py\\\", line 404, in to_key_val_list\\n    return list(value)\\nTypeError: 'ProxyIterable' object is not iterable\\n\", \"exit_code\": 1}}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 59.637107610702515,
+                "timestamp": 1791931530.0958886,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 59.37514114379883,
+              "timestamp": 1791931529.8339221,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 -c \"class P:\n    def __getattr__(self, n):\n        if n == '__iter__': return iter([1])\n        raise AttributeError()\np = P()\nprint(hasattr(p, '__iter__'))\ntry:\n    list(p)\n    print('list worked')\nexcept Exception as e:\n    print(f'list failed: {e}')\""
+                },
+                "extra": {
+                  "elapsed_s": 65.99899363517761,
+                  "timestamp": 1791931536.4577746,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 66.00485754013062,
+                "timestamp": 1791931536.4636385,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 65.99899363517761,
+              "timestamp": 1791931536.4577746,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 92.49694061279297,
+                  "timestamp": 1791931562.9557216,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 1785, \"files_changed\": 2}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 92.76368188858032,
+                "timestamp": 1791931563.222463,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 92.49694061279297,
+              "timestamp": 1791931562.9557216,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    }
+  }
+}

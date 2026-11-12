@@ -1,0 +1,58 @@
+{
+  "version": "current-baseline",
+  "revision": "2026-11-11 baseline rewrite (v0.1-v0.4 archived)",
+  "source_files": {
+    "main.tex": "65a21f666a3548e0c0f74200c3c5818bfa6529e16169289b08f83987605c8acb",
+    "sections/abstract.tex": "8f0c0095a7f36baae7005341a2392b70877b16554cbb2488920c311a582454d3",
+    "sections/introduction.tex": "edad2a079e495b7f69464a860fc7d55090c0f75f34e5da4a3f2d7390d46915b0",
+    "sections/related-work.tex": "ab4eb297f2d502e2211ea74d6de247fbf33cc2ee4ede5b60f6359e3fc6e9a834",
+    "sections/methods.tex": "3e155e840bd480aee2aaecb48f0cad08a95d36041174221c44aacc564842e0c6",
+    "sections/results.tex": "028c25bcbec987a872426bb93169a3c08ab15c0806525d44a52cb7b14dbfe711",
+    "tables/construction-coverage-v04.tex": "61feb204dc3cc2eba8713fbfd966b34532277d916e95719c98fb1663f06acbe0",
+    "tables/result-groups-v04.tex": "91630b22520db8cf7f422ba64bc5dca20b77ed313b07e4b90e8f9fb9907554a9",
+    "sections/cases.tex": "b06ae0fd620a88e8237a544dd873c541d182847bae48fd1ccc35955fc9d2083c",
+    "sections/discussion.tex": "7a6e4f543de8ab8825da34c97bcf8c8f6d1bb9ceb5522fe81365ef108a050770",
+    "tables/prompt-ablations-v04.tex": "678ff54f63d9e93b32d7ef2ba22c06a2b1a1fa22b7edd1e714ef2c894fe753ec",
+    "sections/conclusion.tex": "240a0ed52c4a761176de5eeeb3f871ca45e0448f6549418fc44d83f0016b5323",
+    "references/references.bib": "8e549afeaecf0b8abb4e683c3ad83d304d31210cbf578a9e628f2c3e4c65e4e1",
+    "evidence/visuals-v04.json": "b4f377818d552c6bc9136a50c759c62e0862feb983b202d43b7995dfd2ab667d"
+  },
+  "tables": 3,
+  "figures": 2,
+  "figure_files": [
+    "figures/study-design-v04.png",
+    "figures/feedback-and-edit-budget-v04.png"
+  ],
+  "citations": [
+    "selfrepair",
+    "feedbackeval",
+    "selfdebug",
+    "swtbench",
+    "cogeneration",
+    "coharden",
+    "looping",
+    "genesis"
+  ],
+  "reading_copy_word_counts": {
+    "whitespace": 3201,
+    "word_tokens": 3255
+  },
+  "main_text_word_counts_excluding_references": {
+    "whitespace": 2942,
+    "word_tokens": 2993
+  },
+  "figure_text_word_counts": {
+    "whitespace": 258,
+    "word_tokens": 255
+  },
+  "word_count_scope": "Local counts include title, author attribution, tables, captions, and the actual labels, numbers, and legends drawn in both figures (not duplicate image alt text). Main-text counts exclude references, as clarified by the Paper Track host. PDF text extraction and page rendering are checked separately by verify_pdf.py.",
+  "verified_local_links": [
+    "figures/study-design-v04.png",
+    "supplement/reproducibility.md",
+    "figures/feedback-and-edit-budget-v04.png",
+    "supplement/continuation-process-v04.md",
+    "supplement/reproducibility.md"
+  ],
+  "markdown_sha256": "8b6898206c593e3960e8b02e90a131286dc5b85c23622e3ef622963f5d48d1cc",
+  "unresolved_references_or_commands": 0
+}

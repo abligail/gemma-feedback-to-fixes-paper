@@ -1,0 +1,1135 @@
+{
+  "version": "v0.4 review 5",
+  "date": "2026-11-11",
+  "analysis": "Post-hoc descriptive join of existing check labels, source-state replay, tool allocation, interface delimiter/key diagnostics, returned-source changes, normal paired scores, and follow-up prompt-mitigation ablations.",
+  "unit": "Task realization; paired branches share the draft and check. Repeated tasks retain their batch identity.",
+  "program_scale_summary": {
+    "distinct_tasks": 95,
+    "repositories": 15,
+    "study_a_runs": 736,
+    "study_b_realizations": 216,
+    "study_b_graded_endpoints": 648,
+    "study_b_model_sessions": 864,
+    "followup_ablation_cycles": 3,
+    "followup_ablation_runs": 2565,
+    "total_runs_and_realizations": 3517,
+    "total_graded_endpoints": 3949
+  },
+  "group_definition": {
+    "grounded_target": "Publicly supported expectation and relevant target behavior reached.",
+    "other_output": "Execution output outside that joint category, including launch failures.",
+    "no_output": "No common execution output; F receives an unavailable-check notice."
+  },
+  "summary": {
+    "final_configuration": [
+      {
+        "group": "grounded_target",
+        "realizations": 20,
+        "distinct_tasks": 16,
+        "normal_cf_pairs": 20,
+        "feedback_gains": 1,
+        "feedback_losses": 0,
+        "control": {
+          "draft_replays": 20,
+          "postedit_replays": 1,
+          "retained_source_changes": 1,
+          "passes": 11
+        },
+        "feedback": {
+          "draft_replays": 4,
+          "postedit_replays": 2,
+          "retained_source_changes": 3,
+          "passes": 12
+        }
+      },
+      {
+        "group": "other_output",
+        "realizations": 65,
+        "distinct_tasks": 41,
+        "normal_cf_pairs": 62,
+        "feedback_gains": 1,
+        "feedback_losses": 1,
+        "control": {
+          "draft_replays": 62,
+          "postedit_replays": 3,
+          "retained_source_changes": 4,
+          "passes": 26
+        },
+        "feedback": {
+          "draft_replays": 39,
+          "postedit_replays": 1,
+          "retained_source_changes": 5,
+          "passes": 26
+        }
+      },
+      {
+        "group": "no_output",
+        "realizations": 23,
+        "distinct_tasks": 18,
+        "normal_cf_pairs": 21,
+        "feedback_gains": 0,
+        "feedback_losses": 2,
+        "control": {
+          "draft_replays": 0,
+          "postedit_replays": 0,
+          "retained_source_changes": 5,
+          "passes": 6
+        },
+        "feedback": {
+          "draft_replays": 0,
+          "postedit_replays": 0,
+          "retained_source_changes": 1,
+          "passes": 4
+        }
+      }
+    ],
+    "all_configurations": [
+      {
+        "group": "grounded_target",
+        "realizations": 26,
+        "distinct_tasks": 18,
+        "normal_cf_pairs": 26,
+        "feedback_gains": 2,
+        "feedback_losses": 0,
+        "control": {
+          "draft_replays": 26,
+          "postedit_replays": 1,
+          "retained_source_changes": 2,
+          "passes": 14
+        },
+        "feedback": {
+          "draft_replays": 4,
+          "postedit_replays": 3,
+          "retained_source_changes": 4,
+          "passes": 16
+        }
+      },
+      {
+        "group": "other_output",
+        "realizations": 80,
+        "distinct_tasks": 43,
+        "normal_cf_pairs": 77,
+        "feedback_gains": 1,
+        "feedback_losses": 1,
+        "control": {
+          "draft_replays": 76,
+          "postedit_replays": 3,
+          "retained_source_changes": 4,
+          "passes": 33
+        },
+        "feedback": {
+          "draft_replays": 47,
+          "postedit_replays": 1,
+          "retained_source_changes": 5,
+          "passes": 33
+        }
+      },
+      {
+        "group": "no_output",
+        "realizations": 110,
+        "distinct_tasks": 50,
+        "normal_cf_pairs": 103,
+        "feedback_gains": 1,
+        "feedback_losses": 5,
+        "control": {
+          "draft_replays": 0,
+          "postedit_replays": 0,
+          "retained_source_changes": 10,
+          "passes": 37
+        },
+        "feedback": {
+          "draft_replays": 0,
+          "postedit_replays": 0,
+          "retained_source_changes": 4,
+          "passes": 33
+        }
+      }
+    ]
+  },
+  "final_configuration_breakdowns": {
+    "by_batch": [
+      {
+        "dimension": "batch",
+        "value": "R03",
+        "realizations": 54,
+        "distinct_tasks": 54,
+        "grounded_target": 9,
+        "other_output": 31,
+        "no_output": 14,
+        "normal_cf_pairs": 52,
+        "feedback_gains": 1,
+        "feedback_losses": 1,
+        "control_draft_replays": 38,
+        "control_postedit_replays": 2,
+        "control_retained_source_changes": 5,
+        "feedback_draft_replays": 23,
+        "feedback_postedit_replays": 3,
+        "feedback_retained_source_changes": 5
+      },
+      {
+        "dimension": "batch",
+        "value": "R04",
+        "realizations": 54,
+        "distinct_tasks": 54,
+        "grounded_target": 11,
+        "other_output": 34,
+        "no_output": 9,
+        "normal_cf_pairs": 51,
+        "feedback_gains": 1,
+        "feedback_losses": 2,
+        "control_draft_replays": 44,
+        "control_postedit_replays": 2,
+        "control_retained_source_changes": 5,
+        "feedback_draft_replays": 20,
+        "feedback_postedit_replays": 0,
+        "feedback_retained_source_changes": 4
+      }
+    ],
+    "by_repository": [
+      {
+        "dimension": "repository",
+        "value": "fastapi",
+        "realizations": 52,
+        "distinct_tasks": 26,
+        "grounded_target": 9,
+        "other_output": 37,
+        "no_output": 6,
+        "normal_cf_pairs": 49,
+        "feedback_gains": 1,
+        "feedback_losses": 0,
+        "control_draft_replays": 44,
+        "control_postedit_replays": 1,
+        "control_retained_source_changes": 3,
+        "feedback_draft_replays": 22,
+        "feedback_postedit_replays": 1,
+        "feedback_retained_source_changes": 4
+      },
+      {
+        "dimension": "repository",
+        "value": "rich",
+        "realizations": 36,
+        "distinct_tasks": 18,
+        "grounded_target": 5,
+        "other_output": 16,
+        "no_output": 15,
+        "normal_cf_pairs": 34,
+        "feedback_gains": 1,
+        "feedback_losses": 2,
+        "control_draft_replays": 20,
+        "control_postedit_replays": 2,
+        "control_retained_source_changes": 5,
+        "feedback_draft_replays": 13,
+        "feedback_postedit_replays": 1,
+        "feedback_retained_source_changes": 3
+      },
+      {
+        "dimension": "repository",
+        "value": "requests",
+        "realizations": 18,
+        "distinct_tasks": 9,
+        "grounded_target": 5,
+        "other_output": 12,
+        "no_output": 1,
+        "normal_cf_pairs": 18,
+        "feedback_gains": 0,
+        "feedback_losses": 1,
+        "control_draft_replays": 17,
+        "control_postedit_replays": 1,
+        "control_retained_source_changes": 1,
+        "feedback_draft_replays": 8,
+        "feedback_postedit_replays": 1,
+        "feedback_retained_source_changes": 2
+      },
+      {
+        "dimension": "repository",
+        "value": "httpx",
+        "realizations": 2,
+        "distinct_tasks": 1,
+        "grounded_target": 1,
+        "other_output": 0,
+        "no_output": 1,
+        "normal_cf_pairs": 2,
+        "feedback_gains": 0,
+        "feedback_losses": 0,
+        "control_draft_replays": 1,
+        "control_postedit_replays": 0,
+        "control_retained_source_changes": 1,
+        "feedback_draft_replays": 0,
+        "feedback_postedit_replays": 0,
+        "feedback_retained_source_changes": 0
+      }
+    ]
+  },
+  "final_configuration_draft_status_breakdown": [
+    {
+      "dimension": "draft_status",
+      "value": "resolved",
+      "realizations": 40,
+      "distinct_tasks": 25,
+      "grounded_target": 10,
+      "other_output": 25,
+      "no_output": 5,
+      "normal_cf_pairs": 40,
+      "feedback_gains": 0,
+      "feedback_losses": 1,
+      "control_draft_replays": 34,
+      "control_postedit_replays": 0,
+      "control_retained_source_changes": 2,
+      "feedback_draft_replays": 21,
+      "feedback_postedit_replays": 0,
+      "feedback_retained_source_changes": 1,
+      "control_normal_draft_pairs": 40,
+      "control_new_passes_from_draft": 0,
+      "control_lost_passes_from_draft": 0,
+      "control_passes": 40,
+      "control_nonnormal_returns": 0,
+      "feedback_normal_draft_pairs": 40,
+      "feedback_new_passes_from_draft": 0,
+      "feedback_lost_passes_from_draft": 1,
+      "feedback_passes": 39,
+      "feedback_nonnormal_returns": 0
+    },
+    {
+      "dimension": "draft_status",
+      "value": "scored_failed",
+      "realizations": 64,
+      "distinct_tasks": 37,
+      "grounded_target": 10,
+      "other_output": 38,
+      "no_output": 16,
+      "normal_cf_pairs": 63,
+      "feedback_gains": 2,
+      "feedback_losses": 2,
+      "control_draft_replays": 46,
+      "control_postedit_replays": 4,
+      "control_retained_source_changes": 8,
+      "feedback_draft_replays": 22,
+      "feedback_postedit_replays": 3,
+      "feedback_retained_source_changes": 8,
+      "control_normal_draft_pairs": 64,
+      "control_new_passes_from_draft": 3,
+      "control_lost_passes_from_draft": 0,
+      "control_passes": 3,
+      "control_nonnormal_returns": 0,
+      "feedback_normal_draft_pairs": 63,
+      "feedback_new_passes_from_draft": 3,
+      "feedback_lost_passes_from_draft": 0,
+      "feedback_passes": 3,
+      "feedback_nonnormal_returns": 1
+    },
+    {
+      "dimension": "draft_status",
+      "value": "technical_error",
+      "realizations": 3,
+      "distinct_tasks": 2,
+      "grounded_target": 0,
+      "other_output": 1,
+      "no_output": 2,
+      "normal_cf_pairs": 0,
+      "feedback_gains": 0,
+      "feedback_losses": 0,
+      "control_draft_replays": 1,
+      "control_postedit_replays": 0,
+      "control_retained_source_changes": 0,
+      "feedback_draft_replays": 0,
+      "feedback_postedit_replays": 0,
+      "feedback_retained_source_changes": 0,
+      "control_normal_draft_pairs": 0,
+      "control_new_passes_from_draft": 0,
+      "control_lost_passes_from_draft": 0,
+      "control_passes": 0,
+      "control_nonnormal_returns": 3,
+      "feedback_normal_draft_pairs": 0,
+      "feedback_new_passes_from_draft": 0,
+      "feedback_lost_passes_from_draft": 0,
+      "feedback_passes": 0,
+      "feedback_nonnormal_returns": 3
+    },
+    {
+      "dimension": "draft_status",
+      "value": "no_patch",
+      "realizations": 1,
+      "distinct_tasks": 1,
+      "grounded_target": 0,
+      "other_output": 1,
+      "no_output": 0,
+      "normal_cf_pairs": 0,
+      "feedback_gains": 0,
+      "feedback_losses": 0,
+      "control_draft_replays": 1,
+      "control_postedit_replays": 0,
+      "control_retained_source_changes": 0,
+      "feedback_draft_replays": 0,
+      "feedback_postedit_replays": 0,
+      "feedback_retained_source_changes": 0,
+      "control_normal_draft_pairs": 0,
+      "control_new_passes_from_draft": 0,
+      "control_lost_passes_from_draft": 0,
+      "control_passes": 0,
+      "control_nonnormal_returns": 1,
+      "feedback_normal_draft_pairs": 0,
+      "feedback_new_passes_from_draft": 0,
+      "feedback_lost_passes_from_draft": 0,
+      "feedback_passes": 0,
+      "feedback_nonnormal_returns": 1
+    }
+  ],
+  "final_grounded_checks_by_draft": [
+    {
+      "semantics": "与所检预期一致",
+      "draft_status": "resolved",
+      "realizations": 10
+    },
+    {
+      "semantics": "与所检预期一致",
+      "draft_status": "scored_failed",
+      "realizations": 3
+    },
+    {
+      "semantics": "公开反证",
+      "draft_status": "scored_failed",
+      "realizations": 7
+    }
+  ],
+  "tool_allocation_summary": [
+    {
+      "scope": "all_final_108",
+      "realizations": 108,
+      "control": {
+        "executed_calls_total": 850,
+        "run_command": 387,
+        "read_file": 390,
+        "edit_file": 19,
+        "write_file": 28,
+        "get_status": 20,
+        "code_navigation": 6,
+        "event0_run_command_branches": 68,
+        "event0_read_file_branches": 38,
+        "malformed_read_key_calls": 25,
+        "silent_line1_reset_reads": 24,
+        "missing_param_calls": 45,
+        "missing_param_swallowed_old_string": 45,
+        "missing_param_bogus_split_keys": 34,
+        "missing_param_branches": 6,
+        "budget_exceeded_branches": 87,
+        "source_edit_attempt_branches": 26,
+        "source_edit_budget_rejected_branches": 15
+      },
+      "feedback": {
+        "executed_calls_total": 819,
+        "run_command": 328,
+        "read_file": 433,
+        "edit_file": 19,
+        "write_file": 27,
+        "get_status": 8,
+        "code_navigation": 4,
+        "event0_run_command_branches": 30,
+        "event0_read_file_branches": 69,
+        "malformed_read_key_calls": 33,
+        "silent_line1_reset_reads": 32,
+        "missing_param_calls": 48,
+        "missing_param_swallowed_old_string": 48,
+        "missing_param_bogus_split_keys": 48,
+        "missing_param_branches": 5,
+        "budget_exceeded_branches": 87,
+        "source_edit_attempt_branches": 24,
+        "source_edit_budget_rejected_branches": 14
+      }
+    },
+    {
+      "scope": "failing_drafts_64",
+      "realizations": 64,
+      "control": {
+        "executed_calls_total": 511,
+        "run_command": 226,
+        "read_file": 239,
+        "edit_file": 13,
+        "write_file": 12,
+        "get_status": 17,
+        "code_navigation": 4,
+        "event0_run_command_branches": 46,
+        "event0_read_file_branches": 17,
+        "malformed_read_key_calls": 10,
+        "silent_line1_reset_reads": 10,
+        "missing_param_calls": 45,
+        "missing_param_swallowed_old_string": 45,
+        "missing_param_bogus_split_keys": 34,
+        "missing_param_branches": 6,
+        "budget_exceeded_branches": 53,
+        "source_edit_attempt_branches": 21,
+        "source_edit_budget_rejected_branches": 12
+      },
+      "feedback": {
+        "executed_calls_total": 501,
+        "run_command": 197,
+        "read_file": 269,
+        "edit_file": 17,
+        "write_file": 10,
+        "get_status": 6,
+        "code_navigation": 2,
+        "event0_run_command_branches": 21,
+        "event0_read_file_branches": 39,
+        "malformed_read_key_calls": 14,
+        "silent_line1_reset_reads": 14,
+        "missing_param_calls": 48,
+        "missing_param_swallowed_old_string": 48,
+        "missing_param_bogus_split_keys": 48,
+        "missing_param_branches": 5,
+        "budget_exceeded_branches": 57,
+        "source_edit_attempt_branches": 20,
+        "source_edit_budget_rejected_branches": 11
+      }
+    },
+    {
+      "scope": "passing_drafts_40",
+      "realizations": 40,
+      "control": {
+        "executed_calls_total": 307,
+        "run_command": 144,
+        "read_file": 139,
+        "edit_file": 5,
+        "write_file": 14,
+        "get_status": 3,
+        "code_navigation": 2,
+        "event0_run_command_branches": 19,
+        "event0_read_file_branches": 20,
+        "malformed_read_key_calls": 14,
+        "silent_line1_reset_reads": 13,
+        "missing_param_calls": 0,
+        "missing_param_swallowed_old_string": 0,
+        "missing_param_bogus_split_keys": 0,
+        "missing_param_branches": 0,
+        "budget_exceeded_branches": 30,
+        "source_edit_attempt_branches": 5,
+        "source_edit_budget_rejected_branches": 3
+      },
+      "feedback": {
+        "executed_calls_total": 285,
+        "run_command": 116,
+        "read_file": 148,
+        "edit_file": 2,
+        "write_file": 16,
+        "get_status": 1,
+        "code_navigation": 2,
+        "event0_run_command_branches": 9,
+        "event0_read_file_branches": 26,
+        "malformed_read_key_calls": 17,
+        "silent_line1_reset_reads": 16,
+        "missing_param_calls": 0,
+        "missing_param_swallowed_old_string": 0,
+        "missing_param_bogus_split_keys": 0,
+        "missing_param_branches": 0,
+        "budget_exceeded_branches": 26,
+        "source_edit_attempt_branches": 4,
+        "source_edit_budget_rejected_branches": 3
+      }
+    },
+    {
+      "scope": "grounded_target_20",
+      "realizations": 20,
+      "control": {
+        "executed_calls_total": 143,
+        "run_command": 69,
+        "read_file": 68,
+        "edit_file": 1,
+        "write_file": 0,
+        "get_status": 4,
+        "code_navigation": 1,
+        "event0_run_command_branches": 14,
+        "event0_read_file_branches": 6,
+        "malformed_read_key_calls": 6,
+        "silent_line1_reset_reads": 5,
+        "missing_param_calls": 23,
+        "missing_param_swallowed_old_string": 23,
+        "missing_param_bogus_split_keys": 19,
+        "missing_param_branches": 2,
+        "budget_exceeded_branches": 12,
+        "source_edit_attempt_branches": 4,
+        "source_edit_budget_rejected_branches": 2
+      },
+      "feedback": {
+        "executed_calls_total": 137,
+        "run_command": 59,
+        "read_file": 71,
+        "edit_file": 5,
+        "write_file": 0,
+        "get_status": 2,
+        "code_navigation": 0,
+        "event0_run_command_branches": 4,
+        "event0_read_file_branches": 16,
+        "malformed_read_key_calls": 5,
+        "silent_line1_reset_reads": 4,
+        "missing_param_calls": 2,
+        "missing_param_swallowed_old_string": 2,
+        "missing_param_bogus_split_keys": 2,
+        "missing_param_branches": 1,
+        "budget_exceeded_branches": 13,
+        "source_edit_attempt_branches": 8,
+        "source_edit_budget_rejected_branches": 4
+      }
+    },
+    {
+      "scope": "other_output_65",
+      "realizations": 65,
+      "control": {
+        "executed_calls_total": 521,
+        "run_command": 244,
+        "read_file": 231,
+        "edit_file": 11,
+        "write_file": 19,
+        "get_status": 12,
+        "code_navigation": 4,
+        "event0_run_command_branches": 43,
+        "event0_read_file_branches": 21,
+        "malformed_read_key_calls": 15,
+        "silent_line1_reset_reads": 15,
+        "missing_param_calls": 20,
+        "missing_param_swallowed_old_string": 20,
+        "missing_param_bogus_split_keys": 13,
+        "missing_param_branches": 3,
+        "budget_exceeded_branches": 55,
+        "source_edit_attempt_branches": 15,
+        "source_edit_budget_rejected_branches": 11
+      },
+      "feedback": {
+        "executed_calls_total": 495,
+        "run_command": 190,
+        "read_file": 263,
+        "edit_file": 13,
+        "write_file": 23,
+        "get_status": 3,
+        "code_navigation": 3,
+        "event0_run_command_branches": 13,
+        "event0_read_file_branches": 44,
+        "malformed_read_key_calls": 21,
+        "silent_line1_reset_reads": 21,
+        "missing_param_calls": 33,
+        "missing_param_swallowed_old_string": 33,
+        "missing_param_bogus_split_keys": 33,
+        "missing_param_branches": 3,
+        "budget_exceeded_branches": 51,
+        "source_edit_attempt_branches": 12,
+        "source_edit_budget_rejected_branches": 8
+      }
+    },
+    {
+      "scope": "counterevidence_7",
+      "realizations": 7,
+      "control": {
+        "executed_calls_total": 55,
+        "run_command": 27,
+        "read_file": 24,
+        "edit_file": 1,
+        "write_file": 0,
+        "get_status": 3,
+        "code_navigation": 0,
+        "event0_run_command_branches": 6,
+        "event0_read_file_branches": 1,
+        "malformed_read_key_calls": 3,
+        "silent_line1_reset_reads": 3,
+        "missing_param_calls": 17,
+        "missing_param_swallowed_old_string": 17,
+        "missing_param_bogus_split_keys": 17,
+        "missing_param_branches": 1,
+        "budget_exceeded_branches": 6,
+        "source_edit_attempt_branches": 4,
+        "source_edit_budget_rejected_branches": 2
+      },
+      "feedback": {
+        "executed_calls_total": 58,
+        "run_command": 25,
+        "read_file": 29,
+        "edit_file": 2,
+        "write_file": 0,
+        "get_status": 2,
+        "code_navigation": 0,
+        "event0_run_command_branches": 1,
+        "event0_read_file_branches": 6,
+        "malformed_read_key_calls": 2,
+        "silent_line1_reset_reads": 2,
+        "missing_param_calls": 2,
+        "missing_param_swallowed_old_string": 2,
+        "missing_param_bogus_split_keys": 2,
+        "missing_param_branches": 1,
+        "budget_exceeded_branches": 7,
+        "source_edit_attempt_branches": 6,
+        "source_edit_budget_rejected_branches": 4
+      }
+    }
+  ],
+  "draft_status_analysis_scope": "Retrospective stratification by the existing official draft judgment. Drafts were generated without correctness filtering; their judgments were not supplied to C/F.",
+  "counterevidence_comparison": [
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "resolved",
+      "feedback_edit_outcome_class": "landed_and_passed",
+      "control_first_source_edit": null,
+      "feedback_first_source_edit": {
+        "event": 6,
+        "seconds": 113.49787282943726,
+        "budget_rejected": false,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "fastapi/dependencies/utils.py",
+        "old_string_lines": 40,
+        "new_string_lines": 42,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/fastapi/dependencies/utils.py\\n+++ b/fastapi/dependencies/utils.py\\n@@ -871,6 +871,7 @@\\n     received_body: FormData,\\n ) -> Dict[str, Any]:\\n     values = {}\\n+    processed_keys = set()\\n \\n     for field in body_fields:\\n         value = _get_multidict_value(field, received_body)\\n@@ -902,8 +903,9 @@\\n             value = serialize_sequence_value(field=field, value=results)\\n         if value is not None:\\n             values[field.alias] = value\\n+        processed_keys.add(field.alias)\\n     for key, value in received_body.items():\\n-        if key not in values:\\n+        if key not in processed_keys:\\n             values[key] = value\\n     return values\\n \\n\", \"is_truncated\": false}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/dependencies/utils.py",
+          "start_line": 723,
+          "end_line": 950,
+          "seconds": 67.27010154724121
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "run_command",
+          "path": "",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 121.36824226379395
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "resolved",
+      "feedback_edit_outcome_class": "landed_and_passed",
+      "control_first_source_edit": {
+        "event": 3,
+        "seconds": 38.47898197174072,
+        "budget_rejected": false,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": true,
+        "tool": "edit_file",
+        "path": "rich/highlighter.py",
+        "old_string_lines": 0,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": null,
+        "preserves_anchor_def": null,
+        "has_contextual_target": false,
+        "observation": "{\"error\": \"Invoking `edit_file()` failed as the following mandatory input parameters are not present:\\nold_string\\nYou could retry calling this tool, but it is IMPORTANT for you to provide all the mandatory parameters.\"}"
+      },
+      "feedback_first_source_edit": {
+        "event": 4,
+        "seconds": 38.441224813461304,
+        "budget_rejected": false,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": true,
+        "tool": "edit_file",
+        "path": "rich/highlighter.py",
+        "old_string_lines": 0,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": null,
+        "preserves_anchor_def": null,
+        "has_contextual_target": false,
+        "observation": "{\"error\": \"Invoking `edit_file()` failed as the following mandatory input parameters are not present:\\nold_string\\nYou could retry calling this tool, but it is IMPORTANT for you to provide all the mandatory parameters.\"}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 17,
+        "event8_cap_rejected_call": null
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 2,
+        "event8_cap_rejected_call": null
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "draft_status": "scored_failed",
+      "control_status": "resolved",
+      "feedback_status": "resolved",
+      "feedback_edit_outcome_class": "landed_and_passed",
+      "control_first_source_edit": {
+        "event": 2,
+        "seconds": 36.30325508117676,
+        "budget_rejected": false,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "src/requests/status_codes.py",
+        "old_string_lines": 1,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"ok\", \"filepath\": \"src/requests/status_codes.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/src/requests/status_codes.py\\n+++ b/src/requests/status_codes.py\\n@@ -79,7 +79,7 @@\\n     422: (\\\"unprocessable_entity\\\", \\\"unprocessable\\\"),\\n     423: (\\\"locked\\\",),\\n     424: (\\\"failed_dependency\\\", \\\"dependency\\\"),\\n-    425: (\\\"unordered_collection\\\", \\\"unordered\\\"),\\n+    425: (\\\"unordered_collection\\\", \\\"unordered\\\", \\\"too_early\\\"),\\n     426: (\\\"upgrade_required\\\", \\\"upgrade\\\"),\\n     428: (\\\"precondition_required\\\", \\\"precondition\\\"),\\n     429: (\\\"too_many_requests\\\", \\\"too_many\\\"),\\n\", \"is_truncated\": false}"
+      },
+      "feedback_first_source_edit": {
+        "event": 2,
+        "seconds": 43.53484034538269,
+        "budget_rejected": false,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "src/requests/status_codes.py",
+        "old_string_lines": 1,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"ok\", \"filepath\": \"src/requests/status_codes.py\", \"occurrences\": 1, \"strategy\": \"exact\", \"diff\": \"--- a/src/requests/status_codes.py\\n+++ b/src/requests/status_codes.py\\n@@ -79,7 +79,7 @@\\n     422: (\\\"unprocessable_entity\\\", \\\"unprocessable\\\"),\\n     423: (\\\"locked\\\",),\\n     424: (\\\"failed_dependency\\\", \\\"dependency\\\"),\\n-    425: (\\\"unordered_collection\\\", \\\"unordered\\\"),\\n+    425: (\\\"unordered_collection\\\", \\\"unordered\\\", \\\"too_early\\\"),\\n     426: (\\\"upgrade_required\\\", \\\"upgrade\\\"),\\n     428: (\\\"precondition_required\\\", \\\"precondition\\\"),\\n     429: (\\\"too_many_requests\\\", \\\"too_many\\\"),\\n\", \"is_truncated\": false}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 47.921358585357666
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 55.42951536178589
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "scored_failed",
+      "feedback_edit_outcome_class": "blocked_mid_localization_partial_edit",
+      "control_first_source_edit": null,
+      "feedback_first_source_edit": {
+        "event": 9,
+        "seconds": 91.75433683395386,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": true,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "fastapi/applications.py",
+        "old_string_lines": 1,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": false,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 1,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/applications.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 56.496052503585815
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/openapi/docs.py",
+          "start_line": 130,
+          "end_line": 180,
+          "seconds": 61.407119035720825
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "scored_failed",
+      "feedback_edit_outcome_class": "blocked_mid_localization_partial_edit",
+      "control_first_source_edit": {
+        "event": 9,
+        "seconds": 138.0525815486908,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": true,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "fastapi/applications.py",
+        "old_string_lines": 1,
+        "new_string_lines": 12,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": false,
+        "has_contextual_target": false,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "feedback_first_source_edit": {
+        "event": 9,
+        "seconds": 119.9490475654602,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": true,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "fastapi/applications.py",
+        "old_string_lines": 1,
+        "new_string_lines": 15,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": false,
+        "has_contextual_target": false,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "run_command",
+          "path": "",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 107.37786197662354
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/applications.py",
+          "start_line": 1401,
+          "end_line": 1450,
+          "seconds": 86.6365270614624
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "scored_failed",
+      "feedback_edit_outcome_class": "blocked_exact_unique_fix",
+      "control_first_source_edit": {
+        "event": 9,
+        "seconds": 44.120245933532715,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": true,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "rich/table.py",
+        "old_string_lines": 1,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "feedback_first_source_edit": {
+        "event": 8,
+        "seconds": 71.53225588798523,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": false,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "rich/table.py",
+        "old_string_lines": 1,
+        "new_string_lines": 1,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 2,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "run_command",
+          "path": "",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 38.8611159324646
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 1,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "edit_file",
+          "path": "rich/table.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 71.53225588798523
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "scored_failed",
+      "feedback_edit_outcome_class": "blocked_exact_unique_fix",
+      "control_first_source_edit": null,
+      "feedback_first_source_edit": {
+        "event": 9,
+        "seconds": 91.3032078742981,
+        "budget_rejected": true,
+        "immediate_post_cap_event9": true,
+        "missing_parameter": false,
+        "tool": "edit_file",
+        "path": "fastapi/security/api_key.py",
+        "old_string_lines": 3,
+        "new_string_lines": 3,
+        "occurrences_in_read_window": 1,
+        "preserves_anchor_def": null,
+        "has_contextual_target": true,
+        "observation": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}"
+      },
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/security/api_key.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 95.52766180038452
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "run_command",
+          "path": "",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 62.935020446777344
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15589",
+      "draft_status": "scored_failed",
+      "control_status": "scored_failed",
+      "feedback_status": "scored_failed",
+      "feedback_edit_outcome_class": "blocked_at_target_read",
+      "control_first_source_edit": null,
+      "feedback_first_source_edit": null,
+      "control_interface_stats": {
+        "silent_line1_reset_reads": 0,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/dependencies/utils.py",
+          "start_line": null,
+          "end_line": null,
+          "seconds": 76.80689454078674
+        }
+      },
+      "feedback_interface_stats": {
+        "silent_line1_reset_reads": 1,
+        "missing_param_calls": 0,
+        "event8_cap_rejected_call": {
+          "tool": "read_file",
+          "path": "fastapi/dependencies/utils.py",
+          "start_line": 750,
+          "end_line": 850,
+          "seconds": 46.69188404083252
+        }
+      },
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15589.json"
+    }
+  ],
+  "followup_prompt_ablations": [
+    {
+      "cycle": "2026-10-25-local-recursion",
+      "intervention": "Subagent caps (\\texttt{AgentTool}, 855)",
+      "stage_target": "Stages 2--3 pool",
+      "execution_behavior": "89--96\\% overrun (med. 21--24 reqs)",
+      "net_outcome": "25 vs 19/22 (--9.3/--4.5 pp)"
+    },
+    {
+      "cycle": "2026-10-15-strong-baseline-recovery",
+      "intervention": "Schema/heredoc retry (855)",
+      "stage_target": "Stage 4 \\texttt{old\\_string}",
+      "execution_behavior": "3/33 recoveries in R03 (0 pass)",
+      "net_outcome": "Tie official; --2.4/--5.1 pp ext"
+    },
+    {
+      "cycle": "2026-10-23-local-progress",
+      "intervention": "Voluntary \\texttt{keep}/\\texttt{reject} (855)",
+      "stage_target": "Stage 4 regression",
+      "execution_behavior": "23 \\texttt{keep}, 0 \\texttt{reject} in 190 runs",
+      "net_outcome": "+2.0 pp official; --2.4 pp ext"
+    }
+  ],
+  "rebuild_scope": {
+    "mode": "lightweight-derived-inputs",
+    "full_packet_extraction": false,
+    "joined_csv_realizations": 216,
+    "counterevidence_packets_recomputed": 8,
+    "all_trace_tool_allocation": "Frozen aggregate CSV; final seven counterevidence traces recomputed.",
+    "original_provenance": {
+      "verified": 17,
+      "unbundled": 221
+    }
+  },
+  "sources": {
+    "evidence/process-analysis-v04.json": "5032b31325787ad1798c8224a2744d6e70044a3c684364a27832ced1db3ad8a6",
+    "supplement/check-construction-v04.csv": "0a6ac7fcb7c51557cb10934294d9a0b0916bcb3a7b17c1be5609b6f6e8b22de2",
+    "supplement/source-delivery-v04.csv": "4ca139a1d734088d8313199d4c79364be7b08834bafd8a519f5d06e2fb869a31",
+    "supplement/check-phases-v04.csv": "6da350e8e5f0b5e58f06094e4f1d338f4fa4eb255301972ab284f3e63406119a",
+    "evidence/counterevidence-slots.csv": "b525dee85957272e31110dce2215775214046d2fa82f57f293836d33729208b0",
+    "protocol/packets/study-b/R02/fastapi_13537.json": "a2c63cb3705f72166c2d8355acb76fdc0a103d6aa0a83452a514b5e0cf23de0f",
+    "protocol/packets/study-b/R03/rich_3067.json": "eef6dc747e827d8e54e4639c6e9af253de49d139220d2bb3a7378b6b8f616428",
+    "protocol/packets/study-b/R03/requests_6592.json": "fd2fb8574623de102eeb550b947047e157fd3f0c9a96c6dcaee5954f2e76108f",
+    "protocol/packets/study-b/R03/fastapi_14986.json": "32bcba5f73f291bbe185345e586dae3e53d00d25b6524890d6cdd16b72ca70dd",
+    "protocol/packets/study-b/R04/fastapi_15800.json": "22b34333d38705f2dce3b34f671e8ae345dd6a07bf731d6dea19370f78e96b33",
+    "protocol/packets/study-b/R04/rich_3518.json": "21b5f7ee2a6d01ac927e8b012b52934936f825056e4ccf27bfa4edbdd2cdc8ba",
+    "protocol/packets/study-b/R04/fastapi_13786.json": "99310a7bbd808becf1e0dfdf0ab9358c70bb29647935d377fd8ecf8e8717ccf8",
+    "protocol/packets/study-b/R04/fastapi_15589.json": "b9f74a5569e01e1ba339755cfd86570d6cc2cf1327bbd5f422942b03ef189594",
+    "supplement/tool-allocation-v04.csv": "bd72824903946a95c21ad0da6e44c6e01d856c8e406576af724896fbfa4fea31",
+    "protocol/cycles/2026-10-12-trigger-validity/report.md": "0de8a13befbda3652641a7e104681b9deafc2250a81e01f391af80a398540d2a",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R01.json": "819d1d3eb19bc57e0913cfeac9aae9147323794eca498ffdb87592c556353219",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R02.json": "11384d297e4d8b499b95ad6976a4acaf36306056c03b84f3c07a0d3a8f5bb23c",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R03.json": "3bbfa6ecdbbb6713497a796dbf2864e2a608883ec0c064b47c98fd6ffa8b99ec",
+    "protocol/cycles/2026-10-25-local-recursion/report.md": "99fd959bdf32caf273a21b664a29e89f891b9c96a9ca8461096c4051ab6492ef",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R01.json": "c8ac859ae6eba231e2c831a8d8d9d0804af281929abc8390d5a309905a4931e1",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R02.json": "cdbae9254a663b1d5e8cbd75e436ab7e0adf2542f0b1d286e3aa7f025e0c6eef",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R03.json": "a59a8fbf35d73eb32ca2c9dbdbbdc3615448413142f7933e1278ba3cc7c94e66",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/report.md": "a0ccb959c5f93c97addfb44cea9c89bf1ee922a31e5d1b986d9a69b6714ec598",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R01.json": "e7c0cd94a19f0eb3ed20f16c2b9156203ab265f58224f9db922916f86bc9bcdd",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R02.json": "d319f3d4d0778febec076475ad94326eefea6f3ab9fa447f6feeec9f65b97a94",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R03.json": "898a5496ca281eebd311b69888ee762ed6e448d648bce5d4630b62edc39f8dde",
+    "protocol/cycles/2026-10-23-local-progress/report.md": "f6b1cec74bdc1ffab5b3bf4d2f6782c4fcd553ef9446b5721142d30ccab3faa0",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R01.json": "e037acdb3c6475b8c0e014a41b67fea01fc7fcf48d3c322b33a8211ce80c3e1c",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R02.json": "67428ecbcfded8a8c7f400c6cd1194644f1cd0c74fd98b0405d5031c9adb28bc",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R03.json": "8a347c3bc441a450cc822c9b7dc0e3bed8f5cf9a090392807558277825da8af3"
+  }
+}

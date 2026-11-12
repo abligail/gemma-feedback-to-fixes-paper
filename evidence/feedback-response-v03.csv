@@ -1,0 +1,5 @@
+batch,tasks_per_branch,control,feedback
+R01,54,"{""edit_failed_label"": 3, ""same_check_reacquisition_label"": 9, ""source_edited_label"": 3}","{""edit_failed_label"": 3, ""same_check_reacquisition_label"": 4, ""source_edited_label"": 3}"
+R02,54,"{""edit_failed_label"": 2, ""same_check_reacquisition_label"": 11, ""source_edited_label"": 3}","{""edit_failed_label"": 8, ""same_check_reacquisition_label"": 5, ""source_edited_label"": 2}"
+R03,54,"{""edit_failed_label"": 7, ""same_check_reacquisition_label"": 38, ""source_edited_label"": 5}","{""edit_failed_label"": 5, ""same_check_reacquisition_label"": 24, ""source_edited_label"": 5}"
+R04,54,"{""edit_failed_label"": 8, ""same_check_reacquisition_label"": 44, ""source_edited_label"": 6}","{""edit_failed_label"": 7, ""same_check_reacquisition_label"": 20, ""source_edited_label"": 5}"

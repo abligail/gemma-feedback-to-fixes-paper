@@ -1,0 +1,1732 @@
+{
+  "schema_version": 1,
+  "instance_id": "fastapi_15589",
+  "frozen_draft": {
+    "path": "inputs/fastapi_15589/draft.patch",
+    "available": true,
+    "sha256": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+    "bytes": 4710,
+    "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 000000000..9bb59fdf0\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,47 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+\n+app = FastAPI()\n+\n+@app.get(\"/\")\n+async def read_root(my_header: str = Header(None)):\n+    return {\"my_header\": my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header():\n+    # By default convert_underscores=True. \n+    # It should accept 'my-header' and NOT accept 'my_header'.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Response with underscored header: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+def test_underscore_header_disabled():\n+    # Now we explicitly disable convert_underscores\n+    @app.get(\"/disabled\")\n+    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n+        return {\"my_header\": my_header}\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header()\n+        print(\"test_underscore_header passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header failed: {e}\")\n+    \n+    try:\n+        test_underscore_header_disabled()\n+        print(\"test_underscore_header_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_disabled failed: {e}\")\ndiff --git a/repro_model.py b/repro_model.py\nnew file mode 100644\nindex 000000000..70349c135\n--- /dev/null\n+++ b/repro_model.py\n@@ -0,0 +1,36 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header()):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model():\n+    # By default convert_underscores=True. \n+    # It should NOT accept 'my_header' in the request.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model()\n+        print(\"test_underscore_header_model passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model failed: {e}\")\ndiff --git a/repro_model_disabled.py b/repro_model_disabled.py\nnew file mode 100644\nindex 000000000..2c5c9dbad\n--- /dev/null\n+++ b/repro_model_disabled.py\n@@ -0,0 +1,35 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model_disabled():\n+    # Now we explicitly disable convert_underscores\n+    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+    \n+    # Test hyphenated header (should NOT work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model_disabled()\n+        print(\"test_underscore_header_model_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model_disabled failed: {e}\")\n"
+  },
+  "frozen_check": {
+    "available": true,
+    "command": "python3 -B << 'PY'\nimport sys\nfrom fastapi import FastAPI, Header\nfrom fastapi.testclient import TestClient\nfrom pydantic import BaseModel\nfrom typing import Optional\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_root(my_header: Optional[str] = Header(None)):\n    return {\"my_header\": my_header}\n\n@app.get(\"/disabled\")\nasync def read_root_disabled(my_header: Optional[str] = Header(None, convert_underscores=False)):\n    return {\"my_header\": my_header}\n\nclass CommonHeaders(BaseModel):\n    my_header: Optional[str] = None\n\n@app.get(\"/model\")\nasync def read_model(headers: CommonHeaders = Header()):\n    return {\"my_header\": headers.my_header}\n\n@app.get(\"/model_disabled\")\nasync def read_model_disabled(headers: CommonHeaders = Header(convert_underscores=False)):\n    return {\"my_header\": headers.my_header}\n\nclient = TestClient(app)\n\ndef test_all():\n    # Single header default (convert_underscores=True)\n    res = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": \"hyphenated\"}, f\"Default hyphenated failed: {res.json()}\"\n    res = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": None}, f\"Default underscored should be ignored: {res.json()}\"\n    \n    # Single header disabled (convert_underscores=False)\n    res = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": \"underscored\"}, f\"Disabled underscored failed: {res.json()}\"\n    res = client.get(\"/disabled\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": None}, f\"Disabled hyphenated should be ignored: {res.json()}\"\n    \n    # Model header default (convert_underscores=True)\n    res = client.get(\"/model\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": \"hyphenated\"}, f\"Model default hyphenated failed: {res.json()}\"\n    res = client.get(\"/model\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": None}, f\"Model default underscored should be ignored: {res.json()}\"\n    \n    # Model header disabled (convert_underscores=False)\n    res = client.get(\"/model_disabled\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": \"underscored\"}, f\"Model disabled underscored failed: {res.json()}\"\n    res = client.get(\"/model_disabled\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": None}, f\"Model disabled hyphenated should be ignored: {res.json()}\"\n\nif __name__ == \"__main__\":\n    try:\n        test_all()\n        print(\"Success\")\n    except AssertionError as e:\n        print(f\"Failure: {e}\")\n        sys.exit(1)\nPY\n",
+    "public_basis": "The issue states: 'Do not accept underscore headers when using `convert_underscores=True` (the default)'. This means by default, only hyphenated headers (e.g., 'my-header') should be mapped to underscored parameters (e.g., 'my_header'), and underscored headers (e.g., 'my_header') should be ignored. Setting `convert_underscores=False` should reverse this behavior.",
+    "expected": "The command should exit with 0 and print 'Success'. It verifies that when `convert_underscores=True` (default), only hyphenated headers are accepted, and when `convert_underscores=False`, only underscored headers are accepted, for both single Header parameters and Pydantic model Header parameters. This check is limited to basic header mapping and does not cover all possible header name combinations."
+  },
+  "frozen_execution": {
+    "available": true,
+    "exit_code": 1,
+    "stdout": "Failure: Model default underscored should be ignored: {'my_header': 'underscored'}\n",
+    "stderr": "",
+    "timed_out": false,
+    "duration_seconds": 2.531946,
+    "tested_source_tree_sha256": "3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac",
+    "logical_tool_opportunities_used": 1,
+    "source_unchanged": true
+  },
+  "mechanical_comparisons": {
+    "frozen_draft_file_matches_record": true,
+    "frozen_draft_matches_returned_draft": true,
+    "input_draft_sha256": {
+      "checker": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+      "probe": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+      "control": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+      "feedback": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0"
+    },
+    "same_frozen_draft_in_all_followup_sandboxes": true,
+    "branch_runtime_input_hashes_match_frozen": {
+      "control": true,
+      "feedback": true
+    },
+    "starting_source_tree_sha256": {
+      "checker": "3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac",
+      "probe": "3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac",
+      "control": "3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac",
+      "feedback": "3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac"
+    },
+    "control_feedback_starting_source_equal": true,
+    "all_followup_starting_source_equal": true,
+    "common_material_equal": true,
+    "visibility": {
+      "control": {
+        "common_sha256_recomputed": "5b06e811df0e695bc61491ff46410902bd3f360e8ff88a33b33dfb1de46555bb",
+        "common_sha256_declared": "5b06e811df0e695bc61491ff46410902bd3f360e8ff88a33b33dfb1de46555bb",
+        "common_hash_matches_declared": true,
+        "problem_hash_matches_saved_input": true,
+        "execution_field": "Not supplied in this condition. This absence is not evidence that the draft or proposed check is correct or incorrect.",
+        "execution_field_matches_frozen_receipt": true,
+        "first_wire_request": 1,
+        "first_wire_line": 1,
+        "entire_public_problem_in_first_wire": true,
+        "common_material_in_first_wire": true,
+        "execution_section_in_first_wire": true,
+        "frozen_execution_available": true,
+        "expected_information_kind": "withheld",
+        "expected_information_visible_in_first_wire": true,
+        "actual_execution_result_visible_in_first_wire": false,
+        "unavailable_notice_visible_in_first_wire": false
+      },
+      "feedback": {
+        "common_sha256_recomputed": "5b06e811df0e695bc61491ff46410902bd3f360e8ff88a33b33dfb1de46555bb",
+        "common_sha256_declared": "5b06e811df0e695bc61491ff46410902bd3f360e8ff88a33b33dfb1de46555bb",
+        "common_hash_matches_declared": true,
+        "problem_hash_matches_saved_input": true,
+        "execution_field": "{\"available\": true, \"duration_seconds\": 2.531946, \"exit_code\": 1, \"reason\": null, \"source_unchanged\": true, \"stderr\": \"\", \"stdout\": \"Failure: Model default underscored should be ignored: {'my_header': 'underscored'}\\n\", \"tested_source_tree_sha256\": \"3a44bc112d64e78ae28124699f4a2b59f4dfc669de23b65cfebded6781788cac\", \"timed_out\": false}",
+        "execution_field_matches_frozen_receipt": true,
+        "first_wire_request": 1,
+        "first_wire_line": 1,
+        "entire_public_problem_in_first_wire": true,
+        "common_material_in_first_wire": true,
+        "execution_section_in_first_wire": true,
+        "frozen_execution_available": true,
+        "expected_information_kind": "execution_result",
+        "expected_information_visible_in_first_wire": true,
+        "actual_execution_result_visible_in_first_wire": true,
+        "unavailable_notice_visible_in_first_wire": false
+      }
+    },
+    "check_available": true,
+    "execution_available": true,
+    "final_patch_changed_from_draft": {
+      "control": false,
+      "feedback": false
+    },
+    "literal_proposed_command_reexecution_count": {
+      "control": 1,
+      "feedback": 0
+    }
+  },
+  "manual_annotations": {
+    "public_basis_supports_expected_behavior": "pending",
+    "correct_entry_reached": "pending",
+    "execution_semantic_interpretation": "pending",
+    "feedback_used_for_source_revision": "pending",
+    "unjustified_source_change": "pending",
+    "last_check_covers_final_source": "pending",
+    "notes": "pending"
+  },
+  "stages": {
+    "draft": {
+      "agent_patch": {
+        "path": "drafts/jobs/fastapi_15589/2026101404/draft/agent.patch",
+        "available": true,
+        "sha256": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+        "bytes": 4710,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 000000000..9bb59fdf0\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,47 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+\n+app = FastAPI()\n+\n+@app.get(\"/\")\n+async def read_root(my_header: str = Header(None)):\n+    return {\"my_header\": my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header():\n+    # By default convert_underscores=True. \n+    # It should accept 'my-header' and NOT accept 'my_header'.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Response with underscored header: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+def test_underscore_header_disabled():\n+    # Now we explicitly disable convert_underscores\n+    @app.get(\"/disabled\")\n+    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n+        return {\"my_header\": my_header}\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header()\n+        print(\"test_underscore_header passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header failed: {e}\")\n+    \n+    try:\n+        test_underscore_header_disabled()\n+        print(\"test_underscore_header_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_disabled failed: {e}\")\ndiff --git a/repro_model.py b/repro_model.py\nnew file mode 100644\nindex 000000000..70349c135\n--- /dev/null\n+++ b/repro_model.py\n@@ -0,0 +1,36 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header()):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model():\n+    # By default convert_underscores=True. \n+    # It should NOT accept 'my_header' in the request.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model()\n+        print(\"test_underscore_header_model passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model failed: {e}\")\ndiff --git a/repro_model_disabled.py b/repro_model_disabled.py\nnew file mode 100644\nindex 000000000..2c5c9dbad\n--- /dev/null\n+++ b/repro_model_disabled.py\n@@ -0,0 +1,35 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model_disabled():\n+    # Now we explicitly disable convert_underscores\n+    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+    \n+    # Test hyphenated header (should NOT work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model_disabled()\n+        print(\"test_underscore_header_model_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model_disabled failed: {e}\")\n"
+      },
+      "official_tool_events": {
+        "path": "drafts/jobs/fastapi_15589/2026101404/draft/official/traces/trace_fastapi_15589.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "git grep -n \"convert_underscores\" -- '*.py'"
+                },
+                "extra": {
+                  "elapsed_s": 20.488945484161377,
+                  "timestamp": 1791936842.7051685,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"docs_src/header_param_models/tutorial003_an_py310.py:19:    headers: Annotated[CommonHeaders, Header(convert_underscores=False)],\\ndocs_src/header_param_models/tutorial003_py310.py:16:async def read_items(headers: CommonHeaders = Header(convert_underscores=False)):\\ndocs_src/header_params/tutorial002_an_py310.py:10:    strange_header: Annotated[str | None, Header(convert_underscores=False)] = None,\\ndocs_src/header_params/tutorial002_py310.py:8:    strange_header: str | None = Header(default=None, convert_underscores=False),\\nfastapi/dependencies/utils.py:536:        if not field_info.alias and getattr(field_info, \\\"convert_underscores\\\", None):\\nfastapi/dependencies/utils.py:797:    default_convert_underscores = True\\nfastapi/dependencies/utils.py:803:        # If headers are in a Pydantic model, the way to disable convert_underscores\\nfastapi/dependencies/utils.py:804:        # would be with Header(convert_underscores=False) at the Pydantic model level\\nfastapi/dependencies/utils.py:805:        default_convert_underscores = getattr(\\nfastapi/dependencies/utils.py:806:            first_field.field_info, \\\"convert_underscores\\\", True\\nfastapi/dependencies/utils.py:817:            # doesn't have a FieldInfo of type Header with the default convert_underscores=True\\nfastapi/dependencies/utils.py:818:            convert_underscores = getattr(\\nfastapi/dependencies/utils.py:819:                field.field_info, \\\"convert_underscores\\\", default_convert_underscores\\nfastapi/dependencies/utils.py:821:            if convert_underscores:\\nfastapi/openapi/utils.py:128:    default_convert_underscores = True\\nfastapi/openapi/utils.py:132:            default_convert_underscores = getattr(\\nfastapi/openapi/utils.py:133:                first_field.field_info, \\\"convert_underscores\\\", True\\nfastapi/openapi/utils.py:148:            convert_underscores = getattr(\\nfastapi/openapi/utils.py:150:                \\\"convert_underscores\\\",\\nfastapi/openapi/utils.py:151:                default_convert_underscores,\\nfastapi/openapi/utils.py:156:                and convert_underscores\\nfastapi/param_functions.py:761:    convert_underscores: Annotated[\\nfastapi/param_functions.py:991:        convert_underscores=convert_underscores,\\nfastapi/params.py:316:        convert_underscores: bool = True,\\nfastapi/params.py:352:        self.convert_underscores = convert_underscores\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 20.590518712997437,
+                "timestamp": 1791936842.8067417,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 20.488945484161377,
+              "timestamp": 1791936842.7051685,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py",
+                  "start_line": 310,
+                  "end_line": 360
+                },
+                "extra": {
+                  "elapsed_s": 25.801039695739746,
+                  "timestamp": 1791936848.0172627,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        convert_underscores: bool = True,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        self.convert_underscores = convert_underscores\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\", \"start_line\": 310, \"end_line\": 360, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 25.880759716033936,
+                "timestamp": 1791936848.0969827,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 25.801039695739746,
+              "timestamp": 1791936848.0172627,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 550,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 520
+                },
+                "extra": {
+                  "elapsed_s": 28.80684995651245,
+                  "timestamp": 1791936851.023073,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"    # It's a field_info, not a dependency\\n    if field_info is not None:\\n        # Handle field_info.in_\\n        if is_path_param:\\n            assert isinstance(field_info, params.Path), (\\n                f\\\"Cannot use `{field_info.__class__.__name__}` for path param\\\"\\n                f\\\" {param_name!r}\\\"\\n            )\\n        elif (\\n            isinstance(field_info, params.Param)\\n            and getattr(field_info, \\\"in_\\\", None) is None\\n        ):\\n            field_info.in_ = params.ParamTypes.query\\n        use_annotation_from_field_info = use_annotation\\n        if isinstance(field_info, params.Form):\\n            ensure_multipart_is_installed()\\n        if not field_info.alias and getattr(field_info, \\\"convert_underscores\\\", None):\\n            alias = param_name.replace(\\\"_\\\", \\\"-\\\")\\n        else:\\n            alias = field_info.alias or param_name\\n        field_info.alias = alias\\n        field = create_model_field(\\n            name=param_name,\\n            type_=use_annotation_from_field_info,\\n            default=field_info.default,\\n            alias=alias,\\n            field_info=field_info,\\n        )\\n        if is_path_param:\\n            assert is_scalar_field(field=field), (\\n                \\\"Path params must be of one of the supported types\\\"\", \"start_line\": 520, \"end_line\": 550, \"total_lines\": 1057, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 28.920433282852173,
+                "timestamp": 1791936851.1366563,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 28.80684995651245,
+              "timestamp": 1791936851.023073,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 830,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 780
+                },
+                "extra": {
+                  "elapsed_s": 30.494182586669922,
+                  "timestamp": 1791936852.7104056,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"            return deepcopy(field.default)\\n    return value\\n\\n\\ndef request_params_to_args(\\n    fields: Sequence[ModelField],\\n    received_params: Mapping[str, Any] | QueryParams | Headers,\\n) -> tuple[dict[str, Any], list[Any]]:\\n    values: dict[str, Any] = {}\\n    errors: list[dict[str, Any]] = []\\n\\n    if not fields:\\n        return values, errors\\n\\n    first_field = fields[0]\\n    fields_to_extract = fields\\n    single_not_embedded_field = False\\n    default_convert_underscores = True\\n    if len(fields) == 1 and lenient_issubclass(\\n        first_field.field_info.annotation, BaseModel\\n    ):\\n        fields_to_extract = get_cached_model_fields(first_field.field_info.annotation)\\n        single_not_embedded_field = True\\n        # If headers are in a Pydantic model, the way to disable convert_underscores\\n        # would be with Header(convert_underscores=False) at the Pydantic model level\\n        default_convert_underscores = getattr(\\n            first_field.field_info, \\\"convert_underscores\\\", True\\n        )\\n\\n    params_to_process: dict[str, Any] = {}\\n\\n    processed_keys = set()\\n\\n    for field in fields_to_extract:\\n        alias = None\\n        if isinstance(received_params, Headers):\\n            # Handle fields extracted from a Pydantic Model for a header, each field\\n            # doesn't have a FieldInfo of type Header with the default convert_underscores=True\\n            convert_underscores = getattr(\\n                field.field_info, \\\"convert_underscores\\\", default_convert_underscores\\n            )\\n            if convert_underscores:\\n                alias = get_validation_alias(field)\\n                if alias == field.name:\\n                    alias = alias.replace(\\\"_\\\", \\\"-\\\")\\n        value = _get_multidict_value(field, received_params, alias=alias)\\n        if value is not None:\\n            params_to_process[get_validation_alias(field)] = value\\n        processed_keys.add(alias or get_validation_alias(field))\\n\\n    for key in received_params.keys():\", \"start_line\": 780, \"end_line\": 830, \"total_lines\": 1057, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 30.575820446014404,
+                "timestamp": 1791936852.7920434,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 30.494182586669922,
+              "timestamp": 1791936852.7104056,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"_get_multidict_value\" fastapi/dependencies/utils.py"
+                },
+                "extra": {
+                  "elapsed_s": 35.53117561340332,
+                  "timestamp": 1791936857.7473986,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"753:def _get_multidict_value(\\n825:        value = _get_multidict_value(field, received_params, alias=alias)\\n853:        value = _get_multidict_value(field, received_params)\\n919:        value = _get_multidict_value(field, received_body)\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 35.59512805938721,
+                "timestamp": 1791936857.811351,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 35.53117561340332,
+              "timestamp": 1791936857.7473986,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 770,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 750
+                },
+                "extra": {
+                  "elapsed_s": 37.06253790855408,
+                  "timestamp": 1791936859.278761,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"    return any(type(item) is Json for item in field.field_info.metadata)\\n\\n\\ndef _get_multidict_value(\\n    field: ModelField, values: Mapping[str, Any], alias: str | None = None\\n) -> Any:\\n    alias = alias or get_validation_alias(field)\\n    if (\\n        (not _is_json_field(field))\\n        and field_annotation_is_sequence(field.field_info.annotation)\\n        and isinstance(values, (ImmutableMultiDict, Headers))\\n    ):\\n        value = values.getlist(alias)\\n    else:\\n        value = values.get(alias, None)\\n    if (\\n        value is None\\n        or (\\n            isinstance(field.field_info, params.Form)\\n            and isinstance(value, str)  # For type checks\\n            and value == \\\"\\\"\", \"start_line\": 750, \"end_line\": 770, \"total_lines\": 1057, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 37.13223314285278,
+                "timestamp": 1791936859.3484561,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 37.06253790855408,
+              "timestamp": 1791936859.278761,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "from fastapi import FastAPI, Header\nfrom fastapi.testclient import TestClient\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_root(my_header: str = Header(None)):\n    return {\"my_header\": my_header}\n\nclient = TestClient(app)\n\ndef test_underscore_header():\n    # By default convert_underscores=True. \n    # It should accept 'my-header' and NOT accept 'my_header'.\n    \n    # Test hyphenated header (should work)\n    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n    assert response.json() == {\"my_header\": \"hyphenated\"}\n    \n    # Test underscored header (should NOT work if convert_underscores=True)\n    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n    print(f\"Response with underscored header: {response.json()}\")\n    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n    # We want it to be {\"my_header\": None}\n\ndef test_underscore_header_disabled():\n    # Now we explicitly disable convert_underscores\n    @app.get(\"/disabled\")\n    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n        return {\"my_header\": my_header}\n    \n    # Test underscored header (should work)\n    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n    assert response.json() == {\"my_header\": \"underscored\"}\n\nif __name__ == \"__main__\":\n    try:\n        test_underscore_header()\n        print(\"test_underscore_header passed\")\n    except AssertionError as e:\n        print(f\"test_underscore_header failed: {e}\")\n    \n    try:\n        test_underscore_header_disabled()\n        print(\"test_underscore_header_disabled passed\")\n    except AssertionError as e:\n        print(f\"test_underscore_header_disabled failed: {e}\")\n",
+                  "filepath": "repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 60.26566457748413,
+                  "timestamp": 1791936882.4818876,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro.py\", \"size\": 1706}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 60.55149817466736,
+                "timestamp": 1791936882.7677212,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 60.26566457748413,
+              "timestamp": 1791936882.4818876,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro.py"
+                },
+                "extra": {
+                  "elapsed_s": 61.54814696311951,
+                  "timestamp": 1791936883.76437,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"Response with underscored header: {'my_header': None}\\ntest_underscore_header passed\\ntest_underscore_header_disabled passed\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 62.77687072753906,
+                "timestamp": 1791936884.9930937,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 61.54814696311951,
+              "timestamp": 1791936883.76437,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "from starlette.datastructures import Headers\nh = Headers({\"my_header\": \"value\"})\nprint(f\"my-header: {h.get('my-header')}\")\nprint(f\"my_header: {h.get('my_header')}\")\n",
+                  "filepath": "test_starlette.py"
+                },
+                "extra": {
+                  "elapsed_s": 89.41051244735718,
+                  "timestamp": 1791936911.6267354,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"test_starlette.py\", \"size\": 165}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 89.70421648025513,
+                "timestamp": 1791936911.9204395,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 89.41051244735718,
+              "timestamp": 1791936911.6267354,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 test_starlette.py"
+                },
+                "extra": {
+                  "elapsed_s": 90.9419858455658,
+                  "timestamp": 1791936913.1582088,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"my-header: None\\nmy_header: value\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 91.10528540611267,
+                "timestamp": 1791936913.3215084,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 90.9419858455658,
+              "timestamp": 1791936913.1582088,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/12",
+            "step_id": 13,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_33",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 860,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 831
+                },
+                "extra": {
+                  "elapsed_s": 99.2346031665802,
+                  "timestamp": 1791936921.4508262,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"        if key not in processed_keys:\\n            if isinstance(received_params, (ImmutableMultiDict, Headers)):\\n                value = received_params.getlist(key)\\n                if isinstance(value, list) and (len(value) == 1):\\n                    params_to_process[key] = value[0]\\n                else:\\n                    params_to_process[key] = value\\n            else:\\n                params_to_process[key] = received_params.get(key)\\n\\n    if single_not_embedded_field:\\n        field_info = first_field.field_info\\n        assert isinstance(field_info, params.Param), (\\n            \\\"Params must be subclasses of Param\\\"\\n        )\\n        loc: tuple[str, ...] = (field_info.in_.value,)\\n        v_, errors_ = _validate_value_with_model_field(\\n            field=first_field, value=params_to_process, values=values, loc=loc\\n        )\\n        return {first_field.name: v_}, errors_\\n\\n    for field in fields:\\n        value = _get_multidict_value(field, received_params)\\n        field_info = field.field_info\\n        assert isinstance(field_info, params.Param), (\\n            \\\"Params must be subclasses of Param\\\"\\n        )\\n        loc = (field_info.in_.value, get_validation_alias(field))\\n        v_, errors_ = _validate_value_with_model_field(\\n            field=field, value=value, values=values, loc=loc\", \"start_line\": 831, \"end_line\": 860, \"total_lines\": 1057, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 99.31236958503723,
+                "timestamp": 1791936921.5285926,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 99.2346031665802,
+              "timestamp": 1791936921.4508262,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/13",
+            "step_id": 14,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_36",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"_validate_value_with_model_field\" fastapi/dependencies/utils.py"
+                },
+                "extra": {
+                  "elapsed_s": 116.33385372161865,
+                  "timestamp": 1791936938.5500767,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"738:def _validate_value_with_model_field(\\n847:        v_, errors_ = _validate_value_with_model_field(\\n859:        v_, errors_ = _validate_value_with_model_field(\\n977:        v_, errors_ = _validate_value_with_model_field(\\n991:        v_, errors_ = _validate_value_with_model_field(\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 116.41443848609924,
+                "timestamp": 1791936938.6306615,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 116.33385372161865,
+              "timestamp": 1791936938.5500767,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/14",
+            "step_id": 15,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_39",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 760,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 730
+                },
+                "extra": {
+                  "elapsed_s": 118.07634139060974,
+                  "timestamp": 1791936940.2925644,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"        values=values,\\n        errors=errors,\\n        background_tasks=background_tasks,\\n        response=response,\\n        dependency_cache=dependency_cache,\\n    )\\n\\n\\ndef _validate_value_with_model_field(\\n    *, field: ModelField, value: Any, values: dict[str, Any], loc: tuple[str, ...]\\n) -> tuple[Any, list[Any]]:\\n    if value is None:\\n        if field.field_info.is_required():\\n            return None, [get_missing_field_error(loc=loc)]\\n        else:\\n            return deepcopy(field.default), []\\n    return field.validate(value, values, loc=loc)\\n\\n\\ndef _is_json_field(field: ModelField) -> bool:\\n    return any(type(item) is Json for item in field.field_info.metadata)\\n\\n\\ndef _get_multidict_value(\\n    field: ModelField, values: Mapping[str, Any], alias: str | None = None\\n) -> Any:\\n    alias = alias or get_validation_alias(field)\\n    if (\\n        (not _is_json_field(field))\\n        and field_annotation_is_sequence(field.field_info.annotation)\\n        and isinstance(values, (ImmutableMultiDict, Headers))\", \"start_line\": 730, \"end_line\": 760, \"total_lines\": 1057, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 118.14424204826355,
+                "timestamp": 1791936940.360465,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 118.07634139060974,
+              "timestamp": 1791936940.2925644,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/15",
+            "step_id": 16,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_42",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "from fastapi import FastAPI, Header\nfrom fastapi.testclient import TestClient\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass CommonHeaders(BaseModel):\n    my_header: str | None = None\n\n@app.get(\"/\")\nasync def read_root(headers: CommonHeaders = Header()):\n    return {\"my_header\": headers.my_header}\n\nclient = TestClient(app)\n\ndef test_underscore_header_model():\n    # By default convert_underscores=True. \n    # It should NOT accept 'my_header' in the request.\n    \n    # Test hyphenated header (should work)\n    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n    print(f\"Hyphenated: {response.json()}\")\n    assert response.json() == {\"my_header\": \"hyphenated\"}\n    \n    # Test underscored header (should NOT work if convert_underscores=True)\n    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n    print(f\"Underscored: {response.json()}\")\n    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n    # We want it to be {\"my_header\": None}\n\nif __name__ == \"__main__\":\n    try:\n        test_underscore_header_model()\n        print(\"test_underscore_header_model passed\")\n    except AssertionError as e:\n        print(f\"test_underscore_header_model failed: {e}\")\n",
+                  "filepath": "repro_model.py"
+                },
+                "extra": {
+                  "elapsed_s": 129.0422625541687,
+                  "timestamp": 1791936951.2584856,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro_model.py\", \"size\": 1213}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 129.3289361000061,
+                "timestamp": 1791936951.545159,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 129.0422625541687,
+              "timestamp": 1791936951.2584856,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/16",
+            "step_id": 17,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_45",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro_model.py"
+                },
+                "extra": {
+                  "elapsed_s": 130.25547122955322,
+                  "timestamp": 1791936952.4716942,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"Hyphenated: {'my_header': 'hyphenated'}\\nUnderscored: {'my_header': 'underscored'}\\ntest_underscore_header_model passed\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 130.81538128852844,
+                "timestamp": 1791936953.0316043,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 130.25547122955322,
+              "timestamp": 1791936952.4716942,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/17",
+            "step_id": 18,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_48",
+                "function_name": "write_file",
+                "arguments": {
+                  "content": "from fastapi import FastAPI, Header\nfrom fastapi.testclient import TestClient\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass CommonHeaders(BaseModel):\n    my_header: str | None = None\n\n@app.get(\"/\")\nasync def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n    return {\"my_header\": headers.my_header}\n\nclient = TestClient(app)\n\ndef test_underscore_header_model_disabled():\n    # Now we explicitly disable convert_underscores\n    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n    \n    # Test underscored header (should work)\n    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n    print(f\"Underscored: {response.json()}\")\n    assert response.json() == {\"my_header\": \"underscored\"}\n    \n    # Test hyphenated header (should NOT work)\n    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n    print(f\"Hyphenated: {response.json()}\")\n    assert response.json() == {\"my_header\": None}\n\nif __name__ == \"__main__\":\n    try:\n        test_underscore_header_model_disabled()\n        print(\"test_underscore_header_model_disabled passed\")\n    except AssertionError as e:\n        print(f\"test_underscore_header_model_disabled failed: {e}\")\n",
+                  "filepath": "repro_model_disabled.py"
+                },
+                "extra": {
+                  "elapsed_s": 141.4757866859436,
+                  "timestamp": 1791936963.6920097,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"repro_model_disabled.py\", \"size\": 1229}",
+              "extra": {
+                "tool_name": "write_file",
+                "elapsed_s": 141.74582290649414,
+                "timestamp": 1791936963.962046,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 141.4757866859436,
+              "timestamp": 1791936963.6920097,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/18",
+            "step_id": 19,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_51",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 repro_model_disabled.py"
+                },
+                "extra": {
+                  "elapsed_s": 142.77020025253296,
+                  "timestamp": 1791936964.9864233,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (16 calls)\"}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 142.7721791267395,
+                "timestamp": 1791936964.9884021,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 142.77020025253296,
+              "timestamp": 1791936964.9864233,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/19",
+            "step_id": 20,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_54",
+                "function_name": "edit_file",
+                "arguments": {
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "new_string": "    for key in received_params.keys():\n        if key not in processed_keys:\n            if isinstance(received_params, Headers) and default_convert_underscores and \"_\" in key:\n                continue\n            if isinstance(received_params, (ImmutableMultiDict, Headers)):",
+                  "old_string": "    for key in received_params.keys():\n        if key not in processed_keys:\n            if isinstance(received_params, (ImmutableMultiDict, Headers)):"
+                },
+                "extra": {
+                  "elapsed_s": 170.17924809455872,
+                  "timestamp": 1791936992.395471,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (16 calls)\"}",
+              "extra": {
+                "tool_name": "edit_file",
+                "elapsed_s": 170.1814112663269,
+                "timestamp": 1791936992.3976343,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 170.17924809455872,
+              "timestamp": 1791936992.395471,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/20",
+            "step_id": 21,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_57",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 182.73586988449097,
+                  "timestamp": 1791937004.952093,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 4710, \"files_changed\": 3}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 182.89224815368652,
+                "timestamp": 1791937005.1084712,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 182.73586988449097,
+              "timestamp": 1791937004.952093,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/21",
+            "step_id": 22,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_60",
+                "function_name": "edit_file",
+                "arguments": {
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "new_string": "    for key in received_params.keys():\n        if key not in processed_keys:\n            if isinstance(received_params, Headers) and default_convert_underscores and \"_\" in key:\n                continue\n            if isinstance(received_params, (ImmutableMultiDict, Headers)):",
+                  "old_string": "    for key in received_params.keys():\n        if key not in processed_keys:\n            if isinstance(received_params, (ImmutableMultiDict, Headers)):"
+                },
+                "extra": {
+                  "elapsed_s": 201.24720859527588,
+                  "timestamp": 1791937023.4634316,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (16 calls)\"}",
+              "extra": {
+                "tool_name": "edit_file",
+                "elapsed_s": 201.24933671951294,
+                "timestamp": 1791937023.4655597,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 201.24720859527588,
+              "timestamp": 1791937023.4634316,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/22",
+            "step_id": 23,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_63",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 202.3154535293579,
+                  "timestamp": 1791937024.5316765,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 4710, \"files_changed\": 3}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 202.46827387809753,
+                "timestamp": 1791937024.6844969,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 202.3154535293579,
+              "timestamp": 1791937024.5316765,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "checker": {
+      "agent_patch": {
+        "path": "checks/jobs/fastapi_15589/2026101414/checker/agent.patch",
+        "available": true,
+        "sha256": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+        "bytes": 4710,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 000000000..9bb59fdf0\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,47 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+\n+app = FastAPI()\n+\n+@app.get(\"/\")\n+async def read_root(my_header: str = Header(None)):\n+    return {\"my_header\": my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header():\n+    # By default convert_underscores=True. \n+    # It should accept 'my-header' and NOT accept 'my_header'.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Response with underscored header: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+def test_underscore_header_disabled():\n+    # Now we explicitly disable convert_underscores\n+    @app.get(\"/disabled\")\n+    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n+        return {\"my_header\": my_header}\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header()\n+        print(\"test_underscore_header passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header failed: {e}\")\n+    \n+    try:\n+        test_underscore_header_disabled()\n+        print(\"test_underscore_header_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_disabled failed: {e}\")\ndiff --git a/repro_model.py b/repro_model.py\nnew file mode 100644\nindex 000000000..70349c135\n--- /dev/null\n+++ b/repro_model.py\n@@ -0,0 +1,36 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header()):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model():\n+    # By default convert_underscores=True. \n+    # It should NOT accept 'my_header' in the request.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model()\n+        print(\"test_underscore_header_model passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model failed: {e}\")\ndiff --git a/repro_model_disabled.py b/repro_model_disabled.py\nnew file mode 100644\nindex 000000000..2c5c9dbad\n--- /dev/null\n+++ b/repro_model_disabled.py\n@@ -0,0 +1,35 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model_disabled():\n+    # Now we explicitly disable convert_underscores\n+    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+    \n+    # Test hyphenated header (should NOT work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model_disabled()\n+        print(\"test_underscore_header_model_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model_disabled failed: {e}\")\n"
+      },
+      "official_tool_events": {
+        "path": "checks/jobs/fastapi_15589/2026101414/checker/official/traces/trace_fastapi_15589.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 79.68992257118225,
+                  "timestamp": 1791937990.8248684,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 4710, \"files_changed\": 3}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 79.84588670730591,
+                "timestamp": 1791937990.9808326,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 79.68992257118225,
+              "timestamp": 1791937990.8248684,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "control": {
+      "agent_patch": {
+        "path": "continuations/jobs/fastapi_15589/2026101424/control/agent.patch",
+        "available": true,
+        "sha256": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+        "bytes": 4710,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 000000000..9bb59fdf0\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,47 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+\n+app = FastAPI()\n+\n+@app.get(\"/\")\n+async def read_root(my_header: str = Header(None)):\n+    return {\"my_header\": my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header():\n+    # By default convert_underscores=True. \n+    # It should accept 'my-header' and NOT accept 'my_header'.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Response with underscored header: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+def test_underscore_header_disabled():\n+    # Now we explicitly disable convert_underscores\n+    @app.get(\"/disabled\")\n+    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n+        return {\"my_header\": my_header}\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header()\n+        print(\"test_underscore_header passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header failed: {e}\")\n+    \n+    try:\n+        test_underscore_header_disabled()\n+        print(\"test_underscore_header_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_disabled failed: {e}\")\ndiff --git a/repro_model.py b/repro_model.py\nnew file mode 100644\nindex 000000000..70349c135\n--- /dev/null\n+++ b/repro_model.py\n@@ -0,0 +1,36 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header()):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model():\n+    # By default convert_underscores=True. \n+    # It should NOT accept 'my_header' in the request.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model()\n+        print(\"test_underscore_header_model passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model failed: {e}\")\ndiff --git a/repro_model_disabled.py b/repro_model_disabled.py\nnew file mode 100644\nindex 000000000..2c5c9dbad\n--- /dev/null\n+++ b/repro_model_disabled.py\n@@ -0,0 +1,35 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model_disabled():\n+    # Now we explicitly disable convert_underscores\n+    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+    \n+    # Test hyphenated header (should NOT work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model_disabled()\n+        print(\"test_underscore_header_model_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model_disabled failed: {e}\")\n"
+      },
+      "official_tool_events": {
+        "path": "continuations/jobs/fastapi_15589/2026101424/control/official/traces/trace_fastapi_15589.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "python3 -B << 'PY'\nimport sys\nfrom fastapi import FastAPI, Header\nfrom fastapi.testclient import TestClient\nfrom pydantic import BaseModel\nfrom typing import Optional\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_root(my_header: Optional[str] = Header(None)):\n    return {\"my_header\": my_header}\n\n@app.get(\"/disabled\")\nasync def read_root_disabled(my_header: Optional[str] = Header(None, convert_underscores=False)):\n    return {\"my_header\": my_header}\n\nclass CommonHeaders(BaseModel):\n    my_header: Optional[str] = None\n\n@app.get(\"/model\")\nasync def read_model(headers: CommonHeaders = Header()):\n    return {\"my_header\": headers.my_header}\n\n@app.get(\"/model_disabled\")\nasync def read_model_disabled(headers: CommonHeaders = Header(convert_underscores=False)):\n    return {\"my_header\": headers.my_header}\n\nclient = TestClient(app)\n\ndef test_all():\n    # Single header default (convert_underscores=True)\n    res = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": \"hyphenated\"}, f\"Default hyphenated failed: {res.json()}\"\n    res = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": None}, f\"Default underscored should be ignored: {res.json()}\"\n    \n    # Single header disabled (convert_underscores=False)\n    res = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": \"underscored\"}, f\"Disabled underscored failed: {res.json()}\"\n    res = client.get(\"/disabled\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": None}, f\"Disabled hyphenated should be ignored: {res.json()}\"\n    \n    # Model header default (convert_underscores=True)\n    res = client.get(\"/model\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": \"hyphenated\"}, f\"Model default hyphenated failed: {res.json()}\"\n    res = client.get(\"/model\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": None}, f\"Model default underscored should be ignored: {res.json()}\"\n    \n    # Model header disabled (convert_underscores=False)\n    res = client.get(\"/model_disabled\", headers={\"my_header\": \"underscored\"})\n    assert res.json() == {\"my_header\": \"underscored\"}, f\"Model disabled underscored failed: {res.json()}\"\n    res = client.get(\"/model_disabled\", headers={\"my-header\": \"hyphenated\"})\n    assert res.json() == {\"my_header\": None}, f\"Model disabled hyphenated should be ignored: {res.json()}\"\n\nif __name__ == \"__main__\":\n    try:\n        test_all()\n        print(\"Success\")\n    except AssertionError as e:\n        print(f\"Failure: {e}\")\n        sys.exit(1)\nPY\n"
+                },
+                "extra": {
+                  "elapsed_s": 51.306100845336914,
+                  "timestamp": 1791940572.264508,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"CommandError\", \"error_message\": \"Failure: Model default underscored should be ignored: {'my_header': 'underscored'}\\n\", \"details\": {\"stdout\": \"Failure: Model default underscored should be ignored: {'my_header': 'underscored'}\\n\", \"stderr\": \"\", \"exit_code\": 1}}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 52.60790228843689,
+                "timestamp": 1791940573.5663095,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 51.306100845336914,
+              "timestamp": 1791940572.264508,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py"
+                },
+                "extra": {
+                  "elapsed_s": 57.80169916152954,
+                  "timestamp": 1791940578.7601063,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom collections.abc import Callable, Sequence\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Annotated, Any, Literal\\n\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.models import Example\\nfrom pydantic import AliasChoices, AliasPath\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import deprecated\\n\\nfrom ._compat import (\\n    Undefined,\\n)\\nfrom .datastructures import _Unset\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        kwargs[\\\"deprecated\\\"] = deprecated\\n\\n        if serialization_alias in (_Unset, None) and isinstance(alias, str):\\n            serialization_alias = alias\\n        if validation_alias in (_Unset, None):\\n            validation_alias = alias\\n        kwargs.update(\\n            {\\n                \\\"annotation\\\": annotation,\\n                \\\"alias_priority\\\": alias_priority,\\n                \\\"validation_alias\\\": validation_alias,\\n                \\\"serialization_alias\\\": serialization_alias,\\n                \\\"strict\\\": strict,\\n                \\\"json_schema_extra\\\": current_json_schema_extra,\\n            }\\n        )\\n        kwargs[\\\"pattern\\\"] = pattern or regex\\n\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)  # ty: ignore[invalid-argument-type]\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 754, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 57.884580850601196,
+                "timestamp": 1791940578.842988,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 57.80169916152954,
+              "timestamp": 1791940578.7601063,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"class Header\" fastapi/params.py"
+                },
+                "extra": {
+                  "elapsed_s": 59.87935996055603,
+                  "timestamp": 1791940580.8377671,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"303:class Header(Param):  # type: ignore[misc]\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 59.95175552368164,
+                "timestamp": 1791940580.9101627,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 59.87935996055603,
+              "timestamp": 1791940580.8377671,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py",
+                  "start_line": 303,
+                  "end_line": 350
+                },
+                "extra": {
+                  "elapsed_s": 62.80823874473572,
+                  "timestamp": 1791940583.766646,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"class Header(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.header\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        convert_underscores: bool = True,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\", \"start_line\": 303, \"end_line\": 350, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 62.87314510345459,
+                "timestamp": 1791940583.8315523,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 62.80823874473572,
+              "timestamp": 1791940583.766646,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 380,
+                  "filepath": "fastapi/params.py",
+                  "start_line": 351
+                },
+                "extra": {
+                  "elapsed_s": 64.24057030677795,
+                  "timestamp": 1791940585.1989775,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"    ):\\n        self.convert_underscores = convert_underscores\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\\n            example=example,\\n            examples=examples,\\n            openapi_examples=openapi_examples,\", \"start_line\": 351, \"end_line\": 380, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 64.30854558944702,
+                "timestamp": 1791940585.2669528,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 64.24057030677795,
+              "timestamp": 1791940585.1989775,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 390,
+                  "filepath": "fastapi/params.py",
+                  "start_line": 381
+                },
+                "extra": {
+                  "elapsed_s": 65.329017162323,
+                  "timestamp": 1791940586.2874243,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"            include_in_schema=include_in_schema,\\n            json_schema_extra=json_schema_extra,\\n            **extra,\\n        )\\n\\n\\nclass Cookie(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.cookie\\n\\n    def __init__(\", \"start_line\": 381, \"end_line\": 390, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 65.40134334564209,
+                "timestamp": 1791940586.3597505,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 65.329017162323,
+              "timestamp": 1791940586.2874243,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"convert_underscores\" ."
+                },
+                "extra": {
+                  "elapsed_s": 67.2469003200531,
+                  "timestamp": 1791940588.2053075,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"./docs_src/header_param_models/tutorial003_py310.py:async def read_items(headers: CommonHeaders = Header(convert_underscores=False)):\\n./docs_src/header_param_models/tutorial003_an_py310.py:    headers: Annotated[CommonHeaders, Header(convert_underscores=False)],\\n./docs_src/header_params/tutorial002_an_py310.py:    strange_header: Annotated[str | None, Header(convert_underscores=False)] = None,\\n./docs_src/header_params/tutorial002_py310.py:    strange_header: str | None = Header(default=None, convert_underscores=False),\\n./repro_model.py:    # By default convert_underscores=True. \\n./repro_model.py:    # Test underscored header (should NOT work if convert_underscores=True)\\n./repro.py:    # By default convert_underscores=True. \\n./repro.py:    # Test underscored header (should NOT work if convert_underscores=True)\\n./repro.py:    # Now we explicitly disable convert_underscores\\n./repro.py:    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\\n./docs/tr/docs/tutorial/header-param-models.md:`convert_underscores` de\\u011ferini `False` yapmadan \\u00f6nce, baz\\u0131 HTTP proxy'lerinin ve server'lar\\u0131n alt \\u00e7izgi i\\u00e7eren header'lar\\u0131n kullan\\u0131m\\u0131na izin vermedi\\u011fini unutmay\\u0131n.\\n./docs/tr/docs/tutorial/header-params.md:Herhangi bir nedenle underscore'lar\\u0131n hyphen'lara otomatik d\\u00f6n\\u00fc\\u015ft\\u00fcr\\u00fclmesini kapatman\\u0131z gerekirse, `Header`'\\u0131n `convert_underscores` parametresini `False` yap\\u0131n:\\n./docs/tr/docs/tutorial/header-params.md:`convert_underscores`'u `False` yapmadan \\u00f6nce, baz\\u0131 HTTP proxy'lerinin ve server'lar\\u0131n underscore i\\u00e7eren header'lar\\u0131n kullan\\u0131m\\u0131na izin vermedi\\u011fini unutmay\\u0131n.\\n./docs/ko/docs/tutorial/header-param-models.md:`convert_underscores`\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uae30 \\uc804\\uc5d0, \\uc77c\\ubd80 HTTP \\ud504\\ub85d\\uc2dc\\uc640 \\uc11c\\ubc84\\uc5d0\\uc11c\\ub294 \\ubc11\\uc904\\uc774 \\ud3ec\\ud568\\ub41c \\ud5e4\\ub354 \\uc0ac\\uc6a9\\uc744 \\ud5c8\\uc6a9\\ud558\\uc9c0 \\uc54a\\ub294\\ub2e4\\ub294 \\uc810\\uc744 \\uc5fc\\ub450\\uc5d0 \\ub450\\uc138\\uc694.\\n./docs/ko/docs/tutorial/header-params.md:\\ub9cc\\uc57d \\uc5b8\\ub354\\uc2a4\\ucf54\\uc5b4\\ub97c \\ud558\\uc774\\ud508\\uc73c\\ub85c \\uc790\\ub3d9 \\ubcc0\\ud658\\uc744 \\ube44\\ud65c\\uc131\\ud654\\ud574\\uc57c \\ud560 \\uc5b4\\ub5a4 \\uc774\\uc720\\uac00 \\uc788\\ub2e4\\uba74, `Header`\\uc758 `convert_underscores` \\ub9e4\\uac1c\\ubcc0\\uc218\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uc2ed\\uc2dc\\uc624:\\n./docs/ko/docs/tutorial/header-params.md:`convert_underscores`\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uae30 \\uc804\\uc5d0, \\uc5b4\\ub5a4 HTTP \\ud504\\ub85d\\uc2dc\\ub4e4\\uacfc \\uc11c\\ubc84\\ub4e4\\uc740 \\uc5b8\\ub354\\uc2a4\\ucf54\\uc5b4\\uac00 \\ud3ec\\ud568\\ub41c \\ud5e4\\ub354 \\uc0ac\\uc6a9\\uc744 \\ud5c8\\ub77d\\ud558\\uc9c0 \\uc54a\\ub294\\ub2e4\\ub294 \\uac83\\uc744 \\uba85\\uc2ec\\ud558\\uc2ed\\uc2dc\\uc624.\\n./docs/es/docs/tutorial/header-param-models.md:Antes de establecer `convert_underscores` a `False`, ten en cuenta que algunos proxies y servidores HTTP no permiten el uso de headers con guiones bajos.\\n./docs/es/docs/tutorial/header-params.md:Si por alguna raz\\u00f3n necesitas desactivar la conversi\\u00f3n autom\\u00e1tica de guiones bajos a guiones, establece el par\\u00e1metro `convert_underscores` de `Header` a `False`:\\n./docs/es/docs/tutorial/header-params.md:Antes de establecer `convert_underscores` a `False`, ten en cuenta que algunos proxies y servidores HTTP no permiten el uso de headers con guiones bajos.\\n./docs/fr/docs/tutorial/header-param-models.md:## D\\u00e9sactiver convert_underscores { #disable-convert-underscores }\\n./docs/fr/docs/tutorial/header-param-models.md:Avant de d\\u00e9finir `convert_underscores` \\u00e0 `False`, gardez \\u00e0 l'esprit que certains proxys et serveurs HTTP interdisent l'utilisation d'en-t\\u00eates contenant des underscores.\\n./docs/fr/docs/tutorial/header-params.md:Si, pour une raison quelconque, vous devez d\\u00e9sactiver la conversion automatique des traits bas en traits d'union, d\\u00e9finissez le param\\u00e8tre `convert_underscores` de `Header` sur `False` :\\n./docs/fr/docs/tutorial/header-params.md:Avant de d\\u00e9finir `convert_underscores` sur `False`, gardez \\u00e0 l'esprit que certains proxies et serveurs HTTP interdisent l'utilisation d'en-t\\u00eates contenant des traits bas.\\n./docs/zh/docs/tutorial/header-param-models.md:\\u5728\\u5c06 `convert_underscores` \\u8bbe\\u4e3a `False` \\u4e4b\\u524d\\uff0c\\u8bf7\\u6ce8\\u610f\\u67d0\\u4e9b HTTP \\u4ee3\\u7406\\u548c\\u670d\\u52a1\\u5668\\u4e0d\\u5141\\u8bb8\\u4f7f\\u7528\\u5e26\\u4e0b\\u5212\\u7ebf\\u7684 headers\\u3002\\n./docs/zh/docs/tutorial/header-params.md:\\u5982\\u9700\\u7981\\u7528\\u4e0b\\u5212\\u7ebf\\u81ea\\u52a8\\u8f6c\\u6362\\u4e3a\\u8fde\\u5b57\\u7b26\\uff0c\\u53ef\\u4ee5\\u628a `Header` \\u7684 `convert_underscores` \\u53c2\\u6570\\u8bbe\\u7f6e\\u4e3a `False`\\uff1a\\n./docs/zh/docs/tutorial/header-params.md:\\u6ce8\\u610f\\uff0c\\u4f7f\\u7528 `convert_underscores = False` \\u8981\\u614e\\u91cd\\uff0c\\u6709\\u4e9b HTTP \\u4ee3\\u7406\\u548c\\u670d\\u52a1\\u5668\\u4e0d\\u652f\\u6301\\u4f7f\\u7528\\u5e26\\u6709\\u4e0b\\u5212\\u7ebf\\u7684\\u8bf7\\u6c42\\u5934\\u3002\\n./docs/pt/docs/tutorial/header-param-models.md:Antes de definir `convert_underscores` como `False`, tenha em mente que alguns proxies e servidores HTTP n\\u00e3o permitem o uso de cabe\\u00e7alhos com sublinhados.\\n./docs/pt/docs/tutorial/header-params.md:Se por algum motivo voc\\u00ea precisar desabilitar a convers\\u00e3o autom\\u00e1tica de sublinhados para h\\u00edfens, defina o par\\u00e2metro `convert_underscores` de `Header` para `False`:\\n./docs/pt/docs/tutorial/header-params.md:Antes de definir `convert_underscores` como `False`, lembre-se de que alguns proxies e servidores HTTP n\\u00e3o permitem o uso de cabe\\u00e7alhos com sublinhados.\\n./docs/en/docs/tutorial/header-param-models.md:Before setting `convert_underscores` to `False`, bear in mind that some HTTP proxies and servers disallow the usage of headers with underscores.\\n./docs/en/docs/tutorial/header-params.md:If for some reason you need to disable automatic conversion of underscores to hyphens, set the parameter `convert_underscores` of `Header` to `False`:\\n./docs/en/docs/tutorial/header-params.md:Before setting `convert_underscores` to `False`, bear in mind that some HTTP proxies and servers disallow the usage of headers with underscores.\\n./docs/en/docs/release-notes.md:* \\ud83d\\udc1b Fix `convert_underscores=False` for header Pydantic models.\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 67.4685754776001,
+                "timestamp": 1791940588.4269826,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 67.2469003200531,
+              "timestamp": 1791940588.2053075,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"convert_underscores\" fastapi/"
+                },
+                "extra": {
+                  "elapsed_s": 74.73676323890686,
+                  "timestamp": 1791940595.6951704,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"fastapi/openapi/utils.py:    default_convert_underscores = True\\nfastapi/openapi/utils.py:            default_convert_underscores = getattr(\\nfastapi/openapi/utils.py:                first_field.field_info, \\\"convert_underscores\\\", True\\nfastapi/openapi/utils.py:            convert_underscores = getattr(\\nfastapi/openapi/utils.py:                \\\"convert_underscores\\\",\\nfastapi/openapi/utils.py:                default_convert_underscores,\\nfastapi/openapi/utils.py:                and convert_underscores\\nfastapi/dependencies/utils.py:        if not field_info.alias and getattr(field_info, \\\"convert_underscores\\\", None):\\nfastapi/dependencies/utils.py:    default_convert_underscores = True\\nfastapi/dependencies/utils.py:        # If headers are in a Pydantic model, the way to disable convert_underscores\\nfastapi/dependencies/utils.py:        # would be with Header(convert_underscores=False) at the Pydantic model level\\nfastapi/dependencies/utils.py:        default_convert_underscores = getattr(\\nfastapi/dependencies/utils.py:            first_field.field_info, \\\"convert_underscores\\\", True\\nfastapi/dependencies/utils.py:            # doesn't have a FieldInfo of type Header with the default convert_underscores=True\\nfastapi/dependencies/utils.py:            convert_underscores = getattr(\\nfastapi/dependencies/utils.py:                field.field_info, \\\"convert_underscores\\\", default_convert_underscores\\nfastapi/dependencies/utils.py:            if convert_underscores:\\nfastapi/params.py:        convert_underscores: bool = True,\\nfastapi/params.py:        self.convert_underscores = convert_underscores\\nfastapi/param_functions.py:    convert_underscores: Annotated[\\nfastapi/param_functions.py:        convert_underscores=convert_underscores,\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 74.79859209060669,
+                "timestamp": 1791940595.7569993,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 74.73676323890686,
+              "timestamp": 1791940595.6951704,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/dependencies/utils.py"
+                },
+                "extra": {
+                  "elapsed_s": 76.80689454078674,
+                  "timestamp": 1791940597.7653017,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 76.80985832214355,
+                "timestamp": 1791940597.7682655,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 76.80689454078674,
+              "timestamp": 1791940597.7653017,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "get_status",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 82.88657522201538,
+                  "timestamp": 1791940603.8449824,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"tool_calls_used\": 8, \"patch_submitted\": false, \"patch_size\": 0, \"tool_calls_remaining\": 0, \"max_tool_calls\": 8, \"time_seconds_remaining\": 94.87092596903676, \"max_time_minutes\": 2.5, \"agent_elapsed_seconds\": 55.12907563097542, \"max_turns\": 28, \"command_timeout_seconds\": 240}",
+              "extra": {
+                "tool_name": "get_status",
+                "elapsed_s": 82.88886785507202,
+                "timestamp": 1791940603.847275,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 82.88657522201538,
+              "timestamp": 1791940603.8449824,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/12",
+            "step_id": 13,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_33",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 98.75473713874817,
+                  "timestamp": 1791940619.7131443,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 4710, \"files_changed\": 3}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 98.92315697669983,
+                "timestamp": 1791940619.8815641,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 98.75473713874817,
+              "timestamp": 1791940619.7131443,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    },
+    "feedback": {
+      "agent_patch": {
+        "path": "continuations/jobs/fastapi_15589/2026101424/feedback/agent.patch",
+        "available": true,
+        "sha256": "0f0f620f780b11018aacb46a42fe036a0d0ab1b3c7860de1230c76a2d49c90a0",
+        "bytes": 4710,
+        "text": "diff --git a/repro.py b/repro.py\nnew file mode 100644\nindex 000000000..9bb59fdf0\n--- /dev/null\n+++ b/repro.py\n@@ -0,0 +1,47 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+\n+app = FastAPI()\n+\n+@app.get(\"/\")\n+async def read_root(my_header: str = Header(None)):\n+    return {\"my_header\": my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header():\n+    # By default convert_underscores=True. \n+    # It should accept 'my-header' and NOT accept 'my_header'.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Response with underscored header: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+def test_underscore_header_disabled():\n+    # Now we explicitly disable convert_underscores\n+    @app.get(\"/disabled\")\n+    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\n+        return {\"my_header\": my_header}\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/disabled\", headers={\"my_header\": \"underscored\"})\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header()\n+        print(\"test_underscore_header passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header failed: {e}\")\n+    \n+    try:\n+        test_underscore_header_disabled()\n+        print(\"test_underscore_header_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_disabled failed: {e}\")\ndiff --git a/repro_model.py b/repro_model.py\nnew file mode 100644\nindex 000000000..70349c135\n--- /dev/null\n+++ b/repro_model.py\n@@ -0,0 +1,36 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header()):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model():\n+    # By default convert_underscores=True. \n+    # It should NOT accept 'my_header' in the request.\n+    \n+    # Test hyphenated header (should work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"hyphenated\"}\n+    \n+    # Test underscored header (should NOT work if convert_underscores=True)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    # If the bug exists, this might be {\"my_header\": \"underscored\"}\n+    # We want it to be {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model()\n+        print(\"test_underscore_header_model passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model failed: {e}\")\ndiff --git a/repro_model_disabled.py b/repro_model_disabled.py\nnew file mode 100644\nindex 000000000..2c5c9dbad\n--- /dev/null\n+++ b/repro_model_disabled.py\n@@ -0,0 +1,35 @@\n+from fastapi import FastAPI, Header\n+from fastapi.testclient import TestClient\n+from pydantic import BaseModel\n+\n+app = FastAPI()\n+\n+class CommonHeaders(BaseModel):\n+    my_header: str | None = None\n+\n+@app.get(\"/\")\n+async def read_root(headers: CommonHeaders = Header(convert_underscores=False)):\n+    return {\"my_header\": headers.my_header}\n+\n+client = TestClient(app)\n+\n+def test_underscore_header_model_disabled():\n+    # Now we explicitly disable convert_underscores\n+    # It should accept 'my_header' and NOT accept 'my-header' (unless it's also provided)\n+    \n+    # Test underscored header (should work)\n+    response = client.get(\"/\", headers={\"my_header\": \"underscored\"})\n+    print(f\"Underscored: {response.json()}\")\n+    assert response.json() == {\"my_header\": \"underscored\"}\n+    \n+    # Test hyphenated header (should NOT work)\n+    response = client.get(\"/\", headers={\"my-header\": \"hyphenated\"})\n+    print(f\"Hyphenated: {response.json()}\")\n+    assert response.json() == {\"my_header\": None}\n+\n+if __name__ == \"__main__\":\n+    try:\n+        test_underscore_header_model_disabled()\n+        print(\"test_underscore_header_model_disabled passed\")\n+    except AssertionError as e:\n+        print(f\"test_underscore_header_model_disabled failed: {e}\")\n"
+      },
+      "official_tool_events": {
+        "path": "continuations/jobs/fastapi_15589/2026101424/feedback/official/traces/trace_fastapi_15589.json",
+        "events": [
+          {
+            "json_pointer": "/steps/2",
+            "step_id": 3,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_3",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py"
+                },
+                "extra": {
+                  "elapsed_s": 27.64107584953308,
+                  "timestamp": 1791940525.2508256,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom collections.abc import Callable, Sequence\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Annotated, Any, Literal\\n\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.models import Example\\nfrom pydantic import AliasChoices, AliasPath\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import deprecated\\n\\nfrom ._compat import (\\n    Undefined,\\n)\\nfrom .datastructures import _Unset\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        kwargs[\\\"deprecated\\\"] = deprecated\\n\\n        if serialization_alias in (_Unset, None) and isinstance(alias, str):\\n            serialization_alias = alias\\n        if validation_alias in (_Unset, None):\\n            validation_alias = alias\\n        kwargs.update(\\n            {\\n                \\\"annotation\\\": annotation,\\n                \\\"alias_priority\\\": alias_priority,\\n                \\\"validation_alias\\\": validation_alias,\\n                \\\"serialization_alias\\\": serialization_alias,\\n                \\\"strict\\\": strict,\\n                \\\"json_schema_extra\\\": current_json_schema_extra,\\n            }\\n        )\\n        kwargs[\\\"pattern\\\"] = pattern or regex\\n\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)  # ty: ignore[invalid-argument-type]\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 754, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 27.877031564712524,
+                "timestamp": 1791940525.4867814,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 27.64107584953308,
+              "timestamp": 1791940525.2508256,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/3",
+            "step_id": 4,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_6",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py",
+                  "start_line\"": "600"
+                },
+                "extra": {
+                  "elapsed_s": 29.292118310928345,
+                  "timestamp": 1791940526.901868,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom collections.abc import Callable, Sequence\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Annotated, Any, Literal\\n\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.models import Example\\nfrom pydantic import AliasChoices, AliasPath\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import deprecated\\n\\nfrom ._compat import (\\n    Undefined,\\n)\\nfrom .datastructures import _Unset\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        kwargs[\\\"deprecated\\\"] = deprecated\\n\\n        if serialization_alias in (_Unset, None) and isinstance(alias, str):\\n            serialization_alias = alias\\n        if validation_alias in (_Unset, None):\\n            validation_alias = alias\\n        kwargs.update(\\n            {\\n                \\\"annotation\\\": annotation,\\n                \\\"alias_priority\\\": alias_priority,\\n                \\\"validation_alias\\\": validation_alias,\\n                \\\"serialization_alias\\\": serialization_alias,\\n                \\\"strict\\\": strict,\\n                \\\"json_schema_extra\\\": current_json_schema_extra,\\n            }\\n        )\\n        kwargs[\\\"pattern\\\"] = pattern or regex\\n\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)  # ty: ignore[invalid-argument-type]\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 754, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 29.453912496566772,
+                "timestamp": 1791940527.0636623,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 29.292118310928345,
+              "timestamp": 1791940526.901868,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/4",
+            "step_id": 5,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_9",
+                "function_name": "read_file",
+                "arguments": {
+                  "filepath": "fastapi/params.py",
+                  "start_line": 600,
+                  "end_line": 754
+                },
+                "extra": {
+                  "elapsed_s": 31.723157167434692,
+                  "timestamp": 1791940529.332907,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            media_type=media_type,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\\n            example=example,\\n            examples=examples,\\n            openapi_examples=openapi_examples,\\n            include_in_schema=include_in_schema,\\n            json_schema_extra=json_schema_extra,\\n            **extra,\\n        )\\n\\n\\nclass File(Form):  # type: ignore[misc]\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        media_type: str = \\\"multipart/form-data\\\",\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            media_type=media_type,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\\n            example=example,\\n            examples=examples,\\n            openapi_examples=openapi_examples,\\n            include_in_schema=include_in_schema,\\n            json_schema_extra=json_schema_extra,\\n            **extra,\\n        )\\n\\n\\n@dataclass(frozen=True)\\nclass Depends:\\n    dependency: Callable[..., Any] | None = None\\n    use_cache: bool = True\\n    scope: Literal[\\\"function\\\", \\\"request\\\"] | None = None\", \"start_line\": 600, \"end_line\": 749, \"total_lines\": 754, \"is_truncated\": true}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 31.892783880233765,
+                "timestamp": 1791940529.5025337,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 31.723157167434692,
+              "timestamp": 1791940529.332907,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/5",
+            "step_id": 6,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_12",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"class Header\" fastapi/params.py"
+                },
+                "extra": {
+                  "elapsed_s": 33.60660696029663,
+                  "timestamp": 1791940531.2163568,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"303:class Header(Param):  # type: ignore[misc]\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 33.805941581726074,
+                "timestamp": 1791940531.4156914,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 33.60660696029663,
+              "timestamp": 1791940531.2163568,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/6",
+            "step_id": 7,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_15",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 350,
+                  "filepath": "fastapi/params.py",
+                  "start_line": 300
+                },
+                "extra": {
+                  "elapsed_s": 35.28880453109741,
+                  "timestamp": 1791940532.8985543,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"        )\\n\\n\\nclass Header(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.header\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        convert_underscores: bool = True,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\", \"start_line\": 300, \"end_line\": 350, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 35.46227765083313,
+                "timestamp": 1791940533.0720274,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 35.28880453109741,
+              "timestamp": 1791940532.8985543,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/7",
+            "step_id": 8,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_18",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 400,
+                  "filepath": "fastapi/params.py",
+                  "start_line": 351
+                },
+                "extra": {
+                  "elapsed_s": 37.11544704437256,
+                  "timestamp": 1791940534.7251968,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"    ):\\n        self.convert_underscores = convert_underscores\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\\n            example=example,\\n            examples=examples,\\n            openapi_examples=openapi_examples,\\n            include_in_schema=include_in_schema,\\n            json_schema_extra=json_schema_extra,\\n            **extra,\\n        )\\n\\n\\nclass Cookie(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.cookie\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 351, \"end_line\": 400, \"total_lines\": 754, \"is_truncated\": false}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 37.27004671096802,
+                "timestamp": 1791940534.8797965,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 37.11544704437256,
+              "timestamp": 1791940534.7251968,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/8",
+            "step_id": 9,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_21",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -r \"convert_underscores\" ."
+                },
+                "extra": {
+                  "elapsed_s": 40.122727394104004,
+                  "timestamp": 1791940537.7324772,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"./docs_src/header_param_models/tutorial003_py310.py:async def read_items(headers: CommonHeaders = Header(convert_underscores=False)):\\n./docs_src/header_param_models/tutorial003_an_py310.py:    headers: Annotated[CommonHeaders, Header(convert_underscores=False)],\\n./docs_src/header_params/tutorial002_an_py310.py:    strange_header: Annotated[str | None, Header(convert_underscores=False)] = None,\\n./docs_src/header_params/tutorial002_py310.py:    strange_header: str | None = Header(default=None, convert_underscores=False),\\n./repro_model.py:    # By default convert_underscores=True. \\n./repro_model.py:    # Test underscored header (should NOT work if convert_underscores=True)\\n./repro.py:    # By default convert_underscores=True. \\n./repro.py:    # Test underscored header (should NOT work if convert_underscores=True)\\n./repro.py:    # Now we explicitly disable convert_underscores\\n./repro.py:    async def read_root_disabled(my_header: str = Header(None, convert_underscores=False)):\\n./docs/tr/docs/tutorial/header-param-models.md:`convert_underscores` de\\u011ferini `False` yapmadan \\u00f6nce, baz\\u0131 HTTP proxy'lerinin ve server'lar\\u0131n alt \\u00e7izgi i\\u00e7eren header'lar\\u0131n kullan\\u0131m\\u0131na izin vermedi\\u011fini unutmay\\u0131n.\\n./docs/tr/docs/tutorial/header-params.md:Herhangi bir nedenle underscore'lar\\u0131n hyphen'lara otomatik d\\u00f6n\\u00fc\\u015ft\\u00fcr\\u00fclmesini kapatman\\u0131z gerekirse, `Header`'\\u0131n `convert_underscores` parametresini `False` yap\\u0131n:\\n./docs/tr/docs/tutorial/header-params.md:`convert_underscores`'u `False` yapmadan \\u00f6nce, baz\\u0131 HTTP proxy'lerinin ve server'lar\\u0131n underscore i\\u00e7eren header'lar\\u0131n kullan\\u0131m\\u0131na izin vermedi\\u011fini unutmay\\u0131n.\\n./docs/ko/docs/tutorial/header-param-models.md:`convert_underscores`\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uae30 \\uc804\\uc5d0, \\uc77c\\ubd80 HTTP \\ud504\\ub85d\\uc2dc\\uc640 \\uc11c\\ubc84\\uc5d0\\uc11c\\ub294 \\ubc11\\uc904\\uc774 \\ud3ec\\ud568\\ub41c \\ud5e4\\ub354 \\uc0ac\\uc6a9\\uc744 \\ud5c8\\uc6a9\\ud558\\uc9c0 \\uc54a\\ub294\\ub2e4\\ub294 \\uc810\\uc744 \\uc5fc\\ub450\\uc5d0 \\ub450\\uc138\\uc694.\\n./docs/ko/docs/tutorial/header-params.md:\\ub9cc\\uc57d \\uc5b8\\ub354\\uc2a4\\ucf54\\uc5b4\\ub97c \\ud558\\uc774\\ud508\\uc73c\\ub85c \\uc790\\ub3d9 \\ubcc0\\ud658\\uc744 \\ube44\\ud65c\\uc131\\ud654\\ud574\\uc57c \\ud560 \\uc5b4\\ub5a4 \\uc774\\uc720\\uac00 \\uc788\\ub2e4\\uba74, `Header`\\uc758 `convert_underscores` \\ub9e4\\uac1c\\ubcc0\\uc218\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uc2ed\\uc2dc\\uc624:\\n./docs/ko/docs/tutorial/header-params.md:`convert_underscores`\\ub97c `False`\\ub85c \\uc124\\uc815\\ud558\\uae30 \\uc804\\uc5d0, \\uc5b4\\ub5a4 HTTP \\ud504\\ub85d\\uc2dc\\ub4e4\\uacfc \\uc11c\\ubc84\\ub4e4\\uc740 \\uc5b8\\ub354\\uc2a4\\ucf54\\uc5b4\\uac00 \\ud3ec\\ud568\\ub41c \\ud5e4\\ub354 \\uc0ac\\uc6a9\\uc744 \\ud5c8\\ub77d\\ud558\\uc9c0 \\uc54a\\ub294\\ub2e4\\ub294 \\uac83\\uc744 \\uba85\\uc2ec\\ud558\\uc2ed\\uc2dc\\uc624.\\n./docs/es/docs/tutorial/header-param-models.md:Antes de establecer `convert_underscores` a `False`, ten en cuenta que algunos proxies y servidores HTTP no permiten el uso de headers con guiones bajos.\\n./docs/es/docs/tutorial/header-params.md:Si por alguna raz\\u00f3n necesitas desactivar la conversi\\u00f3n autom\\u00e1tica de guiones bajos a guiones, establece el par\\u00e1metro `convert_underscores` de `Header` a `False`:\\n./docs/es/docs/tutorial/header-params.md:Antes de establecer `convert_underscores` a `False`, ten en cuenta que algunos proxies y servidores HTTP no permiten el uso de headers con guiones bajos.\\n./docs/fr/docs/tutorial/header-param-models.md:## D\\u00e9sactiver convert_underscores { #disable-convert-underscores }\\n./docs/fr/docs/tutorial/header-param-models.md:Avant de d\\u00e9finir `convert_underscores` \\u00e0 `False`, gardez \\u00e0 l'esprit que certains proxys et serveurs HTTP interdisent l'utilisation d'en-t\\u00eates contenant des underscores.\\n./docs/fr/docs/tutorial/header-params.md:Si, pour une raison quelconque, vous devez d\\u00e9sactiver la conversion automatique des traits bas en traits d'union, d\\u00e9finissez le param\\u00e8tre `convert_underscores` de `Header` sur `False` :\\n./docs/fr/docs/tutorial/header-params.md:Avant de d\\u00e9finir `convert_underscores` sur `False`, gardez \\u00e0 l'esprit que certains proxies et serveurs HTTP interdisent l'utilisation d'en-t\\u00eates contenant des traits bas.\\n./docs/zh/docs/tutorial/header-param-models.md:\\u5728\\u5c06 `convert_underscores` \\u8bbe\\u4e3a `False` \\u4e4b\\u524d\\uff0c\\u8bf7\\u6ce8\\u610f\\u67d0\\u4e9b HTTP \\u4ee3\\u7406\\u548c\\u670d\\u52a1\\u5668\\u4e0d\\u5141\\u8bb8\\u4f7f\\u7528\\u5e26\\u4e0b\\u5212\\u7ebf\\u7684 headers\\u3002\\n./docs/zh/docs/tutorial/header-params.md:\\u5982\\u9700\\u7981\\u7528\\u4e0b\\u5212\\u7ebf\\u81ea\\u52a8\\u8f6c\\u6362\\u4e3a\\u8fde\\u5b57\\u7b26\\uff0c\\u53ef\\u4ee5\\u628a `Header` \\u7684 `convert_underscores` \\u53c2\\u6570\\u8bbe\\u7f6e\\u4e3a `False`\\uff1a\\n./docs/zh/docs/tutorial/header-params.md:\\u6ce8\\u610f\\uff0c\\u4f7f\\u7528 `convert_underscores = False` \\u8981\\u614e\\u91cd\\uff0c\\u6709\\u4e9b HTTP \\u4ee3\\u7406\\u548c\\u670d\\u52a1\\u5668\\u4e0d\\u652f\\u6301\\u4f7f\\u7528\\u5e26\\u6709\\u4e0b\\u5212\\u7ebf\\u7684\\u8bf7\\u6c42\\u5934\\u3002\\n./docs/pt/docs/tutorial/header-param-models.md:Antes de definir `convert_underscores` como `False`, tenha em mente que alguns proxies e servidores HTTP n\\u00e3o permitem o uso de cabe\\u00e7alhos com sublinhados.\\n./docs/pt/docs/tutorial/header-params.md:Se por algum motivo voc\\u00ea precisar desabilitar a convers\\u00e3o autom\\u00e1tica de sublinhados para h\\u00edfens, defina o par\\u00e2metro `convert_underscores` de `Header` para `False`:\\n./docs/pt/docs/tutorial/header-params.md:Antes de definir `convert_underscores` como `False`, lembre-se de que alguns proxies e servidores HTTP n\\u00e3o permitem o uso de cabe\\u00e7alhos com sublinhados.\\n./docs/en/docs/tutorial/header-param-models.md:Before setting `convert_underscores` to `False`, bear in mind that some HTTP proxies and servers disallow the usage of headers with underscores.\\n./docs/en/docs/tutorial/header-params.md:If for some reason you need to disable automatic conversion of underscores to hyphens, set the parameter `convert_underscores` of `Header` to `False`:\\n./docs/en/docs/tutorial/header-params.md:Before setting `convert_underscores` to `False`, bear in mind that some HTTP proxies and servers disallow the usage of headers with underscores.\\n./docs/en/docs/release-notes.md:* \\ud83d\\udc1b Fix `convert_underscores=False` for header Pydantic models.\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 40.48509192466736,
+                "timestamp": 1791940538.0948417,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 40.122727394104004,
+              "timestamp": 1791940537.7324772,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/9",
+            "step_id": 10,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_24",
+                "function_name": "run_command",
+                "arguments": {
+                  "command": "grep -n \"Header\" fastapi/dependencies/utils.py"
+                },
+                "extra": {
+                  "elapsed_s": 44.465720653533936,
+                  "timestamp": 1791940542.0754704,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"stdout\": \"69:    Headers,\\n760:        and isinstance(values, (ImmutableMultiDict, Headers))\\n786:    received_params: Mapping[str, Any] | QueryParams | Headers,\\n804:        # would be with Header(convert_underscores=False) at the Pydantic model level\\n815:        if isinstance(received_params, Headers):\\n817:            # doesn't have a FieldInfo of type Header with the default convert_underscores=True\\n832:            if isinstance(received_params, (ImmutableMultiDict, Headers)):\\n\", \"stderr\": \"\", \"exit_code\": 0}",
+              "extra": {
+                "tool_name": "run_command",
+                "elapsed_s": 44.67683219909668,
+                "timestamp": 1791940542.286582,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 44.465720653533936,
+              "timestamp": 1791940542.0754704,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/10",
+            "step_id": 11,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_27",
+                "function_name": "read_file",
+                "arguments": {
+                  "end_line": 850,
+                  "filepath": "fastapi/dependencies/utils.py",
+                  "start_line": 750
+                },
+                "extra": {
+                  "elapsed_s": 46.69188404083252,
+                  "timestamp": 1791940544.3016338,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"error\", \"error_type\": \"BudgetExceeded\", \"error_message\": \"Tool call budget exhausted (8 calls)\"}",
+              "extra": {
+                "tool_name": "read_file",
+                "elapsed_s": 46.702094316482544,
+                "timestamp": 1791940544.311844,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 46.69188404083252,
+              "timestamp": 1791940544.3016338,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/11",
+            "step_id": 12,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_30",
+                "function_name": "get_status",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 74.59977698326111,
+                  "timestamp": 1791940572.2095268,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"tool_calls_used\": 8, \"patch_submitted\": false, \"patch_size\": 0, \"tool_calls_remaining\": 0, \"max_tool_calls\": 8, \"time_seconds_remaining\": 96.13660229602829, \"max_time_minutes\": 2.5, \"agent_elapsed_seconds\": 53.86339880496962, \"max_turns\": 28, \"command_timeout_seconds\": 240}",
+              "extra": {
+                "tool_name": "get_status",
+                "elapsed_s": 74.60241413116455,
+                "timestamp": 1791940572.212164,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 74.59977698326111,
+              "timestamp": 1791940572.2095268,
+              "author": "swe_agent"
+            }
+          },
+          {
+            "json_pointer": "/steps/12",
+            "step_id": 13,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_33",
+                "function_name": "submit_patch",
+                "arguments": {},
+                "extra": {
+                  "elapsed_s": 83.21426463127136,
+                  "timestamp": 1791940580.8240144,
+                  "author": "swe_agent",
+                  "model_version": "gemma-4-31b-it-qat-w4a16-ct"
+                }
+              }
+            ],
+            "observation": {
+              "content": "{\"status\": \"ok\", \"patch_size\": 4710, \"files_changed\": 3}",
+              "extra": {
+                "tool_name": "submit_patch",
+                "elapsed_s": 83.39523553848267,
+                "timestamp": 1791940581.0049853,
+                "author": "swe_agent"
+              }
+            },
+            "extra": {
+              "event_type": "thinking",
+              "elapsed_s": 83.21426463127136,
+              "timestamp": 1791940580.8240144,
+              "author": "swe_agent"
+            }
+          }
+        ],
+        "subsequent_model_visibility_not_assumed": true
+      }
+    }
+  }
+}

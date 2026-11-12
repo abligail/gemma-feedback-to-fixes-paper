@@ -1,0 +1,13 @@
+batch,comparison,normal_pairs,gains,losses,delta_pp,original_bootstrap_ci_pp,pointer,source
+R01,draft_to_control,52,0,0,0,"[0.0, 0.0]",/comparisons/1,research/cycles/2026-10-14-feedback-refinement/analysis-R01.json
+R01,draft_to_feedback,52,0,2,-3.8461538461538463,"[-9.615384615384617, 0.0]",/comparisons/2,research/cycles/2026-10-14-feedback-refinement/analysis-R01.json
+R01,control_to_feedback,52,0,2,-3.8461538461538463,"[-9.615384615384617, 0.0]",/comparisons/0,research/cycles/2026-10-14-feedback-refinement/analysis-R01.json
+R02,draft_to_control,51,1,1,0,"[-5.88235294117647, 5.88235294117647]",/comparisons/1,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json
+R02,draft_to_feedback,51,1,0,1.9607843137254901,"[0.0, 5.88235294117647]",/comparisons/2,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json
+R02,control_to_feedback,51,2,1,1.9607843137254901,"[-3.9215686274509802, 7.8431372549019605]",/comparisons/0,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json
+R03,draft_to_control,52,1,0,1.9230769230769231,"[0.0, 5.769230769230769]",/comparisons/1,research/cycles/2026-10-14-feedback-refinement/analysis-R03.json
+R03,draft_to_feedback,52,2,1,1.9230769230769231,"[-3.8461538461538463, 9.615384615384617]",/comparisons/2,research/cycles/2026-10-14-feedback-refinement/analysis-R03.json
+R03,control_to_feedback,52,1,1,0,"[-5.769230769230769, 5.769230769230769]",/comparisons/0,research/cycles/2026-10-14-feedback-refinement/analysis-R03.json
+R04,draft_to_control,52,2,0,3.8461538461538463,"[0.0, 9.615384615384617]",/comparisons/1,research/cycles/2026-10-14-feedback-refinement/analysis-R04.json
+R04,draft_to_feedback,51,1,0,1.9607843137254901,"[0.0, 5.88235294117647]",/comparisons/2,research/cycles/2026-10-14-feedback-refinement/analysis-R04.json
+R04,control_to_feedback,51,1,2,-1.9607843137254901,"[-9.803921568627452, 3.9215686274509802]",/comparisons/0,research/cycles/2026-10-14-feedback-refinement/analysis-R04.json

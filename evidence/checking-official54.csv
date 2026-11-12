@@ -1,0 +1,4 @@
+batch,scope,tasks_per_arm,v5_target_counterevidence,v5_counterevidence_and_replay,v5_confirmed_passes,v5_technical_unknowns,v1_target_counterevidence,v1_counterevidence_and_replay,v1_confirmed_passes,v1_technical_unknowns
+R01,official54,54,17,15,27,1,27,20,25,3
+R02,official54,54,14,11,23,2,29,23,26,2
+R03,official54,54,15,14,25,3,28,25,26,3

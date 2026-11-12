@@ -1,0 +1,13 @@
+batch,file,sha256,reviewer_identifier,score_results_accessed,reviewed_at_utc,task_count,row_reviewer_fields_missing
+R01,research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-a.json,3ee865d85ae907d7243b2b6220f2c43b2ca2369cb6ba0bd8bd67a13cbfa5a276,/root/competition,False,2026-10-13T19:42:11.949646+00:00,18,0
+R01,research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-b.json,17547d736770d5b9d58aad90e69faf5ed2cba83fe290b86a8ca314d6735018eb,/root/literature,False,2026-10-13T19:46:14.156834Z,18,18
+R01,research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-c.json,32b95bec3d4203d55be77c72ada61344d19d1ff85567ab019501b21a0c57de53,/root/runtime,False,2026-10-13T19:45:27.502227+00:00,18,0
+R02,research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-a.json,4fd66b1e57e135150aac41a3f1b4735d9fe8b3672ce56b46b0f1b34a8fceb13c,/root/competition,False,2026-10-13T21:32:06.091Z,18,0
+R02,research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-b.json,699f52373bae36cdbffd8337b135c4c183743fdbe0f738708272d0834f2cd618,/root/literature,False,2026-10-13T21:35:24.294530+00:00,18,18
+R02,research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-c.json,73fab16fd2328a4943a0fee2bdd95141bd3ca8b4c80212042e91e4b6392c3ca0,/root/runtime,False,2026-10-13T21:35:24.680605+00:00,18,0
+R03,research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-a.json,f1b5f841cc83aa140ccb06becc962cc0e8beeace5cb1c1e9ec1b86db21243da6,/root/competition,False,2026-10-13T23:40:21.270Z,18,0
+R03,research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-b.json,3b2b58507a93d4286e5c1543545912253c27b40087ac189be26b64c6e59ea6dc,/root/literature,False,2026-10-13T23:40:30Z,18,18
+R03,research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-c.json,1fe9e56aaf679b384e0bb6dbfe7cf9e14eb6dd04d57f998f326641494f1eb346,/root/runtime,False,2026-10-13T23:39:43.129053+00:00,18,0
+R04,research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-a.json,1a9551ab33df250c06f6d8d4bea0c6106efa1d5c34871cbe3f500f8286c57e1d,/root/competition,False,2026-10-14T01:40:16Z,18,0
+R04,research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-b.json,e59a7501692ecac887d19d5678f15157b348c69da53f8f56abaefa064e3193ca,/root/literature,False,2026-10-14T01:45:31Z,18,18
+R04,research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-c.json,1f7f0b295aa50d2df609f085887628bfe92b457786932b2e6f0b864ac507697a,/root/runtime,False,2026-10-14T01:41:15.293684+00:00,18,0

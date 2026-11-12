@@ -1,0 +1,7 @@
+dimension,value,realizations,distinct_tasks,grounded_target,other_output,no_output,normal_cf_pairs,feedback_gains,feedback_losses,control_draft_replays,control_postedit_replays,control_retained_source_changes,feedback_draft_replays,feedback_postedit_replays,feedback_retained_source_changes
+batch,R03,54,54,9,31,14,52,1,1,38,2,5,23,3,5
+batch,R04,54,54,11,34,9,51,1,2,44,2,5,20,0,4
+repository,fastapi,52,26,9,37,6,49,1,0,44,1,3,22,1,4
+repository,rich,36,18,5,16,15,34,1,2,20,2,5,13,1,3
+repository,requests,18,9,5,12,1,18,0,1,17,1,1,8,1,2
+repository,httpx,2,1,1,0,1,2,0,0,1,0,1,0,0,0

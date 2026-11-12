@@ -1,0 +1,529 @@
+batch,task,output_available,category,public_basis_label,target_reach_label,execution_semantics,command_first_line,stderr_excerpt,packet_path
+R01,fastapi_13537,True,other_target_not_reached,有支持,未触达,无诊断力,"python3 -B -c 'from fastapi import FastAPI, Form; from fastapi.testclient import TestClient; from typing import Optional; app = FastAPI(); @app.post(""/test"") async def test_endpoint(q: Optional[int] = Form(None)): return {""q"": q}; client = TestClient(app); response = client.post(""/test"", data={""q"": """"}); assert response.status_code == 200; assert response.json() == {""q"": None}'","  File ""<string>"", line 1
+    from fastapi import FastAPI, Form; from fastapi.testclient import TestClient; from typing import Optional; app = FastAPI(); @app.post(""/test"") async def test_endpoint(q: Optional[int] = Form(None)): return {""q"": q}; client = TestClient(app); response = client.post(""/test"", data={""q"": """"}); assert response.status_code == 200; assert response.json() == {""q"": None}
+                                                       ",experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_13537.json
+R01,fastapi_13786,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_13786.json
+R01,fastapi_13920,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_13920.json
+R01,fastapi_14246,True,other_target_not_reached,推断,未触达,无诊断力,"python3 -B -c ""from fastapi import FastAPI; from pydantic import BaseModel; app = FastAPI(); class Item(BaseModel): name: str; class User(BaseModel): item: Item; class Group(BaseModel): users: list[User]; @app.get('/', response_model=Group) def read_group(): return Group(users=[User(item=Item(name='foo'))]); openapi_schema = app.openapi(); schemas = openapi_schema.get('components', {}).get('schemas', {}); assert 'Item' in schemas, f'Item schema missing from components/schemas: {schemas.keys()}'; assert 'User' in schemas, f'User schema missing from components/schemas: {schemas.keys()}'; assert 'Group' in schemas, f'Group schema missing from components/schemas: {schemas.keys()}'""","  File ""<string>"", line 1
+    from fastapi import FastAPI; from pydantic import BaseModel; app = FastAPI(); class Item(BaseModel): name: str; class User(BaseModel): item: Item; class Group(BaseModel): users: list[User]; @app.get('/', response_model=Group) def read_group(): return Group(users=[User(item=Item(name='foo'))]); openapi_schema = app.openapi(); schemas = openapi_schema.get('components', {}).get('schemas', {}); assert 'Item' in schemas, ",experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14246.json
+R01,fastapi_14303,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14303.json
+R01,fastapi_14306,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14306.json
+R01,fastapi_14360,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14360.json
+R01,fastapi_14361,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14361.json
+R01,fastapi_14371,True,other_target_not_reached,有支持,未触达,无诊断力,"python3 -B -c ""from fastapi import FastAPI, Query; from fastapi.testclient import TestClient; app = FastAPI(); @app.get('/') def read_root(q: str = Query(None, validation_alias='my_alias')): return {'q': q}; client = TestClient(app); response = client.get('/?my_alias=hello'); assert response.json() == {'q': 'hello'}; print('Success')""","  File ""<string>"", line 1
+    from fastapi import FastAPI, Query; from fastapi.testclient import TestClient; app = FastAPI(); @app.get('/') def read_root(q: str = Query(None, validation_alias='my_alias')): return {'q': q}; client = TestClient(app); response = client.get('/?my_alias=hello'); assert response.json() == {'q': 'hello'}; print('Success')
+                                                                                                   ",experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14371.json
+R01,fastapi_14372,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14372.json
+R01,fastapi_14455,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14455.json
+R01,fastapi_14459,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14459.json
+R01,fastapi_14463,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14463.json
+R01,fastapi_14482,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14482.json
+R01,fastapi_14583,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14583.json
+R01,fastapi_14794,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14794.json
+R01,fastapi_14873,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14873.json
+R01,fastapi_14953,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,"python3 -B -c ""from fastapi import UploadFile; from pydantic import TypeAdapter; schema = TypeAdapter(UploadFile).json_schema(); assert schema == {'type': 'string', 'contentMediaType': 'application/octet-stream'}; print('Success')""",,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14953.json
+R01,fastapi_14978,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14978.json
+R01,fastapi_14986,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14986.json
+R01,fastapi_15589,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_15589.json
+R01,fastapi_15763,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_15763.json
+R01,fastapi_15800,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_15800.json
+R01,fastapi_9425,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_9425.json
+R01,fastapi_9555,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_9555.json
+R01,fastapi_9753,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_9753.json
+R01,httpx_3672,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/httpx_3672.json
+R01,requests_6589,True,target_reached_expectation_not_grounded,推断,触达相关行为,与所检预期一致,"PYTHONPATH=src python3 -B -c ""from requests.utils import super_len; s = '🚀'; assert super_len(s) == 4""",,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6589.json
+R01,requests_6592,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,"PYTHONPATH=/workspace/src python3 -B -c ""import requests; assert requests.codes.too_early == 425; assert requests.codes.TOO_EARLY == 425; assert requests.codes['too_early'] == 425; print('Success')""",,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6592.json
+R01,requests_6629,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6629.json
+R01,requests_6644,True,other_target_not_reached,有支持,未触达,无诊断力,"PYTHONPATH=src python3 -B -c 'from requests.models import RequestEncodingMixin; class MockRequest(RequestEncodingMixin): def __init__(self, url): self.url = url; assert MockRequest(""http://example.com//foo/bar"").path_url == ""/foo/bar""; assert MockRequest(""http://example.com/foo/bar"").path_url == ""/foo/bar""; assert MockRequest(""http://example.com"").path_url == ""/""; assert MockRequest(""http://example.com//foo/bar?q=1"").path_url == ""/foo/bar?q=1""; print(""Success"")'","  File ""<string>"", line 1
+    from requests.models import RequestEncodingMixin; class MockRequest(RequestEncodingMixin): def __init__(self, url): self.url = url; assert MockRequest(""http://example.com//foo/bar"").path_url == ""/foo/bar""; assert MockRequest(""http://example.com/foo/bar"").path_url == ""/foo/bar""; assert MockRequest(""http://example.com"").path_url == ""/""; assert MockRequest(""http://example.com//foo/bar?q=1"").path_url == ""/foo/bar?q=1""; p",experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6644.json
+R01,requests_7205,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7205.json
+R01,requests_7309,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7309.json
+R01,requests_7427,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7427.json
+R01,requests_7433,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7433.json
+R01,requests_7505,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7505.json
+R01,rich_2725,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_2725.json
+R01,rich_3043,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3043.json
+R01,rich_3052,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,"python3 -B -c 'from rich.prompt import Prompt; choices = [""Paul"", ""Jessica"", ""Duncan""]; p_def = Prompt(""Name"", choices=choices); assert p_def.check_choice(""Paul"") is True; assert p_def.check_choice(""paul"") is False; p_i = Prompt(""Name"", choices=choices, case_sensitive=False); assert p_i.check_choice(""Paul"") is True; assert p_i.check_choice(""paul"") is True; assert p_i.check_choice(""PAUL"") is True; assert p_i.check_choice(""Other"") is False; print(""Success"")'",,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3052.json
+R01,rich_3067,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3067.json
+R01,rich_3278,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3278.json
+R01,rich_3469,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3469.json
+R01,rich_3470,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3470.json
+R01,rich_3472,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3472.json
+R01,rich_3506,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3506.json
+R01,rich_3518,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3518.json
+R01,rich_3521,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3521.json
+R01,rich_3535,True,other_target_not_reached,推断,未触达,无诊断力,"python3 -B -c ""from rich.cells import _is_single_cell_widths; assert _is_single_cell_widths('p') is not None, ""'p' should be recognized as a single-cell width character'""","/bin/bash: -c: line 2: unexpected EOF while looking for matching `''
+",experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3535.json
+R01,rich_3675,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3675.json
+R01,rich_3718,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3718.json
+R01,rich_3782,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3782.json
+R01,rich_3930,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3930.json
+R01,rich_3934,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3934.json
+R01,rich_4075,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_4075.json
+R02,fastapi_13537,True,supported_target_reached,有支持,触达相关行为,公开反证,PYTHONDONTWRITEBYTECODE=1 python3 -B -m pytest -p no:cacheprovider reproduce_issue.py,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json
+R02,fastapi_13786,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13786.json
+R02,fastapi_13920,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13920.json
+R02,fastapi_14246,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14246.json
+R02,fastapi_14303,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14303.json
+R02,fastapi_14306,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14306.json
+R02,fastapi_14360,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14360.json
+R02,fastapi_14361,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14361.json
+R02,fastapi_14371,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14371.json
+R02,fastapi_14372,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 4: syntax error near unexpected token `('
+/bin/bash: -c: line 4: `def dep(): pass'
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14372.json
+R02,fastapi_14455,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14455.json
+R02,fastapi_14459,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14459.json
+R02,fastapi_14463,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14463.json
+R02,fastapi_14482,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14482.json
+R02,fastapi_14583,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14583.json
+R02,fastapi_14794,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 5, in <module>
+  File ""/workspace/fastapi/applications.py"", line 931, in __init__
+    ] = webhooks or routing.APIRouter()
+                    ~~~~~~~~~~~~~~~~~^^
+  File ""/workspace/fastapi/routing.py"", line 906, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        routes=routes,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        lifespan=lifespan,
+        ^^^^^^^^^^^^^^^^^^
+    ",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14794.json
+R02,fastapi_14873,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14873.json
+R02,fastapi_14953,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14953.json
+R02,fastapi_14978,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14978.json
+R02,fastapi_14986,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: openapi_url: command not found
+/bin/bash: line 5: try:: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `    html = get_swagger_ui_html(openapi_url=openapi_url)'
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14986.json
+R02,fastapi_15589,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_15589.json
+R02,fastapi_15763,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_15763.json
+R02,fastapi_15800,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_15800.json
+R02,fastapi_9425,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `res_none = get_typed_annotation(""None"", {})'
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9425.json
+R02,fastapi_9555,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9555.json
+R02,fastapi_9753,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9753.json
+R02,httpx_3672,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/httpx_3672.json
+R02,requests_6589,True,target_reached_expectation_not_grounded,推断,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6589.json
+R02,requests_6592,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6592.json
+R02,requests_6629,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6629.json
+R02,requests_6644,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6644.json
+R02,requests_7205,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7205.json
+R02,requests_7309,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,PYTHONPATH=src python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `ct, params = _parse_content_type_header('text/plain; malformed')'
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7309.json
+R02,requests_7427,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7427.json
+R02,requests_7433,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7433.json
+R02,requests_7505,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7505.json
+R02,rich_2725,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_2725.json
+R02,rich_3043,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3043.json
+R02,rich_3052,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3052.json
+R02,rich_3067,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3067.json
+R02,rich_3278,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3278.json
+R02,rich_3469,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3469.json
+R02,rich_3470,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3470.json
+R02,rich_3472,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3472.json
+R02,rich_3506,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3506.json
+R02,rich_3518,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 4: syntax error near unexpected token `('
+/bin/bash: -c: line 4: `table = Table(highlight=True)'
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3518.json
+R02,rich_3521,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3521.json
+R02,rich_3535,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3535.json
+R02,rich_3675,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3675.json
+R02,rich_3718,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3718.json
+R02,rich_3782,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3782.json
+R02,rich_3930,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3930.json
+R02,rich_3934,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3934.json
+R02,rich_4075,True,peripheral_behavior,推断,仅相关外围,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_4075.json
+R03,fastapi_13537,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_13537.json
+R03,fastapi_13786,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_13786.json
+R03,fastapi_13920,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_13920.json
+R03,fastapi_14246,True,python_invoked_on_missing_PY_file,无支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: line 6: from: command not found
+/bin/bash: -c: line 8: syntax error near unexpected token `('
+/bin/bash: -c: line 8: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14246.json
+R03,fastapi_14303,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14303.json
+R03,fastapi_14306,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: line 6: from: command not found
+/bin/bash: -c: line 8: syntax error near unexpected token `('
+/bin/bash: -c: line 8: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14306.json
+R03,fastapi_14360,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14360.json
+R03,fastapi_14361,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `def test_get_schema_from_model_field_non_dict():'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14361.json
+R03,fastapi_14371,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14371.json
+R03,fastapi_14372,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14372.json
+R03,fastapi_14455,False,no_execution_output,未知,未触达,未知,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14455.json
+R03,fastapi_14459,True,other_target_not_reached,无支持,未触达,无诊断力,python3 -B << 'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 29, in <module>
+TypeError: get_openapi() takes 0 positional arguments but 2 were given
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14459.json
+R03,fastapi_14463,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14463.json
+R03,fastapi_14482,True,target_reached_expectation_not_grounded,推断,触达相关行为,未知,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 14, in <module>
+  File ""/workspace/fastapi/encoders.py"", line 235, in jsonable_encoder
+    obj_dict = _model_dump(
+        obj,
+    ...<6 lines>...
+        exclude_defaults=exclude_defaults,
+    )
+  File ""/workspace/fastapi/_compat/main.py"", line 95, in _model_dump
+    return v2._model_dump(model, mode=mode, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/workspace",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14482.json
+R03,fastapi_14583,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14583.json
+R03,fastapi_14794,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 11, in <module>
+  File ""/workspace/fastapi/applications.py"", line 931, in __init__
+    ] = webhooks or routing.APIRouter()
+                    ~~~~~~~~~~~~~~~~~^^
+  File ""/workspace/fastapi/routing.py"", line 906, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        routes=routes,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        lifespan=lifespan,
+        ^^^^^^^^^^^^^^^^^^
+   ",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14794.json
+R03,fastapi_14873,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14873.json
+R03,fastapi_14953,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: import: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `schema = TypeAdapter(UploadFile).json_schema()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14953.json
+R03,fastapi_14978,True,python_invoked_on_missing_PY_file,无支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14978.json
+R03,fastapi_14986,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json
+R03,fastapi_15589,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_15589.json
+R03,fastapi_15763,True,target_reached_expectation_not_grounded,推断,触达相关行为,无诊断力,python3 -B << 'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 15, in <module>
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_15763.json
+R03,fastapi_15800,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: import: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: line 6: from: command not found
+/bin/bash: line 8: dist_dir: command not found
+/bin/bash: -c: line 9: syntax error near unexpected token `dist_dir'
+/bin/bash: -c: line 9: `if os.path.exists(dist_dir):'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_15800.json
+R03,fastapi_9425,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9425.json
+R03,fastapi_9555,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9555.json
+R03,fastapi_9753,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9753.json
+R03,httpx_3672,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/httpx_3672.json
+R03,requests_6589,True,target_reached_expectation_not_grounded,推断,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6589.json
+R03,requests_6592,True,supported_target_reached,有支持,触达相关行为,公开反证,PYTHONPATH=src python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 2, in <module>
+AttributeError: 'LookupDict' object has no attribute 'too_early'. Did you mean: 'too_many'?
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json
+R03,requests_6629,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,PYTHONPATH=src python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: try:: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `    err = JSONDecodeError(""Expecting value"", '{""foo"":', 7)'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6629.json
+R03,requests_6644,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,PYTHONPATH=/workspace/src python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `def test_leading_slashes():'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6644.json
+R03,requests_7205,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,"python3 -B PY ""import os, tempfile, requests.utils","python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7205.json
+R03,requests_7309,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7309.json
+R03,requests_7427,True,target_reached_expectation_not_grounded,无支持,触达相关行为,无诊断力,PYTHONPATH=src python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 22, in <module>
+  File ""<stdin>"", line 18, in test_no_proxy_domain_boundary
+AssertionError: Failed for URL: http://www.example.com/, no_proxy: example.com
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7427.json
+R03,requests_7433,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7433.json
+R03,requests_7505,True,peripheral_behavior,有支持,仅相关外围,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7505.json
+R03,rich_2725,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_2725.json
+R03,rich_3043,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3043.json
+R03,rich_3052,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3052.json
+R03,rich_3067,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 7, in <module>
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json
+R03,rich_3278,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `def test():'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3278.json
+R03,rich_3469,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3469.json
+R03,rich_3470,True,peripheral_behavior,推断,仅相关外围,无诊断力,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 21, in <module>
+  File ""<stdin>"", line 8, in test
+AttributeError: 'Capture' object has no attribute 'text'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3470.json
+R03,rich_3472,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3472.json
+R03,rich_3506,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3506.json
+R03,rich_3518,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 4: syntax error near unexpected token `('
+/bin/bash: -c: line 4: `t_true = Table(highlight=True)'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3518.json
+R03,rich_3521,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3521.json
+R03,rich_3535,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3535.json
+R03,rich_3675,True,target_reached_expectation_not_grounded,推断,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3675.json
+R03,rich_3718,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `console = Console()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3718.json
+R03,rich_3782,True,python_invoked_on_missing_PY_file,无支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `console = Console()'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3782.json
+R03,rich_3930,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3930.json
+R03,rich_3934,True,target_reached_expectation_not_grounded,推断,触达相关行为,无诊断力,python3 -B << 'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 21, in <module>
+  File ""<stdin>"", line 17, in <module>
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3934.json
+R03,rich_4075,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `console = Console(file=StringIO(), force_terminal=False)'
+",experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_4075.json
+R04,fastapi_13537,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13537.json
+R04,fastapi_13786,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 28, in <module>
+  File ""<stdin>"", line 14, in test_api_key_query_401
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json
+R04,fastapi_13920,True,peripheral_behavior,无支持,仅相关外围,无诊断力,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13920.json
+R04,fastapi_14246,True,peripheral_behavior,推断,仅相关外围,未知,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 26, in <module>
+  File ""<stdin>"", line 20, in test_openapi_schema
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14246.json
+R04,fastapi_14303,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14303.json
+R04,fastapi_14306,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B << 'PY',"  File ""<stdin>"", line 42
+    assert ""File"" in req_err, f""Expected 'File' in {req_err}
+                              ^
+SyntaxError: unterminated f-string literal (detected at line 42)
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14306.json
+R04,fastapi_14360,True,peripheral_behavior,无支持,仅相关外围,无诊断力,python3 -B <<'PY',"<stdin>:7: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14360.json
+R04,fastapi_14361,True,peripheral_behavior,推断,仅相关外围,无诊断力,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14361.json
+R04,fastapi_14371,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14371.json
+R04,fastapi_14372,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: try:: command not found
+/bin/bash: -c: line 5: syntax error near unexpected token `('
+/bin/bash: -c: line 5: `    d1, d2 = Depends(), Depends()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14372.json
+R04,fastapi_14455,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: import: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14455.json
+R04,fastapi_14459,True,peripheral_behavior,无支持,仅相关外围,无诊断力,python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 30, in <module>
+AssertionError: Expected scope 'me' for /test, got []
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14459.json
+R04,fastapi_14463,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B <<'PY',"  File ""<stdin>"", line 36
+    assert len(responses_500) == 2, f""Expected 2 refs in anyOf, got {len(responses_500)}
+                                    ^
+SyntaxError: unterminated f-string literal (detected at line 36)
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14463.json
+R04,fastapi_14482,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 6: class: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `    def __init__(self, value: str):'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14482.json
+R04,fastapi_14583,True,peripheral_behavior,推断,仅相关外围,未知,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14583.json
+R04,fastapi_14794,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B << 'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 9, in <module>
+  File ""/workspace/fastapi/applications.py"", line 931, in __init__
+    ] = webhooks or routing.APIRouter()
+                    ~~~~~~~~~~~~~~~~~^^
+  File ""/workspace/fastapi/routing.py"", line 906, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        routes=routes,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        lifespan=lifespan,
+        ^^^^^^^^^^^^^^^^^^
+    ",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14794.json
+R04,fastapi_14873,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `async def test_startup_shutdown():'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14873.json
+R04,fastapi_14953,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 4: syntax error near unexpected token `('
+/bin/bash: -c: line 4: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14953.json
+R04,fastapi_14978,True,peripheral_behavior,推断,仅相关外围,无诊断力,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14978.json
+R04,fastapi_14986,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `def test_swagger_ui_escaping():'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14986.json
+R04,fastapi_15589,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15589.json
+R04,fastapi_15763,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15763.json
+R04,fastapi_15800,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json
+R04,fastapi_9425,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `app = FastAPI()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_9425.json
+R04,fastapi_9555,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_9555.json
+R04,fastapi_9753,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `def sync_dep():'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_9753.json
+R04,httpx_3672,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/httpx_3672.json
+R04,requests_6589,True,target_reached_expectation_not_grounded,推断,触达相关行为,无诊断力,python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6589.json
+R04,requests_6592,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B << 'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6592.json
+R04,requests_6629,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6629.json
+R04,requests_6644,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `def test_path_trimming():'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6644.json
+R04,requests_7205,True,other_target_not_reached,有支持,未触达,无诊断力,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7205.json
+R04,requests_7309,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,PYTHONPATH=src python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7309.json
+R04,requests_7427,True,target_reached_expectation_not_grounded,推断,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7427.json
+R04,requests_7433,True,target_reached_expectation_not_grounded,无支持,触达相关行为,无诊断力,PYTHONPATH=src python3 -B <<'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 13, in <module>
+AttributeError: 'PreparedRequest' object has no attribute '_stream'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7433.json
+R04,requests_7505,True,other_target_not_reached,有支持,未触达,无诊断力,python3 -B <<'PY',"  File ""<stdin>"", line 11
+    assert result is data, f""Expected {data} to be returned as-is, but got {result}
+                           ^
+SyntaxError: unterminated f-string literal (detected at line 11)
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7505.json
+R04,rich_2725,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: line 6: from: command not found
+/bin/bash: -c: line 8: syntax error near unexpected token `('
+/bin/bash: -c: line 8: `class CustomBox(Box):'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_2725.json
+R04,rich_3043,True,python_invoked_on_missing_PY_file,推断,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: line 4: import: command not found
+/bin/bash: -c: line 6: syntax error near unexpected token `('
+/bin/bash: -c: line 6: `console = Console(file=io.StringIO(), force_terminal=True)'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3043.json
+R04,rich_3052,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY << 'PY',"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3052.json
+R04,rich_3067,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3067.json
+R04,rich_3278,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: from: command not found
+/bin/bash: -c: line 4: syntax error near unexpected token `('
+/bin/bash: -c: line 4: `decoder = AnsiDecoder()'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3278.json
+R04,rich_3469,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3469.json
+R04,rich_3470,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3470.json
+R04,rich_3472,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3472.json
+R04,rich_3506,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3506.json
+R04,rich_3518,True,supported_target_reached,有支持,触达相关行为,公开反证,python3 -B << 'PY',"Traceback (most recent call last):
+  File ""<stdin>"", line 5, in <module>
+AssertionError
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json
+R04,rich_3521,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3521.json
+R04,rich_3535,True,supported_target_reached,有支持,触达相关行为,与所检预期一致,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3535.json
+R04,rich_3675,True,target_reached_expectation_not_grounded,推断,触达相关行为,无诊断力,python3 -B <<'PY',,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3675.json
+R04,rich_3718,True,python_invoked_on_missing_PY_file,有支持,未触达,无诊断力,python3 -B PY,"python3: can't open file '/workspace/PY': [Errno 2] No such file or directory
+/bin/bash: line 3: import: command not found
+/bin/bash: line 4: from: command not found
+/bin/bash: line 5: from: command not found
+/bin/bash: -c: line 7: syntax error near unexpected token `('
+/bin/bash: -c: line 7: `console = Console(file=io.StringIO(), force_terminal=True, color_system=""standard"", width=20)'
+",experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3718.json
+R04,rich_3782,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3782.json
+R04,rich_3930,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3930.json
+R04,rich_3934,True,target_reached_expectation_not_grounded,推断,触达相关行为,未知,python3 -B reproduce_issue.py,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3934.json
+R04,rich_4075,False,no_execution_output,未知,未触达,无诊断力,,,experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_4075.json

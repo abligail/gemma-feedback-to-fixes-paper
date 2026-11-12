@@ -1,0 +1,278 @@
+{
+  "schema_version": 2,
+  "independent_tasks": 54,
+  "reviewed_tasks_verified": 54,
+  "model_sessions_planned": 216,
+  "scoring_endpoints_planned": 162,
+  "totals": {
+    "draft": {
+      "tasks": 54,
+      "official_statuses": {
+        "resolved": 20,
+        "scored_failed": 32,
+        "no_patch": 1,
+        "technical_error": 1
+      },
+      "delivery_and_score_states": {
+        "resolved": 20,
+        "scored_failed": 21,
+        "no_patch": 12,
+        "technical_unknown": 1
+      },
+      "delivery_states": {
+        "nonempty_patch": 42,
+        "no_patch": 12
+      },
+      "confirmed_resolved": 20,
+      "normal_scored": 52,
+      "normal_scored_nonempty": 41,
+      "empty_patches": 12,
+      "missing_patches": 0,
+      "endpoint_integrity_issue_count": 0
+    },
+    "control": {
+      "tasks": 54,
+      "official_statuses": {
+        "resolved": 22,
+        "scored_failed": 30,
+        "no_patch": 1,
+        "technical_error": 1
+      },
+      "delivery_and_score_states": {
+        "resolved": 22,
+        "scored_failed": 20,
+        "no_patch": 11,
+        "technical_unknown": 1
+      },
+      "delivery_states": {
+        "nonempty_patch": 43,
+        "no_patch": 11
+      },
+      "confirmed_resolved": 22,
+      "normal_scored": 52,
+      "normal_scored_nonempty": 42,
+      "empty_patches": 11,
+      "missing_patches": 0,
+      "endpoint_integrity_issue_count": 0
+    },
+    "feedback": {
+      "tasks": 54,
+      "official_statuses": {
+        "resolved": 21,
+        "scored_failed": 30,
+        "no_patch": 1,
+        "technical_error": 2
+      },
+      "delivery_and_score_states": {
+        "resolved": 21,
+        "scored_failed": 22,
+        "no_patch": 9,
+        "technical_unknown": 2
+      },
+      "delivery_states": {
+        "nonempty_patch": 45,
+        "no_patch": 9
+      },
+      "confirmed_resolved": 21,
+      "normal_scored": 51,
+      "normal_scored_nonempty": 43,
+      "empty_patches": 9,
+      "missing_patches": 0,
+      "endpoint_integrity_issue_count": 0
+    }
+  },
+  "comparisons": [
+    {
+      "left": "control",
+      "right": "feedback",
+      "complete_fixed_tasks": 54,
+      "left_confirmed_passes": 22,
+      "right_confirmed_passes": 21,
+      "full_task_confirmed_pass_count_difference": -1,
+      "full_task_confirmed_pass_rate_difference": -0.018518518518518517,
+      "full_task_count_difference_is_descriptive_only": true,
+      "all_status_transitions": {
+        "resolved -> resolved": 20,
+        "scored_failed -> scored_failed": 18,
+        "no_patch -> no_patch": 8,
+        "resolved -> scored_failed": 1,
+        "no_patch -> scored_failed": 3,
+        "scored_failed -> technical_unknown": 1,
+        "resolved -> no_patch": 1,
+        "scored_failed -> resolved": 1,
+        "technical_unknown -> technical_unknown": 1
+      },
+      "both_scored_including_empty": {
+        "mean_delta": -0.0196078431372549,
+        "ci95_exploratory": [
+          -0.09803921568627451,
+          0.0392156862745098
+        ],
+        "tasks": 51,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_including_empty_gains": 1,
+      "both_scored_including_empty_losses": 2,
+      "both_scored_nonempty": {
+        "mean_delta": 0,
+        "ci95_exploratory": [
+          -0.075,
+          0.075
+        ],
+        "tasks": 40,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_nonempty_gains": 1,
+      "both_scored_nonempty_losses": 1,
+      "both_scored_nonempty_gain_tasks": [
+        "fastapi_14361"
+      ],
+      "both_scored_nonempty_loss_tasks": [
+        "rich_3067"
+      ],
+      "both_scored_nonempty_exact_p": 1.0,
+      "scored_empty_to_pass_tasks": [],
+      "pass_to_scored_empty_tasks": [
+        "rich_3718"
+      ],
+      "unscored_to_pass_tasks": [],
+      "pass_to_unscored_tasks": [],
+      "same_patch_discordant_score_tasks": [],
+      "missing_score_extreme_bounds": [
+        -0.05555555555555555,
+        0.037037037037037035
+      ],
+      "interpretation": "Full-task confirmed-pass count differences are descriptive, with no unknown-as-failure bootstrap. Only two normally scored nonempty endpoints enter nonempty gain/loss counts; empty and unscored transitions are separate. A repair/misedit interpretation additionally requires frozen source-change evidence, especially if identical patches receive discordant scores. Subset intervals are exploratory, not equivalence or mediation evidence."
+    },
+    {
+      "left": "draft",
+      "right": "control",
+      "complete_fixed_tasks": 54,
+      "left_confirmed_passes": 20,
+      "right_confirmed_passes": 22,
+      "full_task_confirmed_pass_count_difference": 2,
+      "full_task_confirmed_pass_rate_difference": 0.037037037037037035,
+      "full_task_count_difference_is_descriptive_only": true,
+      "all_status_transitions": {
+        "resolved -> resolved": 20,
+        "scored_failed -> scored_failed": 20,
+        "no_patch -> no_patch": 11,
+        "scored_failed -> resolved": 1,
+        "no_patch -> resolved": 1,
+        "technical_unknown -> technical_unknown": 1
+      },
+      "both_scored_including_empty": {
+        "mean_delta": 0.038461538461538464,
+        "ci95_exploratory": [
+          0.0,
+          0.09615384615384616
+        ],
+        "tasks": 52,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_including_empty_gains": 2,
+      "both_scored_including_empty_losses": 0,
+      "both_scored_nonempty": {
+        "mean_delta": 0.024390243902439025,
+        "ci95_exploratory": [
+          0.0,
+          0.07317073170731707
+        ],
+        "tasks": 41,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_nonempty_gains": 1,
+      "both_scored_nonempty_losses": 0,
+      "both_scored_nonempty_gain_tasks": [
+        "rich_3067"
+      ],
+      "both_scored_nonempty_loss_tasks": [],
+      "both_scored_nonempty_exact_p": 1.0,
+      "scored_empty_to_pass_tasks": [
+        "rich_3718"
+      ],
+      "pass_to_scored_empty_tasks": [],
+      "unscored_to_pass_tasks": [],
+      "pass_to_unscored_tasks": [],
+      "same_patch_discordant_score_tasks": [],
+      "missing_score_extreme_bounds": [
+        0.0,
+        0.07407407407407407
+      ],
+      "interpretation": "Full-task confirmed-pass count differences are descriptive, with no unknown-as-failure bootstrap. Only two normally scored nonempty endpoints enter nonempty gain/loss counts; empty and unscored transitions are separate. A repair/misedit interpretation additionally requires frozen source-change evidence, especially if identical patches receive discordant scores. Subset intervals are exploratory, not equivalence or mediation evidence."
+    },
+    {
+      "left": "draft",
+      "right": "feedback",
+      "complete_fixed_tasks": 54,
+      "left_confirmed_passes": 20,
+      "right_confirmed_passes": 21,
+      "full_task_confirmed_pass_count_difference": 1,
+      "full_task_confirmed_pass_rate_difference": 0.018518518518518517,
+      "full_task_count_difference_is_descriptive_only": true,
+      "all_status_transitions": {
+        "resolved -> resolved": 20,
+        "scored_failed -> scored_failed": 19,
+        "no_patch -> no_patch": 9,
+        "no_patch -> scored_failed": 3,
+        "scored_failed -> technical_unknown": 1,
+        "scored_failed -> resolved": 1,
+        "technical_unknown -> technical_unknown": 1
+      },
+      "both_scored_including_empty": {
+        "mean_delta": 0.0196078431372549,
+        "ci95_exploratory": [
+          0.0,
+          0.058823529411764705
+        ],
+        "tasks": 51,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_including_empty_gains": 1,
+      "both_scored_including_empty_losses": 0,
+      "both_scored_nonempty": {
+        "mean_delta": 0.025,
+        "ci95_exploratory": [
+          0.0,
+          0.075
+        ],
+        "tasks": 40,
+        "resamples": 20000,
+        "seed": 2026101491
+      },
+      "both_scored_nonempty_gains": 1,
+      "both_scored_nonempty_losses": 0,
+      "both_scored_nonempty_gain_tasks": [
+        "fastapi_14361"
+      ],
+      "both_scored_nonempty_loss_tasks": [],
+      "both_scored_nonempty_exact_p": 1.0,
+      "scored_empty_to_pass_tasks": [],
+      "pass_to_scored_empty_tasks": [],
+      "unscored_to_pass_tasks": [],
+      "pass_to_unscored_tasks": [],
+      "same_patch_discordant_score_tasks": [],
+      "missing_score_extreme_bounds": [
+        -0.018518518518518517,
+        0.07407407407407407
+      ],
+      "interpretation": "Full-task confirmed-pass count differences are descriptive, with no unknown-as-failure bootstrap. Only two normally scored nonempty endpoints enter nonempty gain/loss counts; empty and unscored transitions are separate. A repair/misedit interpretation additionally requires frozen source-change evidence, especially if identical patches receive discordant scores. Subset intervals are exploratory, not equivalence or mediation evidence."
+    }
+  ],
+  "feedback_availability": {
+    "available": 45,
+    "check_unavailable": 9
+  },
+  "limits": [
+    "Single fresh continuation seed conditional on the generated draft distribution.",
+    "Shared check generation/execution is physically paid once and charged to each hypothetical path; this is an information ablation, not direct V5 end-to-end competition evidence.",
+    "Public checks are not an oracle; all tasks remain exposed; repeated arms do not add independent tasks.",
+    "Bootstrap is by task without repository-cluster or multiplicity correction; no equivalence claim.",
+    "Physical API calls and missing/cancelled request usage are distinct from declared agent turns."
+  ]
+}

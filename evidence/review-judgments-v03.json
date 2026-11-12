@@ -1,0 +1,905 @@
+{
+  "revision": "v0.3",
+  "review_date": "2026-11-09",
+  "reviewer": "Codex-assisted post-hoc review; no independent human review recorded",
+  "timing": "The selection was fixed before these judgments. Manuscript results and grading outcomes were already known to the reviewer.",
+  "scope_file": "evidence/revision-review-scope-v03.json",
+  "scope_sha256": "727dad2f5a0700fe462a9f8de2f02993b10bb478eae5ce9b56c21ec98189f042",
+  "source_categories": {
+    "retained_code_revision": "A non-documentation source revision remains relative to D. This includes partial or invalid revisions and does not imply a correct repair.",
+    "removed_requested_draft_logic": "The returned source removes logic explicitly requested in the public issue that was present in D.",
+    "quote_syntax_repair": "Escaped source quoting is repaired, while other syntax defects remain observable.",
+    "docstring_only": "The business source difference from D consists only of a docstring addition.",
+    "temporary_edit_restored": "Business source was changed during the branch but restored to D before delivery."
+  },
+  "source_branches": [
+    {
+      "batch": "R01",
+      "task": "requests_7433",
+      "branch": "feedback",
+      "category": "removed_requested_draft_logic",
+      "net_change": "Deletes D's hasattr(data, '__iter__') stream fallback; retains only a parenthesized isinstance condition.",
+      "issue_relation": "The public issue explicitly requests the deleted fallback for __getattr__ proxies.",
+      "validation": "same_business_failed",
+      "validation_note": "The final source is exercised by repro.py and raises TypeError. Two restoration edits are rejected at the eight-tool cap.",
+      "edit_events": [
+        6,
+        9,
+        10
+      ],
+      "check_events": [
+        5,
+        7
+      ]
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_9555",
+      "branch": "feedback",
+      "category": "removed_requested_draft_logic",
+      "net_change": "Replaces inspect.unwrap(self.call) with self.call in coroutine classification; D's other unwrapping changes remain.",
+      "issue_relation": "The public issue requires classifying wrapped coroutine dependencies by their unwrapped call.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The preceding reproduction passes; after deleting coroutine unwrapping, both rerun and restoration are rejected.",
+      "edit_events": [
+        7,
+        9
+      ],
+      "check_events": [
+        6
+      ]
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14794",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Gates special request/response type handling on depends is None and removes the assertion forbidding Depends.",
+      "issue_relation": "This implements the requested dependency-annotation gate, with scope beyond Response to other listed special types.",
+      "validation": "blocked_before_target",
+      "validation_note": "The final source is present during the attempted reproduction, but FastAPI initialization fails on Router's on_startup argument before the annotated dependency is exercised.",
+      "edit_events": [
+        5
+      ],
+      "check_events": [
+        7
+      ]
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Adds a case_sensitive docstring and removes strip() from both choice-matching branches.",
+      "issue_relation": "Case-insensitive matching already exists in D. Removing whitespace normalization is an additional behavioral revision, not a demonstrated new case-insensitivity repair.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The check passes on D before the edits; the final rerun is rejected.",
+      "edit_events": [
+        6,
+        7
+      ],
+      "check_events": [
+        0
+      ]
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "branch": "feedback",
+      "category": "docstring_only",
+      "net_change": "Adds only a case_sensitive line to the class docstring. An attempted strip() removal is rejected.",
+      "issue_relation": "The requested executable case-insensitive behavior is inherited from D.",
+      "validation": "unchanged_logic_checked",
+      "validation_note": "Two Prompt.ask calls accept lower/upper-case input before the docstring edit. The full source text changes, but the executable logic does not.",
+      "edit_events": [
+        7,
+        8
+      ],
+      "check_events": [
+        3,
+        4
+      ]
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3930",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Extends D's grapheme grouping so a character following a zero-width joiner stays in the current group.",
+      "issue_relation": "This is a partial revision of grapheme handling, not evidence of full Unicode or width correctness.",
+      "validation": "same_business_failed",
+      "validation_note": "The final version still fails the branch's chop_cells assertion; its particular expected split is not treated as a reference oracle.",
+      "edit_events": [
+        6
+      ],
+      "check_events": [
+        5,
+        7
+      ]
+    },
+    {
+      "batch": "R02",
+      "task": "requests_7433",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Adds the hasattr(data, '__iter__') stream fallback absent from D.",
+      "issue_relation": "The added condition directly matches the explicit public issue requirement.",
+      "validation": "same_business_observed",
+      "validation_note": "After the edit, repro.py prints the proxy body and chunked transfer encoding without an exception; it does not assert network behavior.",
+      "edit_events": [
+        6
+      ],
+      "check_events": [
+        5,
+        7
+      ]
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9555",
+      "branch": "control",
+      "category": "removed_requested_draft_logic",
+      "net_change": "Removes inspect.unwrap from generator, async-generator, and coroutine classification.",
+      "issue_relation": "The public issue explicitly requests classification using the unwrapped dependency call.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "Two requests return 200 before the removal. A rerun and attempted restoration are rejected, so that success does not cover delivery.",
+      "edit_events": [
+        7,
+        9
+      ],
+      "check_events": [
+        6
+      ]
+    },
+    {
+      "batch": "R02",
+      "task": "rich_3930",
+      "branch": "control",
+      "category": "quote_syntax_repair",
+      "net_change": "Replaces literal escaped quotes in D's split_graphemes definition with valid quoted source, including its joiner literal.",
+      "issue_relation": "This repairs one source-construction defect rather than extending the grapheme algorithm.",
+      "validation": "blocked_before_target",
+      "validation_note": "The subsequent import still raises SyntaxError because D inserted code before a future import.",
+      "edit_events": [
+        6
+      ],
+      "check_events": [
+        3,
+        7
+      ]
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13786",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Adds not_authenticated_status_code to APIKeyHeader's constructor and stores it on the instance.",
+      "issue_relation": "This extends D's partial security implementation; it does not implement all security classes or independently establish header-call behavior.",
+      "validation": "no_postedit_behavior_execution",
+      "validation_note": "The edit is the final ordinary tool operation; no subsequent request exercises the new constructor or missing-credential behavior.",
+      "edit_events": [
+        7
+      ],
+      "check_events": []
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Tracks processed field aliases in _extract_form_body and uses them to prevent reinsertion of discarded empty values.",
+      "issue_relation": "This directly implements the public explanation of the empty-string/None regression.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original target test node passes after the edit; the whole-file common output also contains unrelated async-test failures.",
+      "edit_events": [
+        6
+      ],
+      "check_events": [
+        7
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7433",
+      "branch": "feedback",
+      "category": "removed_requested_draft_logic",
+      "net_change": "Deletes D's hasattr(data, '__iter__') fallback while constructing a negative reproduction and never restores it.",
+      "issue_relation": "The deleted condition is explicitly requested by the public issue.",
+      "validation": "same_business_failed",
+      "validation_note": "The final version raises TypeError in the same reproduction after an earlier pass on D. A later exploratory command is rejected.",
+      "edit_events": [
+        6
+      ],
+      "check_events": [
+        5,
+        7
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3469",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Rewrites set_cell_size's binary search and removes padding for a cut through a wide character; deletes D's reproduction file.",
+      "issue_relation": "The public title requests removal of a superfluous space, but does not establish all resulting width semantics.",
+      "validation": "same_business_observed",
+      "validation_note": "The edited function prints 'abc' with width 3 instead of D's 'abc ' with width 4. Only the auxiliary reproduction is deleted after this observation; business source remains the tested version.",
+      "edit_events": [
+        3,
+        5
+      ],
+      "check_events": [
+        1,
+        4
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Adds ~ to ReprHighlighter's URL character set after two malformed edit calls.",
+      "issue_relation": "The public issue explicitly requests tilde URL support.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original full-URL span assertions pass after the edit and the business source is retained.",
+      "edit_events": [
+        4,
+        5,
+        6
+      ],
+      "check_events": [
+        7
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "httpx_3672",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Adds request.stream.read() in the server path and replaces the unused parser.complete reference with parser.reset(). D's parser API changes remain.",
+      "issue_relation": "These address request completion and the renamed reset API; stream closure and exit exceptions remain outside the delivered additions.",
+      "validation": "no_postedit_behavior_execution",
+      "validation_note": "No behavioral check follows the two server edits. Source is under src/httpx/, which the preliminary path-based reading aid omitted; the full returned patch was directly reviewed.",
+      "edit_events": [
+        6,
+        7
+      ],
+      "check_events": []
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Adds too_early to the existing 425 alias tuple while retaining both old aliases.",
+      "issue_relation": "This directly implements the requested new status name.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original lower/upper-case attribute assertions pass after the edit.",
+      "edit_events": [
+        2
+      ],
+      "check_events": [
+        1,
+        3
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Adds too_early to the existing 425 alias tuple while retaining both old aliases.",
+      "issue_relation": "This directly implements the requested new status name; C delivers the same patch.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original lower/upper-case attribute assertions pass after the edit.",
+      "edit_events": [
+        2
+      ],
+      "check_events": [
+        1,
+        3
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3535",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Excludes U+00AD from D's fast-path character range.",
+      "issue_relation": "This revises the single-width predicate after cell_len(U+00AD) prints zero; it does not validate the whole range or performance.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The post-edit command compiles a copied regex string, without importing the final repository predicate. It is not a final-source behavioral rerun.",
+      "edit_events": [
+        4
+      ],
+      "check_events": [
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14482",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Changes jsonable_encoder's model dump mode from json to python.",
+      "issue_relation": "This addresses the observed serialization failure for an arbitrary type, while compatibility with other serializers is unmeasured.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original arbitrary-type reproduction passes its dict/foo assertions after the edit.",
+      "edit_events": [
+        4
+      ],
+      "check_events": [
+        0,
+        5
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14482",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Changes jsonable_encoder's model dump mode from json to python, delivering the same patch as C.",
+      "issue_relation": "This addresses the observed arbitrary-type serialization failure, with limited compatibility evidence.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The original dict/foo assertions and a second object-field assertion pass on the final business source.",
+      "edit_events": [
+        5
+      ],
+      "check_events": [
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_13786",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Changes check_api_key to an instance method using self.not_authenticated_status_code and adds a WWW-Authenticate formatter.",
+      "issue_relation": "This attempts the requested security behavior but the delivered additions do not assign the newly referenced status attribute in constructors.",
+      "validation": "no_postedit_behavior_execution",
+      "validation_note": "No request executes the edited method. The apparent attribute-completeness defect is a source observation, not a newly executed failure.",
+      "edit_events": [
+        7
+      ],
+      "check_events": []
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3067",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Adds ~ to ReprHighlighter's URL character set after malformed edit calls.",
+      "issue_relation": "The public issue explicitly requests tilde URL support.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "The unchanged reproduction now prints a full URL span and exits zero after the edit.",
+      "edit_events": [
+        5,
+        6,
+        7
+      ],
+      "check_events": [
+        4,
+        8
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3067",
+      "branch": "feedback",
+      "category": "temporary_edit_restored",
+      "net_change": "A sed command corrupts highlighter.py after repeated malformed edits; git checkout restores the business file. The returned patch equals D exactly.",
+      "issue_relation": "No tilde correction remains in delivery.",
+      "validation": "restored_to_checked_failure",
+      "validation_note": "The final patch is byte-identical to the earlier failed D reproduction. There is no fresh behavioral rerun after restoration.",
+      "edit_events": [
+        16,
+        18
+      ],
+      "check_events": [
+        3
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3278",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Changes the ANSI single-character escape class from [(@-Z\\-_] to [0-Z\\-_].",
+      "issue_relation": "This includes the requested private 0-? range, but also changes the old class; only concrete escape pairs were exercised.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "Post-edit decoding assertions pass for ESC7/ESC8 and ESC0/ESC?. No complete ANSI compatibility claim follows.",
+      "edit_events": [
+        12
+      ],
+      "check_events": [
+        1,
+        13,
+        14
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3278",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Changes the ANSI escape class to [0-?@-Z\\-_] and rewrites the auxiliary reproduction.",
+      "issue_relation": "This attempts to add the requested private range but also changes the old class.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The last executed decoder reproduction fails before the successful final edit. The delivered business revision is not rerun.",
+      "edit_events": [
+        14
+      ],
+      "check_events": [
+        3
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3506",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Revises Segment._split_cells boundary handling and proportional padding around a split character.",
+      "issue_relation": "This extends D's partial split-cells revision; the public issue title does not specify all boundary outcomes.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "A finite branch reproduction passes after editing. Deleting only its auxiliary script later changes the whole patch identity without changing the checked business source.",
+      "edit_events": [
+        1,
+        8
+      ],
+      "check_events": [
+        3
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Removes the prefixless empty-path guard but duplicates the start of the include_context assignment. Failed and budget-rejected repairs leave that duplicate in delivery.",
+      "issue_relation": "The guard removal targets the public requirement, but the retained source also contains an apparent syntax defect.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The empty-path inclusion raises FastAPIError before editing. No final syntax or behavioral execution occurs; the technical-unknown grading endpoint is preserved.",
+      "edit_events": [
+        5,
+        6,
+        8
+      ],
+      "check_events": [
+        1,
+        3
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14986",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Changes Swagger URL/config JSON formatting and replaces </script> with </\\script> in two expressions.",
+      "issue_relation": "This attempts the public Swagger escaping requirement; the unusual escape and incomplete redirect handling are not accepted as proven fixes.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "Swagger escaping fails before editing; a separate root_path subset passes before the docs.py changes. No Swagger or final-source rerun occurs.",
+      "edit_events": [
+        11,
+        12,
+        13
+      ],
+      "check_events": [
+        0,
+        3
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3718",
+      "branch": "control",
+      "category": "retained_code_revision",
+      "net_change": "Applies the panel style to title_text and subtitle_text before the border style.",
+      "issue_relation": "The title addition directly addresses the public background-style requirement; subtitle is an additional revision.",
+      "validation": "same_business_observed",
+      "validation_note": "Final title rendering prints red-background ANSI styling. The subtitle run is rejected, so that new branch is unexercised.",
+      "edit_events": [
+        5,
+        6
+      ],
+      "check_events": [
+        4,
+        7
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14361",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Guards an additional remapper access using schema.get('$ref') and skips non-string references.",
+      "issue_relation": "This extends D's earlier guard to another missing-$ref access, matching the public issue direction.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "A branch reproduction observes KeyError before editing. Its try/except deliberately exits zero on the error; the attempted post-edit rerun is rejected.",
+      "edit_events": [
+        8
+      ],
+      "check_events": [
+        4,
+        6
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13920",
+      "branch": "feedback",
+      "category": "retained_code_revision",
+      "net_change": "Adds TypeAliasType dispatch through get_args(annotation)[0] to five annotation predicates. A sixth addition is rejected.",
+      "issue_relation": "This attempts broader integration beyond D's alias-detection helper. The chosen unwrapping expression is not validated.",
+      "validation": "not_rechecked_after_revision",
+      "validation_note": "The common check exercises only D's helper, not the five subsequently changed predicates; no branch execution validates the delivered additions.",
+      "edit_events": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "check_events": []
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3052",
+      "branch": "control",
+      "category": "docstring_only",
+      "net_change": "Adds only a case_sensitive line to the class docstring.",
+      "issue_relation": "The executable case-insensitive behavior is inherited from D.",
+      "validation": "same_business_limited_pass",
+      "validation_note": "After the docstring addition, the input-stream reproduction passes both case-sensitive and case-insensitive ASCII cases.",
+      "edit_events": [
+        5
+      ],
+      "check_events": [
+        1,
+        6
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "batch": "R01",
+      "task": "requests_6592",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The issue requires too_early=425; three repository attribute/dictionary assertions complete. Existing aliases and other status names are outside the check."
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The six real Prompt.check_choice assertions cover default sensitivity and ASCII insensitive matches. Prompt.ask interaction, whitespace, and Unicode are untested."
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14953",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "UploadFile's real schema has the requested contentMediaType replacement. Whole-dictionary equality is stronger than the issue's field requirement and cannot certify raw bytes or all routes."
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14371",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The string alias direction is supported, but an inline decorator causes SyntaxError before any request."
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14246",
+      "basis": "inferred",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "Three schema-name presence checks do not specify input/output separation. The single-line class definition causes SyntaxError before OpenAPI generation."
+    },
+    {
+      "batch": "R01",
+      "task": "requests_6644",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "Single-leading-slash path_url expectations follow the public issue, but the inline class statement prevents all assertions."
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_13537",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "Empty Optional[int] form values should use None, but the inline decorator is a checking-program syntax failure."
+    },
+    {
+      "batch": "R02",
+      "task": "requests_6592",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "Both requested lower/upper-case aliases equal 425 after importing the workspace Requests source. Old aliases are not checked."
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14303",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The public Form-model multi-value reproduction reaches TestClient and completes the 200/list assertions. Single-value and other parameter types are outside scope."
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The independent target node receives 422 for an empty Optional[int] form field, contradicting the required 200/None behavior. Two unrelated async collection failures do not erase this target failure; the JSON assertion is not reached."
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14372",
+      "basis": "inferred",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "Hashability is required, but equality and set deduplication of separately constructed instances are additional assumptions. The missing here-document prevents Python execution."
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9425",
+      "basis": "inferred",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The issue concerns typed return annotations and bodiless routes; a generic helper identity assertion expands that contract. Python treats PY as a missing file, so no helper call runs."
+    },
+    {
+      "batch": "R02",
+      "task": "rich_4075",
+      "basis": "inferred",
+      "reach": "peripheral",
+      "semantics": "consistent",
+      "rationale": "Console.print(None, end='!') prints None! and continues to Done. The public title does not establish None as an empty call or no-crash as the full requirement."
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14794",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The Response/Depends annotation is supported, but app construction fails on on_startup before the dependency endpoint is registered."
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The requested tilde URL reaches ReprHighlighter. The single span starts at zero but ends before the full URL; failure occurs at the endpoint assertion, not span count or style."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_9753",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "Three self-contained partial dependencies resolve via a real request and return foo. Async callable instances and generator combinations are not covered."
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7309",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real parser excludes the parameter lacking '=', while preserving charset=utf-8. The assertion does not cover all Content-Type grammar."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_9555",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "Two real requests exercise a cache/reawaitable wrapped async dependency and obtain bar. The simplified Settings class and modified cached generator do not validate every wrapper or generator case."
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The real codes object lacks the explicitly requested too_early attribute. This fails before the upper-case alias assertion."
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3535",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real fast-path predicate matches four ordinary single-width examples. Public source supports the limited predicate interpretation; full Unicode range and performance claims do not follow."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The OpenAPI response includes /root in servers, contradicting the visible requirement. The first failure prevents the Swagger escaping check from running."
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3052",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real Prompt.ask path accepts insensitive input and rejects it under explicit/default sensitivity. Return-case expectations are consistent with the visible process_response implementation, not a new issue-wide contract."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14463",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The public three-route/two-model reproduction generates anyOf length two. Reference identity and all route entries are not independently asserted."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_15763",
+      "basis": "inferred",
+      "reach": "target",
+      "semantics": "nondiagnostic",
+      "rationale": "Empty-path inclusion completes. GET '/' fails the inferred 200 requirement, but the public title only explicitly requires allowing the empty route; this does not provide a strict grounded contradiction."
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6644",
+      "basis": "inferred",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The issue requires request-uri normalization, not necessarily rewriting PreparedRequest.url. The missing here-document fails first; the intended Request call also misplaces the URL in the method argument."
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3278",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The explicit ESC0..ESC? range is supported. Python is invoked on a nonexistent PY file, so the tokenizer and preservation checks never run."
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14360",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The Query model alias and extra-name checks correspond to the two public defects. Missing shell-to-Python wrapping prevents both tests; Header/Cookie are untested."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The FastAPI object lacks the explicitly requested frontend API. File-serving and router assertions are later and unexecuted; the observed API failure alone establishes the contradiction."
+    },
+    {
+      "batch": "R04",
+      "task": "httpx_3672",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "All three explicitly requested parser API-name assertions complete. hasattr neither verifies a property value nor executes reset, keep-alive, request reading, or shutdown."
+    },
+    {
+      "batch": "R04",
+      "task": "requests_7309",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real parser excludes a malformed parameter with no '=' and retains the valid charset. The returned content type and other grammar cases are not asserted."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_9555",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "One real request awaits the issue's cache/reawaitable dependency and returns bar. Repeat awaiting and generator classification remain outside this check."
+    },
+    {
+      "batch": "R04",
+      "task": "requests_6592",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The explicitly requested alias resolves to 425 via real attribute and dictionary access. Upper-case and old aliases are untested."
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3535",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real single-width fast-path predicate matches p and ~. This neither validates every character in the extended range nor measures performance."
+    },
+    {
+      "batch": "R04",
+      "task": "requests_6629",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The requested pickle roundtrip completes and preserves JSONDecodeError type. The check does not assert msg/doc/pos values or execute a process pool."
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "Table(highlight=True).add_row creates columns that fail the directly requested highlight inheritance assertion. Other table/highlighter settings are outside scope."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The missing-key request passes the 401 status assertion but fails the visible ApiKey query header-format requirement. The issue warns that parts are outdated; the later 403 compatibility scenario is not executed."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13537",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "consistent",
+      "rationale": "The real scalar int=Form(None) route returns 200 and q=None for q=''. This does not certify models, aliases, file fields, or all regressions."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15589",
+      "basis": "supported",
+      "reach": "target",
+      "semantics": "counterevidence",
+      "rationale": "The model Header path accepts an underscored name under the default conversion setting, directly contradicting the issue. Four scalar assertions and the model hyphen case pass first; the final model-disabled scenarios are not reached."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14873",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The callback-execution direction is public, but the shell wrapping fails before app construction. The app.lifespan trigger itself is not independently validated."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763",
+      "basis": "inferred",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "Route inclusion is public; resolving the empty string to a 200 root request is an additional assumption. Missing here-document wrapping prevents either stage."
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14583",
+      "basis": "inferred",
+      "reach": "peripheral",
+      "semantics": "indeterminate",
+      "rationale": "Importing an internal compatibility module emits the expected message substring. The issue concerns using pydantic.v1; exact wording, warning category, user trigger, and silence without v1 use are not established."
+    },
+    {
+      "batch": "R04",
+      "task": "requests_7505",
+      "basis": "supported",
+      "reach": "not_reached",
+      "semantics": "nondiagnostic",
+      "rationale": "The reader-preservation direction matches the public source, but this class directly defines read instead of proxying it. An unterminated f-string prevents parsing, so no protocol fallback is exercised."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+batch,task,arm,status,score_present,resolved,patch_nonempty,patch_available,patch_sha256,source
+R01,fastapi_14873,draft,resolved,True,True,False,True,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,research/cycles/2026-10-14-feedback-refinement/analysis-R01.json
+R01,fastapi_14873,control,resolved,True,True,False,True,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,research/cycles/2026-10-14-feedback-refinement/analysis-R01.json
+R02,fastapi_14873,draft,resolved,True,True,False,True,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json
+R02,fastapi_14873,control,resolved,True,True,False,True,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json
+R02,fastapi_14873,feedback,resolved,True,True,False,True,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,research/cycles/2026-10-14-feedback-refinement/analysis-R02.json

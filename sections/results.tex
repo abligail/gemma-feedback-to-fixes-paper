@@ -1,0 +1,39 @@
+\section{Results}
+\subsection{Whole-workflow checking boosts confirmation without net repair gains}
+In Study A, across three batches on the 54 official tasks (162 pairs), \texttt{v1} raises pre-edit target counterevidence from V5's 17/14/15 tasks to 27/29/28, and joint counterevidence-plus-replay from 15/11/14 to 20/23/25 (39 to 60 and 37 to 53 on all 95 tasks in R03). Yet confirmed passes tie at 75 vs 75 across 143 normal pairs (27 vs 25, 23 vs 26, 25 vs 26 per batch; seven gains, seven losses; external 29 tasks: 48 vs 47). Probing burns budget (SymPy23950 spends 11 calls before its first edit hits the cap), narrow checks pass on partial fixes (Requests7427), and unverified edits break working code (pytest7205 deletes \texttt{saferepr}).
+
+\subsection{Stage 1: CLI invocation syntax filters out over a third of generated checks}
+In Study B's final configuration (R03/R04, Table~\ref{tab:construction}), the constructor emits output in 85 of 108 realizations (up from 21/108 in R01/R02), but only 20 checks reach target behavior with a grounded expectation: 13 match the expectation and 7 expose counterevidence on a failing draft.
+
+\begin{table}[htbp]
+\centering\small
+\input{tables/construction-coverage-v04}
+\caption{Check-construction outcomes across 108 R03/R04 realizations (54 tasks, two seeds).}
+\label{tab:construction}
+\end{table}
+
+The top failure is shell syntax rather than diagnostic logic: \textbf{38 of 108 attempts (35\%) fail with \texttt{can't open file '.../PY'}} on \texttt{python3 -B PY}. Attempting an inline heredoc (\texttt{python3 -B - << 'PY'}), the constructor omits \texttt{- <<}, so Python treats \texttt{PY} as a missing file; the rest split into 7 pre-target crashes, 9 peripheral checks, and 11 ungrounded target checks.
+
+\subsection{Stage 2: Action substitution and silent read resets absorb saved test calls}
+Stratifying the 108 R03/R04 realizations by D's grade (40 passing, 64 failing, 3 unknowns, 1 unscored; Figure~\ref{fig:actions}A), advance results on the 64 failing drafts halve replay from \textbf{46/64 (72\%) in C to 22/64 (34\%) in F} (82 to 43 overall), without adding \textbf{retained edits} (8 vs 8; 10 vs 9 overall) or \textbf{passes} (3 vs 3; two gains, two losses on 63 pairs).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/feedback-and-edit-budget-v04.png}
+\caption{R03/R04 failing-draft continuations and counterevidence timelines. (A) Advance results halve replay on 64 failing drafts, but agents trade command runs for file reads. (B) Four counterevidence F branches have their first edit blocked at the cap with 30--79 s left.}
+\label{fig:actions}
+\end{figure}
+
+Auditing executed calls on the 64 failing drafts shows why: \textbf{agents substitute file reading for test execution}. Compared with C, F runs \textbf{29 fewer \texttt{run\_command} calls} (226 to 197) and 11 fewer \texttt{get\_status} calls (17 to 6), but adds \textbf{30 \texttt{read\_file} calls} (239 to 269; 387 to 328 and 390 to 433 overall). Moreover, \textbf{58 executed \texttt{read\_file} calls across R03/R04 (25 C, 33 F; 24 on failing drafts)} pass a malformed optional key (\texttt{"start\_line"": "151"}); because \texttt{start\_line} is optional, the tool ignores it and \textbf{silently resets to lines 1--150 in 56 of 58 calls} (24 C, 32 F). Sharing one eight-call pool means \textbf{89\% of F branches on failing drafts (57/64) and 83\% of C branches (53/64) hit \texttt{BudgetExceeded}} (\href{supplement/continuation-process-v04.md}{process table}).
+
+\begin{table}[htbp]
+\centering\small
+\input{tables/result-groups-v04}
+\caption{R03/R04 continuations by check quality. Replay counts pre-edit runs on D; edits count retained diffs; gains/losses compare F against C.}
+\label{tab:strata}
+\end{table}
+
+Stratifying by check quality (Table~\ref{tab:strata}) links Stage 1 to Stage 2. In \emph{Other output} (65 realizations, including the 38 \texttt{python3 -B PY} crashes), F receives a shell error, forcing \textbf{60\% (39/65)} of F branches to re-run or repair the check. In \emph{Grounded target} (20 realizations: 10 passing D, 10 failing D), F replay drops \textbf{80\% (20/20 to 4/20)}, call-0 \texttt{read\_file} starts jump from \textbf{6/20 (30\%) to 16/20 (80\%)}, and edit-attempting branches double from \textbf{4/20 to 8/20}---yet 4 of 8 hit \texttt{BudgetExceeded}, leaving 3 retained edits vs 1 in C (+1 pass).
+
+\input{sections/cases}
+\FloatBarrier

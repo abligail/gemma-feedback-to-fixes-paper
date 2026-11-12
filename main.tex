@@ -1,0 +1,64 @@
+% NeurIPS-style single-column baseline manuscript
+\documentclass[10pt,a4paper]{article}
+\usepackage[top=18.5mm,bottom=18.5mm,left=22mm,right=22mm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{placeins}
+\usepackage{flafter}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+\setlist{nosep,leftmargin=*}
+\setlength{\parskip}{0.26em}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\textfloatsep}{9pt plus 2pt minus 2pt}
+\setlength{\floatsep}{7pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 2pt minus 2pt}
+\widowpenalty=10000
+\clubpenalty=10000
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\makeatletter
+\renewcommand{\@maketitle}{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \noindent\rule{\textwidth}{3pt}\par\vspace{2mm}%
+    \centering
+    {\LARGE\bfseries \@title \par}%
+    \vspace{2mm}%
+    \noindent\rule{\textwidth}{1pt}\par\vspace{2mm}%
+    {\normalsize\bfseries \@author \par}%
+    \vspace{2mm}%
+  }%
+}
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+  {-1.8ex \@plus -0.4ex \@minus -0.2ex}%
+  {0.8ex \@plus 0.2ex}%
+  {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+  {-1.4ex \@plus -0.3ex \@minus -0.2ex}%
+  {0.5ex \@plus 0.1ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+\title{Knowing the Bug Is Not Landing the Fix:\\Why Execution Feedback Stalls Before Patch Delivery in Budget-Constrained Coding Agents}
+\author{Team xiakongxin}
+\date{}
+\begin{document}
+\maketitle
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related-work}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+{\small
+\bibliographystyle{plain}
+\bibliography{references/references}
+}
+\end{document}

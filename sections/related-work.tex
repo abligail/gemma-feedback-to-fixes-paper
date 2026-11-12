@@ -1,0 +1,6 @@
+\section{Related work}
+\textbf{Iterative self-repair.} Self-Repair~\cite{selfrepair}, FeedbackEval~\cite{feedbackeval}, and Self-Debugging~\cite{selfdebug} study feedback in function generation; repository agents instead spend discrete calls on reading, running, and editing under one shared cap.
+
+\textbf{Reproduction tests.} SWT-Bench~\cite{swtbench}, Dynamic Cogeneration~\cite{cogeneration}, and CoHarden~\cite{coharden} generate fail-to-pass tests; we trace how CLI syntax, shared caps, and edit interfaces govern whether test output becomes a delivered patch.
+
+\textbf{State-bound repair.} \emph{Looping Is Not Reliability}~\cite{looping} and Genesis~\cite{genesis} evaluate state-bound repair and acceptance gates; we audit the full natural-draft population, linking each diff to the tool sequence that produced or blocked it.

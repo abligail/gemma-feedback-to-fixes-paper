@@ -1,0 +1,11 @@
+batch,task,scores,common_availability,common_semantics,same_cf_patch,source_change_labels
+R01,requests_7433,"{""control"": ""resolved"", ""draft"": ""resolved"", ""feedback"": ""scored_failed""}",不可用,无诊断力,False,"{""control"": ""仅检查或辅助文件改变"", ""feedback"": ""源码已修改""}"
+R01,fastapi_9555,"{""control"": ""resolved"", ""draft"": ""resolved"", ""feedback"": ""scored_failed""}",不可用,未知,False,"{""control"": ""仅检查或辅助文件改变"", ""feedback"": ""源码已修改""}"
+R02,requests_7433,"{""control"": ""resolved"", ""draft"": ""scored_failed"", ""feedback"": ""scored_failed""}",不可用,无诊断力,False,"{""control"": ""源码已修改"", ""feedback"": ""仅检查或辅助文件改变""}"
+R02,fastapi_9555,"{""control"": ""scored_failed"", ""draft"": ""resolved"", ""feedback"": ""resolved""}",不可用,未知,False,"{""control"": ""源码已修改"", ""feedback"": ""仅检查或辅助文件改变""}"
+R02,fastapi_13537,"{""control"": ""scored_failed"", ""draft"": ""scored_failed"", ""feedback"": ""resolved""}",执行且可用,公开反证,False,"{""control"": ""无修改"", ""feedback"": ""源码已修改""}"
+R03,requests_7433,"{""control"": ""resolved"", ""draft"": ""resolved"", ""feedback"": ""scored_failed""}",不可用,无诊断力,False,"{""control"": ""仅检查或辅助文件改变"", ""feedback"": ""源码已修改""}"
+R03,rich_3067,"{""control"": ""scored_failed"", ""draft"": ""scored_failed"", ""feedback"": ""resolved""}",执行且可用,公开反证,False,"{""control"": ""编辑失败"", ""feedback"": ""源码已修改""}"
+R04,rich_3067,"{""control"": ""resolved"", ""draft"": ""scored_failed"", ""feedback"": ""scored_failed""}",不可用,无诊断力,False,"{""control"": ""源码已修改"", ""feedback"": ""源码已修改""}"
+R04,rich_3718,"{""control"": ""resolved"", ""draft"": ""scored_failed"", ""feedback"": ""scored_failed""}",执行且可用,无诊断力,False,"{""control"": ""源码已修改"", ""feedback"": ""编辑失败""}"
+R04,fastapi_14361,"{""control"": ""scored_failed"", ""draft"": ""scored_failed"", ""feedback"": ""resolved""}",执行且可用,无诊断力,False,"{""control"": ""编辑失败"", ""feedback"": ""源码已修改""}"

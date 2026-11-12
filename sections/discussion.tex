@@ -1,0 +1,18 @@
+\section{Discussion}
+Interventions that improve diagnosis---reproducing bugs first (Study A) or supplying precomputed outputs (Study B)---leave solve rates flat because downstream bottlenecks absorb freed capacity. Three 855-run follow-up ablations across 95 tasks and 15 repositories (Table~\ref{tab:ablations}) confirm that prompt rules fail without runtime enforcement, motivating three design principles.
+
+\begin{table}[htbp]
+\centering\footnotesize\setlength{\tabcolsep}{2.8pt}
+\input{tables/prompt-ablations-v04}
+\caption{Follow-up prompt-only ablations across 95 tasks from 15 repositories (2,565 runs).}
+\label{tab:ablations}
+\end{table}
+
+\textbf{Decouple check specification from shell syntax.} Because 35\% of R03/R04 checks fail on \texttt{python3 -B PY}, forcing 60\% of F branches in \emph{Other output} to re-run or repair the check, runtimes should accept a structured Python test body separate from the runner and execute it via a fixed harness.
+
+\textbf{Enforce runtime edit reservations over shared pools or soft prompts.} In \emph{Grounded target}, advance results cut replay by 80\% and double edit attempts (4/20 to 8/20), yet half hit \texttt{BudgetExceeded}. Emitting \texttt{edit\_file} at event 9 right after an event-8 \texttt{BudgetExceeded} (three F, two C traces) proves the agent holds a candidate patch before the cap. Because soft subagent caps overrun in 89--96\% of tasks (Table~\ref{tab:ablations}), bounded repair requires \textbf{runtime-partitioned quotas} reserving the final 2--3 slots for \texttt{edit\_file} and verification, plus strict key validation on \texttt{read\_file} so malformed \texttt{start\_line"} keys warn instead of resetting to line 1.
+
+\textbf{Move edit recovery and state-bound acceptance into the runtime.} Because 100\% of the 93 missing-\texttt{old\_string} errors stem from delimiter corruption swallowing \texttt{old\_string:} into \texttt{new\_string}, prompt recovery succeeded in just 3 of 33 traces in R03 (Table~\ref{tab:ablations}). Tool adapters must reject unrecognized keys, detect swallowed \texttt{,old\_string:} delimiters, and cap schema retries. Likewise, voluntary \texttt{keep}/\texttt{reject} prompting yielded 23 \texttt{keep} and \textbf{0 \texttt{reject} calls} in 190 runs~\cite{genesis}: runtimes must bind verification to git hashes and revert regressions over D.
+
+\textbf{Scope.} While we fix Gemma 4 31B QAT on Python repositories under competition budgets, shared exploration/edit pools, unvalidated pagination keys, and unrecovered delimiter errors are structural interface properties that penalize any bounded agent (\href{supplement/reproducibility.md}{companion records}).
+\FloatBarrier

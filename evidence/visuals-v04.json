@@ -1,0 +1,474 @@
+{
+  "version": "v0.4 native SVG figure 1",
+  "date": "2026-11-12",
+  "matplotlib": "3.11.1",
+  "renderer_sha256": "992fa0cfa5732101032a1655814adddf9b0aaa23da9984654f3c340a6865f98c",
+  "input_sha256": {
+    "evidence/process-analysis-v04.json": "5032b31325787ad1798c8224a2744d6e70044a3c684364a27832ced1db3ad8a6",
+    "evidence/reviewer-analysis-v04.json": "fd4c51e23c1ff524c8b0f1869f3404e6d0873ec3e98879d6a0f7e6a7b6536aa0",
+    "supplement/check-construction-v04.csv": "0a6ac7fcb7c51557cb10934294d9a0b0916bcb3a7b17c1be5609b6f6e8b22de2",
+    "supplement/source-delivery-v04.csv": "4ca139a1d734088d8313199d4c79364be7b08834bafd8a519f5d06e2fb869a31",
+    "supplement/check-phases-v04.csv": "6da350e8e5f0b5e58f06094e4f1d338f4fa4eb255301972ab284f3e63406119a",
+    "evidence/counterevidence-slots.csv": "b525dee85957272e31110dce2215775214046d2fa82f57f293836d33729208b0",
+    "protocol/packets/study-b/R02/fastapi_13537.json": "a2c63cb3705f72166c2d8355acb76fdc0a103d6aa0a83452a514b5e0cf23de0f",
+    "protocol/packets/study-b/R03/rich_3067.json": "eef6dc747e827d8e54e4639c6e9af253de49d139220d2bb3a7378b6b8f616428",
+    "protocol/packets/study-b/R03/requests_6592.json": "fd2fb8574623de102eeb550b947047e157fd3f0c9a96c6dcaee5954f2e76108f",
+    "protocol/packets/study-b/R03/fastapi_14986.json": "32bcba5f73f291bbe185345e586dae3e53d00d25b6524890d6cdd16b72ca70dd",
+    "protocol/packets/study-b/R04/fastapi_15800.json": "22b34333d38705f2dce3b34f671e8ae345dd6a07bf731d6dea19370f78e96b33",
+    "protocol/packets/study-b/R04/rich_3518.json": "21b5f7ee2a6d01ac927e8b012b52934936f825056e4ccf27bfa4edbdd2cdc8ba",
+    "protocol/packets/study-b/R04/fastapi_13786.json": "99310a7bbd808becf1e0dfdf0ab9358c70bb29647935d377fd8ecf8e8717ccf8",
+    "protocol/packets/study-b/R04/fastapi_15589.json": "b9f74a5569e01e1ba339755cfd86570d6cc2cf1327bbd5f422942b03ef189594",
+    "supplement/tool-allocation-v04.csv": "bd72824903946a95c21ad0da6e44c6e01d856c8e406576af724896fbfa4fea31",
+    "protocol/cycles/2026-10-12-trigger-validity/report.md": "0de8a13befbda3652641a7e104681b9deafc2250a81e01f391af80a398540d2a",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R01.json": "819d1d3eb19bc57e0913cfeac9aae9147323794eca498ffdb87592c556353219",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R02.json": "11384d297e4d8b499b95ad6976a4acaf36306056c03b84f3c07a0d3a8f5bb23c",
+    "protocol/cycles/2026-10-12-trigger-validity/analysis-R03.json": "3bbfa6ecdbbb6713497a796dbf2864e2a608883ec0c064b47c98fd6ffa8b99ec",
+    "protocol/cycles/2026-10-25-local-recursion/report.md": "99fd959bdf32caf273a21b664a29e89f891b9c96a9ca8461096c4051ab6492ef",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R01.json": "c8ac859ae6eba231e2c831a8d8d9d0804af281929abc8390d5a309905a4931e1",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R02.json": "cdbae9254a663b1d5e8cbd75e436ab7e0adf2542f0b1d286e3aa7f025e0c6eef",
+    "protocol/cycles/2026-10-25-local-recursion/analysis-R03.json": "a59a8fbf35d73eb32ca2c9dbdbbdc3615448413142f7933e1278ba3cc7c94e66",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/report.md": "a0ccb959c5f93c97addfb44cea9c89bf1ee922a31e5d1b986d9a69b6714ec598",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R01.json": "e7c0cd94a19f0eb3ed20f16c2b9156203ab265f58224f9db922916f86bc9bcdd",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R02.json": "d319f3d4d0778febec076475ad94326eefea6f3ab9fa447f6feeec9f65b97a94",
+    "protocol/cycles/2026-10-15-strong-baseline-recovery/analysis-R03.json": "898a5496ca281eebd311b69888ee762ed6e448d648bce5d4630b62edc39f8dde",
+    "protocol/cycles/2026-10-23-local-progress/report.md": "f6b1cec74bdc1ffab5b3bf4d2f6782c4fcd553ef9446b5721142d30ccab3faa0",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R01.json": "e037acdb3c6475b8c0e014a41b67fea01fc7fcf48d3c322b33a8211ce80c3e1c",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R02.json": "67428ecbcfded8a8c7f400c6cd1194644f1cd0c74fd98b0405d5031c9adb28bc",
+    "protocol/cycles/2026-10-23-local-progress/analysis-R03.json": "8a347c3bc441a450cc822c9b7dc0e3bed8f5cf9a090392807558277825da8af3",
+    "protocol/plan-R03.json": "2a629994c4e7da7f1d99bcf485480c5d8e73a3d856111ddb1c97f57a05a78ef5",
+    "protocol/plan-R04.json": "b26d1b2fe8aac966e48a8a64d39a99d0cc18206511727818159d07d6a769f799",
+    "evidence/study-design-svg-v04.json": "e7c6d34b524217f1547e44d57f0b0396a031f99f447aaf629c6f134e76f953fc",
+    "paper/feedback-to-fixes/scripts/build_study_design_svg.py": "555bbcab7e915471305be113ee282f0a5995d89bfee9fda3134d8232d2e54451"
+  },
+  "budgets": {
+    "draft_seconds": 240,
+    "draft_calls": 16,
+    "constructor_seconds": 120,
+    "constructor_reads": 1,
+    "execution_seconds": 30,
+    "continuation_seconds": 150,
+    "continuation_calls": 8
+  },
+  "failed_draft_panel": {
+    "dimension": "draft_status",
+    "value": "scored_failed",
+    "realizations": 64,
+    "distinct_tasks": 37,
+    "grounded_target": 10,
+    "other_output": 38,
+    "no_output": 16,
+    "normal_cf_pairs": 63,
+    "feedback_gains": 2,
+    "feedback_losses": 2,
+    "control_draft_replays": 46,
+    "control_postedit_replays": 4,
+    "control_retained_source_changes": 8,
+    "feedback_draft_replays": 22,
+    "feedback_postedit_replays": 3,
+    "feedback_retained_source_changes": 8,
+    "control_normal_draft_pairs": 64,
+    "control_new_passes_from_draft": 3,
+    "control_lost_passes_from_draft": 0,
+    "control_passes": 3,
+    "control_nonnormal_returns": 0,
+    "feedback_normal_draft_pairs": 63,
+    "feedback_new_passes_from_draft": 3,
+    "feedback_lost_passes_from_draft": 0,
+    "feedback_passes": 3,
+    "feedback_nonnormal_returns": 1
+  },
+  "budget_timelines": [
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "first_source_edit_event": 9,
+      "first_source_edit_seconds": 91.75433683395386,
+      "nominal_seconds_remaining": 58.24566316604614,
+      "spent_opportunities": {
+        "search": 4,
+        "read": 4
+      },
+      "delivered_equals_draft": true,
+      "eight_spent_events": [
+        {
+          "event": 0,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 30.664106845855713
+        },
+        {
+          "event": 1,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 33.78126335144043
+        },
+        {
+          "event": 2,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 40.077972412109375
+        },
+        {
+          "event": 3,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 42.34264302253723
+        },
+        {
+          "event": 4,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 44.16451382637024
+        },
+        {
+          "event": 5,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 53.04194474220276
+        },
+        {
+          "event": 6,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 57.36973309516907
+        },
+        {
+          "event": 7,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 58.92283010482788
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "first_source_edit_event": 9,
+      "first_source_edit_seconds": 91.3032078742981,
+      "nominal_seconds_remaining": 58.696792125701904,
+      "spent_opportunities": {
+        "read": 4,
+        "search": 1,
+        "execution": 3
+      },
+      "delivered_equals_draft": true,
+      "eight_spent_events": [
+        {
+          "event": 0,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 26.329559326171875
+        },
+        {
+          "event": 1,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 30.256129264831543
+        },
+        {
+          "event": 2,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 32.05790114402771
+        },
+        {
+          "event": 3,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 34.41586208343506
+        },
+        {
+          "event": 4,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 35.74939179420471
+        },
+        {
+          "event": 5,
+          "tool": "run_command",
+          "category": "execution",
+          "elapsed_seconds": 45.12313199043274
+        },
+        {
+          "event": 6,
+          "tool": "run_command",
+          "category": "execution",
+          "elapsed_seconds": 47.68857932090759
+        },
+        {
+          "event": 7,
+          "tool": "run_command",
+          "category": "execution",
+          "elapsed_seconds": 50.12819290161133
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "first_source_edit_event": 9,
+      "first_source_edit_seconds": 119.9490475654602,
+      "nominal_seconds_remaining": 30.050952434539795,
+      "spent_opportunities": {
+        "read": 5,
+        "search": 3
+      },
+      "delivered_equals_draft": true,
+      "eight_spent_events": [
+        {
+          "event": 0,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 51.62104272842407
+        },
+        {
+          "event": 1,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 53.9518084526062
+        },
+        {
+          "event": 2,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 55.701164960861206
+        },
+        {
+          "event": 3,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 56.81479072570801
+        },
+        {
+          "event": 4,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 64.76700162887573
+        },
+        {
+          "event": 5,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 68.48041868209839
+        },
+        {
+          "event": 6,
+          "tool": "run_command",
+          "category": "search",
+          "elapsed_seconds": 82.90576553344727
+        },
+        {
+          "event": 7,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 84.52731204032898
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "first_source_edit_event": 8,
+      "first_source_edit_seconds": 71.53225588798523,
+      "nominal_seconds_remaining": 78.46774411201477,
+      "spent_opportunities": {
+        "read": 7,
+        "execution": 1
+      },
+      "delivered_equals_draft": true,
+      "eight_spent_events": [
+        {
+          "event": 0,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 15.209297180175781
+        },
+        {
+          "event": 1,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 17.199135065078735
+        },
+        {
+          "event": 2,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 22.57595920562744
+        },
+        {
+          "event": 3,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 24.23982548713684
+        },
+        {
+          "event": 4,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 29.91751194000244
+        },
+        {
+          "event": 5,
+          "tool": "run_command",
+          "category": "execution",
+          "elapsed_seconds": 49.937723875045776
+        },
+        {
+          "event": 6,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 56.20935654640198
+        },
+        {
+          "event": 7,
+          "tool": "read_file",
+          "category": "read",
+          "elapsed_seconds": 69.91808438301086
+        }
+      ]
+    }
+  ],
+  "figures": {
+    "study-design-v04": {
+      "alt": "Study B (R03/R04): C/F share frozen draft D, public issue, check specification and expected outcome; both can inspect, edit and run checks, and only F receives the precomputed result or unavailable notice.",
+      "visible_text": [
+        "Study B | R03/R04",
+        "1",
+        "Generate & freeze D",
+        "240 s | 16 tool calls",
+        "2",
+        "Propose a check",
+        "Read-only | 120 s | ≤1 file read",
+        "3",
+        "Run the check on D",
+        "30 s timeout | at most once",
+        "Shared inputs to both arms",
+        "!",
+        "Frozen draft D",
+        "Public issue",
+        "Check specification",
+        "+ expected outcome",
+        "Precomputed result",
+        "or unavailable notice",
+        "C",
+        "Ordinary continuation",
+        "150 s | 8 tool calls",
+        "Inspect",
+        "Edit",
+        "Run",
+        "F",
+        "Advance-result continuation",
+        "150 s | 8 tool calls",
+        "Inspect",
+        "Edit",
+        "Run",
+        "Result",
+        "Fresh contexts | matched seed | no draft conversation history",
+        "Both arms may inspect, edit, and run checks."
+      ],
+      "outputs": {
+        "svg": {
+          "path": "figures/study-design-v04.svg",
+          "sha256": "e6a86eece0e1fb7c993c3663a3d6c09bfc093ede9ae308a143ff122c6752de8c"
+        },
+        "png": {
+          "path": "figures/study-design-v04.png",
+          "sha256": "6048dbbae31d89897bd6c26cc2dad738beacc83a920e70c88b8c9927cda576a2",
+          "pixels": [
+            3072,
+            2048
+          ]
+        },
+        "pdf": {
+          "path": "figures/study-design-v04.pdf",
+          "sha256": "cdbc824618672e645c5d909923a3db4d83499a80b8825ad9a96488402a8132dc",
+          "pages": 1,
+          "native_text": true,
+          "embedded_raster_images": 0,
+          "page_points": [
+            1152.0,
+            768.0
+          ]
+        }
+      },
+      "canvas_text_bounds_check": "approved SVG v02; native PDF export and all visible labels checked",
+      "renderer": "Authored native SVG; versioned PNG/PDF exports verified against the SVG fingerprint"
+    },
+    "feedback-and-edit-budget-v04": {
+      "alt": "Failing-draft comparison (64 realizations): C/F replay 46/22, exhaust 8-tool cap 53/57, retain edits 8/8, and confirm new passes 3/3. Four counterevidence timelines show the first source edit rejected after all eight tool opportunities, despite 30–79 seconds remaining.",
+      "visible_text": [
+        "46",
+        "22",
+        "53",
+        "57",
+        "8",
+        "8",
+        "3",
+        "3",
+        "Branch count (out of 64)",
+        "0",
+        "16",
+        "32",
+        "48",
+        "64",
+        "Common-check\nreplay on D",
+        "Exhaust\n8-tool cap",
+        "Retained\nsource edits",
+        "Confirmed\nnew passes",
+        "71.5 s",
+        "78.5 s",
+        "91.3 s",
+        "58.7 s",
+        "91.8 s",
+        "58.2 s",
+        "119.9 s",
+        "30.1 s",
+        "Seconds from continuation start",
+        "0",
+        "30",
+        "60",
+        "90",
+        "120",
+        "150",
+        "Rich 3518\nR04",
+        "FastAPI 13786\nR04",
+        "FastAPI 14986\nR03",
+        "FastAPI 15800\nR04",
+        "A  Failing-draft behavior & tool cap",
+        "R03/R04 · 64 failing drafts per arm",
+        "B  First source edit blocked at tool cap",
+        "6 of 7 counterevidence F branches attempt edits: 2 pass, 4 blocked",
+        "Tool shift (C→F): runs 226→197 (−29); reads 239→269 (+30).",
+        "Normal grades: C 64; F 63 (one unknown).",
+        "8 calls spent on read/probe · 0 left for first edit",
+        "All 4 blocked F branches return D unchanged; both arms fail.",
+        "C · Ordinary",
+        "F · Advance result",
+        "Tool opportunity",
+        "Rejected edit",
+        "Time remaining"
+      ],
+      "outputs": {
+        "png": {
+          "path": "figures/feedback-and-edit-budget-v04.png",
+          "sha256": "422e7262bf9d2adc7d4a2f1c90851d9ef37c3371792fc6edf161db792de63a3d",
+          "pixels": [
+            2640,
+            1404
+          ]
+        },
+        "svg": {
+          "path": "figures/feedback-and-edit-budget-v04.svg",
+          "sha256": "72cc52ce993e0522ba18edc126f43a38b0380cdd5ae1e197c08456f6b9502dba"
+        }
+      },
+      "canvas_text_bounds_check": "passed"
+    }
+  },
+  "other_outputs": {
+    "tables/construction-coverage-v04.tex": "61feb204dc3cc2eba8713fbfd966b34532277d916e95719c98fb1663f06acbe0",
+    "tables/result-groups-v04.tex": "91630b22520db8cf7f422ba64bc5dca20b77ed313b07e4b90e8f9fb9907554a9",
+    "supplement/continuation-process-v04.md": "f06825c0cf2003cf7d8e45291b153f8cfd9da3a566a64a8ac56cd183bf53a224"
+  },
+  "scope": "R03/R04; existing frozen analysis only. Counts, not rate estimates. Timeline marks show first rejected edits within the nominal 150-second allocation, not branch termination. No manuscript PDF output; Figure 1 uses a verified vector PDF export."
+}

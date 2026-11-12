@@ -1,0 +1,595 @@
+{
+  "revision": "v0.3",
+  "timing": "Declared before new source/semantic review; scores already known from previous research and review.",
+  "reviewer": "Codex assistant; no independent human review.",
+  "negative_sampling_seed": 2026110903,
+  "source_branches": [
+    {
+      "batch": "R01",
+      "task": "requests_7433",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7433.json",
+      "packet_sha256": "b99b85fc21986d7e08709d1cf1935078249f97b43155482e9b0fde2580abfe02"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_9555",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_9555.json",
+      "packet_sha256": "8471084fdafd45cd99f9f7ef42eb7189504e395003c1d5dccb7f5252d933c87c"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14794",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14794.json",
+      "packet_sha256": "2f159ac40f72d873faac850be3d0655cc96fbcb83624076095eb3c592f77c192"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3052.json",
+      "packet_sha256": "f6ee1fa11a9c8167e8ee32270d1e47d81fc77575dc766dbdeb092f7ffb81e6c8"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3052.json",
+      "packet_sha256": "f6ee1fa11a9c8167e8ee32270d1e47d81fc77575dc766dbdeb092f7ffb81e6c8"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3930",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3930.json",
+      "packet_sha256": "c4536210673e2a89c49d42eeb376d09b73ec04cbbe11b8008505baedc624d28b"
+    },
+    {
+      "batch": "R02",
+      "task": "requests_7433",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7433.json",
+      "packet_sha256": "2d3c8cc5540cb7f716b1fcce0ade865441410f8b52b01be24f9743e51569563d"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9555",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9555.json",
+      "packet_sha256": "1d8d96e9690a171e9e1f8e43a4185a50862f6745670ffaec78010c92d1a4c1af"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_3930",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3930.json",
+      "packet_sha256": "ad772dd9a787b0f2f52f1a4d54aa4d9ecdd2485064832ee8199778d0b04b37da"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13786",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13786.json",
+      "packet_sha256": "8dd62426dfe56ce4e491529ebbbc214351cf1f5b298211cb36104033f02e2893"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json",
+      "packet_sha256": "340e5ef4e312485b89ecdea6b80e8f6e2ec8f088524d1b577e0e2072441e30ac"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7433",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7433.json",
+      "packet_sha256": "17a1dcef8753ec9cba7055562debac64882a7b2c70c0eb207601336112b18b68"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3469",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3469.json",
+      "packet_sha256": "f4c89c028ff664b31aaf95eca7a6ead2d7918df864886a24bd65a0e7a003d485"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json",
+      "packet_sha256": "27549f0cd872198ec5b2d24ad123b692b24363c49983a906265e2c275110b53c"
+    },
+    {
+      "batch": "R03",
+      "task": "httpx_3672",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/httpx_3672.json",
+      "packet_sha256": "674e791c01931d846fa007b268455ec29bbee7f44e3306b7eaadd3de51abb8e9"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json",
+      "packet_sha256": "602194409a54738920dc9e4efcdd81ca75563effd09a0f793c30796812bbcd4e"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json",
+      "packet_sha256": "602194409a54738920dc9e4efcdd81ca75563effd09a0f793c30796812bbcd4e"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3535",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3535.json",
+      "packet_sha256": "965c4737867fdf56f9bd62bb7a1d7e7d68afc4f0cdf2aeeb8f861af8ffb1fb6f"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14482",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14482.json",
+      "packet_sha256": "0b44427dc8580e035b2b2f8eb2df830419618e24029e8e424af2166098314bbf"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14482",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14482.json",
+      "packet_sha256": "0b44427dc8580e035b2b2f8eb2df830419618e24029e8e424af2166098314bbf"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_13786",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_13786.json",
+      "packet_sha256": "2e501d834720f0184d9c081aa99d9eb00695a0455c96dbbd0930bba1426dd897"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3067",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3067.json",
+      "packet_sha256": "ec504e31fe0133637086798df6a0544ce62a95c4e70b5de1b13628f23eb9c70f"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3067",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3067.json",
+      "packet_sha256": "ec504e31fe0133637086798df6a0544ce62a95c4e70b5de1b13628f23eb9c70f"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3278",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3278.json",
+      "packet_sha256": "0a6e91be4b8ed7a793c36eb7bb3c61cfb0eade780aacb774c867c348f9ad756c"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3278",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3278.json",
+      "packet_sha256": "0a6e91be4b8ed7a793c36eb7bb3c61cfb0eade780aacb774c867c348f9ad756c"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3506",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3506.json",
+      "packet_sha256": "d792ddb26ac7f8a48874c6f12995228a8b99f7ec493af388c7c109d91b2f84ca"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15763.json",
+      "packet_sha256": "2e65256742011d6c16460cf08585b600129c7a202b122f6ef6be281de630a0f8"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14986",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14986.json",
+      "packet_sha256": "5051d45286b3ee5ba6a213b29fe3cdcb52aa3319cf284e2e229cda8fce4b5829"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3718",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3718.json",
+      "packet_sha256": "1b79da90adf7cd3db29a23f9b00ae76097b96d053965614e2c96362dbf39135f"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14361",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14361.json",
+      "packet_sha256": "0201762cadb7e10e83254ee3cdd05824e702969e3cad41aca9b992be045290be"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13920",
+      "branch": "feedback",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13920.json",
+      "packet_sha256": "fdc133478b03a3558b75c826ca2aaee169e6c1dda0dd01c4bc630c9e72aebc38"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3052",
+      "branch": "control",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3052.json",
+      "packet_sha256": "5c36d85591cc2b89918b1447ba6dcb15a54ca59305575a486769e3ff4460f37d"
+    }
+  ],
+  "checks": [
+    {
+      "batch": "R01",
+      "task": "requests_6592",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6592.json",
+      "packet_sha256": "109095876e6aa40f28797c9be328bbae3e5516efc1234377749ec94d2dd9f56d"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3052",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3052.json",
+      "packet_sha256": "f6ee1fa11a9c8167e8ee32270d1e47d81fc77575dc766dbdeb092f7ffb81e6c8"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14953",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14953.json",
+      "packet_sha256": "a385ca649ba6cdb6f0e7c4d2613dff3ab1da2d4474005c9205c0d78fd1bca9d5"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14371",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14371.json",
+      "packet_sha256": "2639dcca2cfe9fe3025afd64ec6fa2148f644893698aa99103d96170da89d40d"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14246",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14246.json",
+      "packet_sha256": "744d7e589faa0e0ae094464f39ce7ac066915591ada9159ed776c8a972e7e91c"
+    },
+    {
+      "batch": "R01",
+      "task": "requests_6644",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6644.json",
+      "packet_sha256": "b2865c6b4ad7996afefaec329a8f23338c8d0ae4606c945fce8804d914b629e9"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_13537",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_13537.json",
+      "packet_sha256": "47818b7e188c03ea3b0bedfb80e0d7d8fc0f08c0359f312229839e7e91e2f311"
+    },
+    {
+      "batch": "R02",
+      "task": "requests_6592",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6592.json",
+      "packet_sha256": "3fa24f6d4cdcf9d30ffdd35d3e6593897c93ab5b8f481c6d8ca0a0fb9092caab"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14303",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14303.json",
+      "packet_sha256": "115336b93eee85dff604046da33780ab6ecf521f3ec0574199dc39ea0685a579"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json",
+      "packet_sha256": "340e5ef4e312485b89ecdea6b80e8f6e2ec8f088524d1b577e0e2072441e30ac"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14372",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14372.json",
+      "packet_sha256": "0f62266b09a51f79851997939afbf1aecd9ff01ebeac062aab75904c3f38ea5e"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9425",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9425.json",
+      "packet_sha256": "7e5ea105f1355232bb4e5b6bb45283470ef1753d0624bac0be7a9b4fa170ab58"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_4075",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_4075.json",
+      "packet_sha256": "57fcf1c3732c5058667de9a0cf055ac466b40987a1b052298f2149e2e6c12306"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14794",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14794.json",
+      "packet_sha256": "e45bf19168bd394eddecb0fabbcf2df805507481b335c929a4fb76a1780aa81f"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json",
+      "packet_sha256": "27549f0cd872198ec5b2d24ad123b692b24363c49983a906265e2c275110b53c"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_9753",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9753.json",
+      "packet_sha256": "62f615d4af3e221dda1f9a9724f00e2e2a3853a9ccd991c0714dcb4dde8b4e59"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7309",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7309.json",
+      "packet_sha256": "0bc9c9d86ebf5b6debe6a9eb0a6a461f32519bf353691f15537626502adc839a"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_9555",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9555.json",
+      "packet_sha256": "3afd3ba85937c9144564d2fa4017a19f4dd20ace451a3e722ff69326f87d6fd2"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json",
+      "packet_sha256": "602194409a54738920dc9e4efcdd81ca75563effd09a0f793c30796812bbcd4e"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3535",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3535.json",
+      "packet_sha256": "965c4737867fdf56f9bd62bb7a1d7e7d68afc4f0cdf2aeeb8f861af8ffb1fb6f"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json",
+      "packet_sha256": "5ce2e86c51b7ee756f6f850c81b7d38059fa1ad804a36370ce8fdffaa36c0f41"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3052",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3052.json",
+      "packet_sha256": "5d2ad0db40ca20152da6a60733a68a9d0eeb599aaeec35b589f995b5a01a86e6"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14463",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14463.json",
+      "packet_sha256": "3c84e68033cbb81c74275127352a98fdeb94ee59c2b9dbde9a936caaccaf9450"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_15763",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_15763.json",
+      "packet_sha256": "60a197db8c8960cfd97bdc14337524c71e9584fb5799f827cfa828453c777160"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6644",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6644.json",
+      "packet_sha256": "31a64278102e149f545bd4fd3b3a1bfc4c540c3166c99ff05a5d1ec8468610be"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3278",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3278.json",
+      "packet_sha256": "fa5c09f7863432fbb16fc179c16914e5a391f796d4eac991d52815219a44e664"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14360",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14360.json",
+      "packet_sha256": "8dde46563b83ab8ac97d6585239b9b1a2389ce41300136bf84efed841f1a9dad"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json",
+      "packet_sha256": "68f1edb30e0c9091448c951380e8dcc6e788d2bff6b817711636dfc5cc1cf970"
+    },
+    {
+      "batch": "R04",
+      "task": "httpx_3672",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/httpx_3672.json",
+      "packet_sha256": "7d72bfa4007916131de657b673aadc5d36f4d1a3670bdb28209a839c61b4be50"
+    },
+    {
+      "batch": "R04",
+      "task": "requests_7309",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7309.json",
+      "packet_sha256": "d1ffa6f4b6ab5c41737be0b1601de42ae26bd3c742124a7a92583224a05b5c46"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_9555",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_9555.json",
+      "packet_sha256": "9e9729ab0b0dbac2167417fffdd39be52e3d4d9609fbd2f36664730be43c87a4"
+    },
+    {
+      "batch": "R04",
+      "task": "requests_6592",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6592.json",
+      "packet_sha256": "80df0b8b6a0cc0d6f190ebefc1f91f14f76d288917f7e423ad8bad1704f4503b"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3535",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3535.json",
+      "packet_sha256": "a1c979a585f7a6636084f33aa9c2261f210e0df4e6e2da6e28fec1056dc290dd"
+    },
+    {
+      "batch": "R04",
+      "task": "requests_6629",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6629.json",
+      "packet_sha256": "c23cfb78f98fad3afd9cc24aeef5eb3659ab9dd17f9be4ea117fe55f68e04830"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json",
+      "packet_sha256": "dbf81be5bde0bd7a36a686316c6f5363502a434ee6e863fec38c6e80c3921ac3"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json",
+      "packet_sha256": "e41f1fe54c8ffa6b1b02dca237b7d79091199f338a8b80e7ce48832c08f630ab"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13537",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13537.json",
+      "packet_sha256": "7782672807c1a3c939413d6e8c9b76559edc02c1116ae606db9595a32af6b4fa"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15589",
+      "role": "positive_joint_label",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15589.json",
+      "packet_sha256": "56ba80e661dd38155e061a78a98c3304257d97069c5ced7e3b67e8c94b19c927"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14873",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14873.json",
+      "packet_sha256": "e014351c80d657b6f6c1c02891dc140b6f97b720be5ca3b568561f1893b21283"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15763.json",
+      "packet_sha256": "2e65256742011d6c16460cf08585b600129c7a202b122f6ef6be281de630a0f8"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14583",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14583.json",
+      "packet_sha256": "9a14ebb12f308c04181f3150e8334aefdaf2b7a5987b57c576600acd3259193d"
+    },
+    {
+      "batch": "R04",
+      "task": "requests_7505",
+      "role": "negative_output_sample",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7505.json",
+      "packet_sha256": "817a3f0c27564271c4e5769701d62036f9d7e76949c3e5cd2c15518d634bbf68"
+    }
+  ],
+  "negative_samples": [
+    {
+      "batch": "R01",
+      "task": "fastapi_14371"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14246"
+    },
+    {
+      "batch": "R01",
+      "task": "requests_6644"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_13537"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14372"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9425"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_4075"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14794"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_15763"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6644"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3278"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14360"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14873"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14583"
+    },
+    {
+      "batch": "R04",
+      "task": "requests_7505"
+    }
+  ],
+  "original_labels_preserved": true
+}

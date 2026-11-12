@@ -1,0 +1,23 @@
+{
+  "version": "v0.4",
+  "date_beijing": "2026-11-10",
+  "review": "Outcome-informed Codex event review. Original labels remain unchanged.",
+  "scope": "All 13 branches carrying both the original common-check replay label and the original source-edited label. Other replay-labeled branches retain their original no-executable-source-change interpretation, cross-checked against returned source diffs and successful file-tool events.",
+  "event_index": "Zero-based index in /stages/<branch>/official_tool_events/events. Before/after refers to executable repository source; docstring-only edits do not change that state. Replays include invocation adaptations and diagnostic observations documented in the original label, not only literal command equality.",
+  "rows": [
+    {"batch":"R01","task":"rich_3052","branch":"control","source_edit_events":[7],"docstring_events":[6],"draft_check_events":[0],"revised_check_events":[],"denied_replay_events":[8],"note":"The original six assertions run on D. The later request is rejected after source editing."},
+    {"batch":"R02","task":"fastapi_13537","branch":"feedback","source_edit_events":[6],"draft_check_events":[],"revised_check_events":[7],"note":"First branch execution of the common target node follows the processed-keys edit; assertions remain unchanged."},
+    {"batch":"R03","task":"rich_3067","branch":"feedback","source_edit_events":[6],"draft_check_events":[],"revised_check_events":[7],"note":"Malformed edit requests 4 and 5 do not change source. The original URL check first runs after successful edit 6."},
+    {"batch":"R03","task":"requests_6592","branch":"control","source_edit_events":[2],"draft_check_events":[1],"revised_check_events":[3],"note":"The same alias assertions run before and after adding too_early."},
+    {"batch":"R03","task":"requests_6592","branch":"feedback","source_edit_events":[2],"draft_check_events":[1],"revised_check_events":[3],"note":"The same alias assertions run before and after adding too_early."},
+    {"batch":"R03","task":"fastapi_14482","branch":"control","source_edit_events":[4],"draft_check_events":[0],"revised_check_events":[5],"note":"The original arbitrary-type object and dict/foo assertions precede and follow the dump-mode edit."},
+    {"batch":"R03","task":"fastapi_14482","branch":"feedback","source_edit_events":[5],"draft_check_events":[4],"revised_check_events":[6],"note":"Printing and exception reporting adapt the invocation; the original object and assertions are retained. Event 7 adds a different object case and is not counted here."},
+    {"batch":"R04","task":"rich_3278","branch":"control","source_edit_events":[12],"draft_check_events":[1],"revised_check_events":[13],"note":"After correcting the wrapper, the ESC7/ESC8 check runs before and after editing. Event 14 extends coverage to ESC0/ESC? and is separate."},
+    {"batch":"R04","task":"rich_3278","branch":"feedback","source_edit_events":[14],"draft_check_events":[3],"revised_check_events":[],"note":"The adapted script runs before the final successful edit; no post-edit execution follows."},
+    {"batch":"R04","task":"fastapi_15763","branch":"feedback","source_edit_events":[5],"draft_check_events":[3],"revised_check_events":[],"note":"The empty-path reproduction fails at inclusion before editing. The earlier slash-path script is a different case."},
+    {"batch":"R04","task":"fastapi_14986","branch":"control","source_edit_events":[11,12],"draft_check_events":[0,3],"revised_check_events":[],"note":"The wrapper-corrected combined check fails on Swagger; the separate root-path subset then passes. Neither is rerun after the docs.py edits."},
+    {"batch":"R04","task":"rich_3718","branch":"control","source_edit_events":[5,6],"draft_check_events":[1,4],"revised_check_events":[7],"diagnostic_replay_events":[4,7],"note":"Event 1 runs the original whole-line assertion. Events 4 and 7 print the same rendered input before/after editing, revealing the title's own ANSI scope. The latter is diagnostic replay, not an unchanged-assertion pass."},
+    {"batch":"R04","task":"rich_3052","branch":"control","source_edit_events":[],"docstring_events":[5],"draft_check_events":[1,6],"revised_check_events":[],"note":"Both executions exercise D's executable logic; the intervening edit only adds a docstring."}
+  ],
+  "additional_docstring_branch": {"batch":"R03","task":"rich_3052","branch":"feedback","event":3,"note":"The original auxiliary-change label correctly records a docstring-only change. It is included in the full source-diff reconciliation, outside the original 32 source-edited labels."}
+}

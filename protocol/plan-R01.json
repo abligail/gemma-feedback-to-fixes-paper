@@ -1,0 +1,394 @@
+{
+  "id": "feedback-refinement-R01",
+  "question": "From the same natural draft and public check specification, does supplying its execution result improve final repair under identical continuation budgets?",
+  "source_reference": "Budget-Fit Single Agent V5 scriptVersionId355310852; shared-draft local mechanism experiment",
+  "protocol": "research/cycles/2026-10-14-feedback-refinement/protocol.md",
+  "task_source_plan": "research/cycles/2026-10-13-history-time-budget/plan-R01.json",
+  "tasks": [
+    {
+      "instance_id": "requests_7433",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "fastapi_14360",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "requests_7505",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "requests_6644",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_15800",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "rich_3469",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3067",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3278",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3506",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "httpx_3672",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14873",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14371",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_9753",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "requests_7309",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "rich_3043",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14459",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14978",
+      "environment": "research/cycles/2026-10-11-task-pool-alignment/environment-followup/environment.json"
+    },
+    {
+      "instance_id": "rich_3782",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_9555",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "requests_6592",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "rich_3535",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "fastapi_15763",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14303",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14986",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_14455",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "rich_3718",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_14372",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14794",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14361",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "rich_4075",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "requests_7427",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "requests_6589",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "requests_7205",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "rich_3675",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_13920",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3052",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3470",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "rich_3521",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "rich_3930",
+      "environment": "research/cycles/2026-10-11-task-pool-alignment/environment-followup/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14306",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "requests_6629",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "rich_3518",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14583",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14482",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "rich_3934",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    },
+    {
+      "instance_id": "fastapi_13786",
+      "environment": "research/programme-v3/environments/existing-overlay-next-controls/environment-py313.json"
+    },
+    {
+      "instance_id": "fastapi_13537",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "rich_3472",
+      "environment": "research/programme-v3/environments/python312-binding-v1/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14463",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_9425",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_14246",
+      "environment": "research/programme-v3/environments/online-resolved-controls-v1/assembled-v2/environment.json"
+    },
+    {
+      "instance_id": "fastapi_15589",
+      "environment": "configs/programme-v3/environment-company-py313-v1.json"
+    },
+    {
+      "instance_id": "fastapi_14953",
+      "environment": "research/cycles/2026-10-11-task-pool-alignment/environment/fastapi-environment.json"
+    },
+    {
+      "instance_id": "rich_2725",
+      "environment": "research/cycles/2026-10-09-path-selection/new16-environment/environment.json"
+    }
+  ],
+  "seeds": [
+    2026101421
+  ],
+  "draft_seed": 2026101401,
+  "checker_seed": 2026101411,
+  "concurrency": 8,
+  "base_url": "http://127.0.0.1:18003/v1",
+  "task_wall_timeout_seconds": 1500,
+  "probe_timeout_seconds": 30,
+  "context": {
+    "adk_cache": {
+      "enabled": true,
+      "min_tokens": 2048,
+      "ttl_seconds": 1800,
+      "cache_intervals": 10
+    },
+    "compaction": {
+      "enabled": true,
+      "compaction_interval": 5,
+      "overlap_size": 2,
+      "token_threshold": 14336,
+      "event_retention_size": 5
+    }
+  },
+  "runtime_versions": {
+    "wheelhouse": 30,
+    "swegemma": "0.2.11",
+    "adk-submission": "0.2.13"
+  },
+  "draft_arm": {
+    "id": "draft",
+    "submission_dir": "experiments/strategies/budget-fit-v5-feedback-refinement-v1/draft",
+    "eval": {
+      "max_time_minutes": 4,
+      "max_tool_calls": 16,
+      "max_turns": 40,
+      "command_timeout_seconds": 240
+    },
+    "model": {
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "top_k": null,
+      "max_output_tokens": 8192,
+      "thinking": true,
+      "thinking_budget": 4096,
+      "http_timeout_seconds": 240,
+      "context_tokens": 32768,
+      "max_model_calls": null,
+      "include_thoughts": true
+    },
+    "submission_files": [
+      "agent.yaml",
+      "configs/sampling.yaml",
+      "eval_config.yaml",
+      "prompts/system.md"
+    ]
+  },
+  "checker_arm": {
+    "id": "checker",
+    "submission_dir": "experiments/strategies/budget-fit-v5-feedback-refinement-v1/checker",
+    "eval": {
+      "max_time_minutes": 1,
+      "max_tool_calls": 3,
+      "max_turns": 12,
+      "command_timeout_seconds": 240
+    },
+    "model": {
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "top_k": null,
+      "max_output_tokens": 8192,
+      "thinking": true,
+      "thinking_budget": 4096,
+      "http_timeout_seconds": 240,
+      "context_tokens": 32768,
+      "max_model_calls": null,
+      "include_thoughts": true
+    },
+    "submission_files": [
+      "agent.yaml",
+      "configs/sampling.yaml",
+      "eval_config.yaml",
+      "prompts/system.md"
+    ]
+  },
+  "arms": [
+    {
+      "id": "control",
+      "submission_dir": "experiments/strategies/budget-fit-v5-feedback-refinement-v1/revision",
+      "eval": {
+        "max_time_minutes": 2.5,
+        "max_tool_calls": 8,
+        "max_turns": 28,
+        "command_timeout_seconds": 240
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "submission_files": [
+        "agent.yaml",
+        "configs/sampling.yaml",
+        "eval_config.yaml",
+        "prompts/system.md"
+      ]
+    },
+    {
+      "id": "feedback",
+      "submission_dir": "experiments/strategies/budget-fit-v5-feedback-refinement-v1/revision",
+      "eval": {
+        "max_time_minutes": 2.5,
+        "max_tool_calls": 8,
+        "max_turns": 28,
+        "command_timeout_seconds": 240
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "submission_files": [
+        "agent.yaml",
+        "configs/sampling.yaml",
+        "eval_config.yaml",
+        "prompts/system.md"
+      ]
+    }
+  ],
+  "frozen_at_utc": "2026-10-13T18:02:20.079093+00:00",
+  "scope": "R01 of the user-authorized continuous feedback-refinement research cycle; no Kaggle submission, paid service or external messaging.",
+  "analysis_notes": {
+    "independent_tasks": 54,
+    "task_order": "Exact order copied from history-time-budget-R01, including its two historically unknown tasks.",
+    "exposure": "All 54 tasks already exposed; no task selection based on this round's draft, check, or score.",
+    "planned_draft_sessions": 54,
+    "planned_checker_sessions": 54,
+    "planned_public_probe_opportunities": 54,
+    "planned_revision_sessions": 108,
+    "planned_scored_endpoints": 162,
+    "all_terminal_statuses_retained": true,
+    "shared_revision_configuration": true,
+    "result_field_injection": "The runner supplies the execution-result field inside problem_statement. Both revision arms use the identical prompt and all other public context.",
+    "per_path_reserved_activity_seconds": 480,
+    "per_path_reserved_ordinary_tool_opportunities": 28,
+    "per_path_reserved_model_turns": 80,
+    "unused_stage_budget_transfer": false,
+    "shared_physical_cost_counted_once": true,
+    "draft_scores_available_to_model": false,
+    "scoring_start": "Only after branch material and public behavior records are frozen.",
+    "primary_comparison": "All-task feedback minus control with paired gains/losses; draft-to-control and draft-to-feedback are secondary transitions.",
+    "technical_unknown_policy": "Retain separately; do not impute failure or relabel collection errors automatically as environment failures.",
+    "no_new_seed_on_failure": true,
+    "interpretation": "Common source in fresh sessions; not replayed conversation/process state, not an end-to-end V5 equivalence claim, and not proof of Kaggle 12-hour completion."
+  }
+}

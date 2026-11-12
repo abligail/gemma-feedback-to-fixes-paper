@@ -1,0 +1,45 @@
+{
+  "manuscript": "v0.3",
+  "original_review_sources_verified": 41,
+  "annotation_partitions_verified": 12,
+  "selected_public_packets_verified": 12,
+  "same_scope_counts_agree_with_reviewer_extraction": true,
+  "all_pair_transitions_agree_with_original_analysis": true,
+  "budget_sums_agree_with_fixed_plans": true,
+  "counterevidence_slots": 8,
+  "missing_endpoints": 28,
+  "normally_graded_empty_passes": 5,
+  "semantic_labels_independently_reverified": false,
+  "v03_posthoc_review": {
+    "source_branch_records": 32,
+    "source_categories": {
+      "removed_requested_draft_logic": 4,
+      "retained_code_revision": 24,
+      "docstring_only": 2,
+      "quote_syntax_repair": 1,
+      "temporary_edit_restored": 1
+    },
+    "source_categories_by_branch": {
+      "control": {
+        "retained_code_revision": 14,
+        "removed_requested_draft_logic": 1,
+        "quote_syntax_repair": 1,
+        "docstring_only": 1
+      },
+      "feedback": {
+        "removed_requested_draft_logic": 3,
+        "docstring_only": 1,
+        "retained_code_revision": 10,
+        "temporary_edit_restored": 1
+      }
+    },
+    "checks_reviewed": 42,
+    "positive_checks_reviewed": 26,
+    "negative_checks_sampled": 16,
+    "negative_sampling_seed": 2026110903,
+    "joint_label_disagreements": 0,
+    "category_disagreements": 0,
+    "unique_public_packets_verified": 63,
+    "independent_annotation_validation": false
+  }
+}

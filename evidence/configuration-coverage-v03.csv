@@ -1,0 +1,4 @@
+phase,batches,task_realizations,distinct_tasks,output_slots,supported_target_slots,counterevidence_slots
+Construction development,"[""R01"", ""R02""]",108,54,21,6,1
+Repeated final configuration,"[""R03"", ""R04""]",108,54,85,20,7
+All configurations (descriptive),"[""R01"", ""R02"", ""R03"", ""R04""]",216,54,106,26,8

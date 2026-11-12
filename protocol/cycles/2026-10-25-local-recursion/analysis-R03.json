@@ -1,0 +1,829 @@
+{
+  "batch": "R03",
+  "status": "completed",
+  "jobs": 285,
+  "independent_tasks": 95,
+  "repositories": 15,
+  "groups": {
+    "official54": {
+      "tasks": 54,
+      "pairs": 54,
+      "arms": {
+        "history5m": {
+          "jobs": 54,
+          "status_counts": {
+            "resolved": 25,
+            "scored_failed": 23,
+            "no_patch": 3,
+            "technical_error": 3
+          },
+          "outcome_counts": {
+            "resolved": 25,
+            "scored_failed": 23,
+            "no_patch": 3,
+            "technical_unknown": 3
+          },
+          "scored_jobs": 48,
+          "resolved_count": 25,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 14253.604,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 263.95562962962964
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": null,
+              "known_jobs": 0,
+              "unknown_jobs": 54,
+              "mean_known": null
+            },
+            "tool_calls": {
+              "known_sum": 1237,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 22.90740740740741
+            },
+            "model_calls": {
+              "known_sum": 1501,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 27.796296296296298
+            }
+          },
+          "usage": {
+            "available_jobs": 54,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 13700683,
+                "known_requests": 1552,
+                "unknown_requests": 7,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "completion_tokens": {
+                "known_subtotal": 479275,
+                "known_requests": 1552,
+                "unknown_requests": 7,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "total_tokens": {
+                "known_subtotal": 14179958,
+                "known_requests": 1552,
+                "unknown_requests": 7,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1552,
+                "unknown_requests": 7,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              }
+            }
+          },
+          "empty_final_patch_files": 3,
+          "missing_final_patch_files": 0
+        },
+        "local_flat_contextual": {
+          "jobs": 54,
+          "status_counts": {
+            "resolved": 19,
+            "scored_failed": 28,
+            "no_patch": 3,
+            "technical_error": 4
+          },
+          "outcome_counts": {
+            "resolved": 19,
+            "scored_failed": 28,
+            "no_patch": 3,
+            "technical_unknown": 4
+          },
+          "scored_jobs": 47,
+          "resolved_count": 19,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 15707.383,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 290.87746296296297
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": null,
+              "known_jobs": 0,
+              "unknown_jobs": 54,
+              "mean_known": null
+            },
+            "tool_calls": {
+              "known_sum": 1296,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 24.0
+            },
+            "model_calls": {
+              "known_sum": 1766,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 32.7037037037037
+            }
+          },
+          "usage": {
+            "available_jobs": 54,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 18689397,
+                "known_requests": 1770,
+                "unknown_requests": 77,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 16
+              },
+              "completion_tokens": {
+                "known_subtotal": 494082,
+                "known_requests": 1770,
+                "unknown_requests": 77,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 16
+              },
+              "total_tokens": {
+                "known_subtotal": 19183479,
+                "known_requests": 1770,
+                "unknown_requests": 77,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 16
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1770,
+                "unknown_requests": 77,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 16
+              }
+            }
+          },
+          "empty_final_patch_files": 4,
+          "missing_final_patch_files": 0
+        },
+        "local_nested_contextual": {
+          "jobs": 54,
+          "status_counts": {
+            "resolved": 22,
+            "scored_failed": 25,
+            "no_patch": 5,
+            "technical_error": 2
+          },
+          "outcome_counts": {
+            "resolved": 22,
+            "scored_failed": 25,
+            "no_patch": 5,
+            "technical_unknown": 2
+          },
+          "scored_jobs": 47,
+          "resolved_count": 22,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 16451.946,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 304.66566666666665
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": null,
+              "known_jobs": 0,
+              "unknown_jobs": 54,
+              "mean_known": null
+            },
+            "tool_calls": {
+              "known_sum": 1294,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 23.962962962962962
+            },
+            "model_calls": {
+              "known_sum": 1848,
+              "known_jobs": 54,
+              "unknown_jobs": 0,
+              "mean_known": 34.22222222222222
+            }
+          },
+          "usage": {
+            "available_jobs": 54,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 15493300,
+                "known_requests": 1850,
+                "unknown_requests": 37,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 15
+              },
+              "completion_tokens": {
+                "known_subtotal": 576496,
+                "known_requests": 1850,
+                "unknown_requests": 37,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 15
+              },
+              "total_tokens": {
+                "known_subtotal": 16069796,
+                "known_requests": 1850,
+                "unknown_requests": 37,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 15
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1850,
+                "unknown_requests": 37,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 15
+              }
+            }
+          },
+          "empty_final_patch_files": 6,
+          "missing_final_patch_files": 0
+        }
+      },
+      "comparisons": [
+        {
+          "reference": "history5m",
+          "candidate": "local_flat_contextual",
+          "planned_pairs": 54,
+          "normally_scored_pairs": 43,
+          "gains": [
+            "fastapi_15589"
+          ],
+          "losses": [
+            "fastapi_14360",
+            "requests_7205",
+            "rich_2725",
+            "rich_3278",
+            "rich_3718"
+          ],
+          "net_normal_gains": -4,
+          "confirmed_pass_counts_all": {
+            "history5m": 25,
+            "local_flat_contextual": 19
+          },
+          "normal_pair_task_mean_difference_pp": -9.30232558139535,
+          "exploratory_task_bootstrap_95pp": [
+            -20.930232558139537,
+            0.0
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 18,
+            "scored_failed -> scored_failed": 19,
+            "resolved -> scored_failed": 5,
+            "no_patch -> scored_failed": 3,
+            "scored_failed -> no_patch": 2,
+            "technical_unknown -> scored_failed": 1,
+            "technical_unknown -> technical_unknown": 2,
+            "scored_failed -> technical_unknown": 1,
+            "scored_failed -> resolved": 1,
+            "resolved -> no_patch": 1,
+            "resolved -> technical_unknown": 1
+          },
+          "unscored_pair_tasks": [
+            "fastapi_14371",
+            "fastapi_14459",
+            "fastapi_14583",
+            "fastapi_14978",
+            "fastapi_14986",
+            "fastapi_15800",
+            "requests_7505",
+            "rich_3067",
+            "rich_3469",
+            "rich_3521",
+            "rich_3930"
+          ]
+        },
+        {
+          "reference": "history5m",
+          "candidate": "local_nested_contextual",
+          "planned_pairs": 54,
+          "normally_scored_pairs": 44,
+          "gains": [
+            "fastapi_15589",
+            "fastapi_9425",
+            "rich_3506"
+          ],
+          "losses": [
+            "fastapi_9753",
+            "httpx_3672",
+            "requests_6592",
+            "requests_7205",
+            "requests_7433",
+            "requests_7505"
+          ],
+          "net_normal_gains": -3,
+          "confirmed_pass_counts_all": {
+            "history5m": 25,
+            "local_nested_contextual": 22
+          },
+          "normal_pair_task_mean_difference_pp": -6.818181818181818,
+          "exploratory_task_bootstrap_95pp": [
+            -20.454545454545457,
+            6.8181818181818175
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 19,
+            "scored_failed -> scored_failed": 16,
+            "scored_failed -> no_patch": 3,
+            "scored_failed -> technical_unknown": 1,
+            "no_patch -> scored_failed": 3,
+            "technical_unknown -> no_patch": 2,
+            "scored_failed -> resolved": 3,
+            "resolved -> scored_failed": 6,
+            "technical_unknown -> technical_unknown": 1
+          },
+          "unscored_pair_tasks": [
+            "fastapi_13920",
+            "fastapi_14306",
+            "fastapi_14371",
+            "fastapi_14583",
+            "fastapi_14978",
+            "fastapi_15800",
+            "rich_3469",
+            "rich_3472",
+            "rich_3521",
+            "rich_3930"
+          ]
+        },
+        {
+          "reference": "local_flat_contextual",
+          "candidate": "local_nested_contextual",
+          "planned_pairs": 54,
+          "normally_scored_pairs": 43,
+          "gains": [
+            "fastapi_14360",
+            "fastapi_9425",
+            "rich_2725",
+            "rich_3278",
+            "rich_3506",
+            "rich_3718"
+          ],
+          "losses": [
+            "fastapi_9753",
+            "httpx_3672",
+            "requests_6592",
+            "requests_7433"
+          ],
+          "net_normal_gains": 2,
+          "confirmed_pass_counts_all": {
+            "local_flat_contextual": 19,
+            "local_nested_contextual": 22
+          },
+          "normal_pair_task_mean_difference_pp": 4.651162790697675,
+          "exploratory_task_bootstrap_95pp": [
+            -9.30232558139535,
+            18.6046511627907
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 15,
+            "scored_failed -> scored_failed": 18,
+            "scored_failed -> no_patch": 3,
+            "scored_failed -> technical_unknown": 1,
+            "scored_failed -> resolved": 6,
+            "no_patch -> scored_failed": 2,
+            "technical_unknown -> no_patch": 1,
+            "technical_unknown -> scored_failed": 1,
+            "resolved -> scored_failed": 4,
+            "technical_unknown -> resolved": 1,
+            "no_patch -> no_patch": 1,
+            "technical_unknown -> technical_unknown": 1
+          },
+          "unscored_pair_tasks": [
+            "fastapi_13920",
+            "fastapi_14306",
+            "fastapi_14459",
+            "fastapi_14583",
+            "fastapi_14978",
+            "fastapi_14986",
+            "requests_7505",
+            "rich_3067",
+            "rich_3472",
+            "rich_3521",
+            "rich_3930"
+          ]
+        }
+      ]
+    },
+    "external41": {
+      "tasks": 41,
+      "pairs": 41,
+      "arms": {
+        "history5m": {
+          "jobs": 41,
+          "status_counts": {
+            "scored_failed": 18,
+            "resolved": 21,
+            "no_patch": 2
+          },
+          "outcome_counts": {
+            "scored_failed": 18,
+            "resolved": 21,
+            "no_patch": 2
+          },
+          "scored_jobs": 39,
+          "resolved_count": 21,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 8681.513,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 211.74421951219514
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": 7989.58,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 194.8678048780488
+            },
+            "tool_calls": {
+              "known_sum": 871,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 21.24390243902439
+            },
+            "model_calls": {
+              "known_sum": 1168,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 28.48780487804878
+            }
+          },
+          "usage": {
+            "available_jobs": 41,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 11048199,
+                "known_requests": 1204,
+                "unknown_requests": 6,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 6
+              },
+              "completion_tokens": {
+                "known_subtotal": 326709,
+                "known_requests": 1204,
+                "unknown_requests": 6,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 6
+              },
+              "total_tokens": {
+                "known_subtotal": 11374908,
+                "known_requests": 1204,
+                "unknown_requests": 6,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 6
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1204,
+                "unknown_requests": 6,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 6
+              }
+            }
+          },
+          "empty_final_patch_files": 2,
+          "missing_final_patch_files": 0
+        },
+        "local_flat_contextual": {
+          "jobs": 41,
+          "status_counts": {
+            "resolved": 23,
+            "no_patch": 3,
+            "scored_failed": 15
+          },
+          "outcome_counts": {
+            "resolved": 23,
+            "no_patch": 3,
+            "scored_failed": 15
+          },
+          "scored_jobs": 38,
+          "resolved_count": 23,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 8736.951000000001,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 213.09636585365857
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": 8085.142,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 197.19858536585366
+            },
+            "tool_calls": {
+              "known_sum": 959,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 23.390243902439025
+            },
+            "model_calls": {
+              "known_sum": 1278,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 31.170731707317074
+            }
+          },
+          "usage": {
+            "available_jobs": 41,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 12093187,
+                "known_requests": 1281,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 5
+              },
+              "completion_tokens": {
+                "known_subtotal": 311699,
+                "known_requests": 1281,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 5
+              },
+              "total_tokens": {
+                "known_subtotal": 12404886,
+                "known_requests": 1281,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 5
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1281,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 5
+              }
+            }
+          },
+          "empty_final_patch_files": 3,
+          "missing_final_patch_files": 0
+        },
+        "local_nested_contextual": {
+          "jobs": 41,
+          "status_counts": {
+            "scored_failed": 16,
+            "no_patch": 3,
+            "resolved": 21,
+            "technical_error": 1
+          },
+          "outcome_counts": {
+            "scored_failed": 16,
+            "no_patch": 3,
+            "resolved": 21,
+            "technical_unknown": 1
+          },
+          "scored_jobs": 37,
+          "resolved_count": 21,
+          "metrics": {
+            "job_elapsed_seconds": {
+              "known_sum": 9683.18,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 236.17512195121952
+            },
+            "agent_elapsed_seconds": {
+              "known_sum": 9034.055,
+              "known_jobs": 41,
+              "unknown_jobs": 0,
+              "mean_known": 220.34280487804878
+            },
+            "tool_calls": {
+              "known_sum": 991,
+              "known_jobs": 40,
+              "unknown_jobs": 1,
+              "mean_known": 24.775
+            },
+            "model_calls": {
+              "known_sum": 1458,
+              "known_jobs": 40,
+              "unknown_jobs": 1,
+              "mean_known": 36.45
+            }
+          },
+          "usage": {
+            "available_jobs": 41,
+            "tokens": {
+              "prompt_tokens": {
+                "known_subtotal": 12808726,
+                "known_requests": 1500,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "completion_tokens": {
+                "known_subtotal": 366522,
+                "known_requests": 1500,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "total_tokens": {
+                "known_subtotal": 13175248,
+                "known_requests": 1500,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              },
+              "cached_tokens": {
+                "known_subtotal": 0,
+                "known_requests": 1500,
+                "unknown_requests": 9,
+                "partial_subtotal": null,
+                "partial_requests": 0,
+                "complete_total": null,
+                "incomplete_jobs": 7
+              }
+            }
+          },
+          "empty_final_patch_files": 4,
+          "missing_final_patch_files": 0
+        }
+      },
+      "comparisons": [
+        {
+          "reference": "history5m",
+          "candidate": "local_flat_contextual",
+          "planned_pairs": 41,
+          "normally_scored_pairs": 36,
+          "gains": [
+            "django__django-17087",
+            "pytest-dev__pytest-10051",
+            "sphinx-doc__sphinx-8035"
+          ],
+          "losses": [
+            "django__django-13033",
+            "django__django-16899"
+          ],
+          "net_normal_gains": 1,
+          "confirmed_pass_counts_all": {
+            "history5m": 21,
+            "local_flat_contextual": 23
+          },
+          "normal_pair_task_mean_difference_pp": 2.7777777777777777,
+          "exploratory_task_bootstrap_95pp": [
+            -8.333333333333332,
+            13.88888888888889
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 19,
+            "scored_failed -> scored_failed": 12,
+            "resolved -> scored_failed": 2,
+            "scored_failed -> resolved": 3,
+            "scored_failed -> no_patch": 3,
+            "no_patch -> scored_failed": 1,
+            "no_patch -> resolved": 1
+          },
+          "unscored_pair_tasks": [
+            "mwaskom__seaborn-3069",
+            "pylint-dev__pylint-6386",
+            "pytest-dev__pytest-5840",
+            "sphinx-doc__sphinx-8265",
+            "sympy__sympy-23950"
+          ]
+        },
+        {
+          "reference": "history5m",
+          "candidate": "local_nested_contextual",
+          "planned_pairs": 41,
+          "normally_scored_pairs": 36,
+          "gains": [
+            "django__django-17087",
+            "sphinx-doc__sphinx-8035"
+          ],
+          "losses": [
+            "django__django-13033",
+            "scikit-learn__scikit-learn-10908"
+          ],
+          "net_normal_gains": 0,
+          "confirmed_pass_counts_all": {
+            "history5m": 21,
+            "local_nested_contextual": 21
+          },
+          "normal_pair_task_mean_difference_pp": 0.0,
+          "exploratory_task_bootstrap_95pp": [
+            -11.11111111111111,
+            11.11111111111111
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 18,
+            "scored_failed -> scored_failed": 14,
+            "resolved -> scored_failed": 2,
+            "scored_failed -> resolved": 2,
+            "scored_failed -> no_patch": 2,
+            "resolved -> no_patch": 1,
+            "no_patch -> technical_unknown": 1,
+            "no_patch -> resolved": 1
+          },
+          "unscored_pair_tasks": [
+            "mwaskom__seaborn-3069",
+            "psf__requests-1766",
+            "pytest-dev__pytest-10081",
+            "sphinx-doc__sphinx-8265",
+            "sympy__sympy-23950"
+          ]
+        },
+        {
+          "reference": "local_flat_contextual",
+          "candidate": "local_nested_contextual",
+          "planned_pairs": 41,
+          "normally_scored_pairs": 35,
+          "gains": [
+            "django__django-16899"
+          ],
+          "losses": [
+            "pytest-dev__pytest-10051",
+            "scikit-learn__scikit-learn-10908"
+          ],
+          "net_normal_gains": -1,
+          "confirmed_pass_counts_all": {
+            "local_flat_contextual": 23,
+            "local_nested_contextual": 21
+          },
+          "normal_pair_task_mean_difference_pp": -2.857142857142857,
+          "exploratory_task_bootstrap_95pp": [
+            -14.285714285714285,
+            5.714285714285714
+          ],
+          "all_transitions": {
+            "resolved -> resolved": 20,
+            "scored_failed -> scored_failed": 12,
+            "scored_failed -> resolved": 1,
+            "no_patch -> no_patch": 1,
+            "scored_failed -> no_patch": 1,
+            "no_patch -> scored_failed": 2,
+            "resolved -> scored_failed": 2,
+            "resolved -> no_patch": 1,
+            "scored_failed -> technical_unknown": 1
+          },
+          "unscored_pair_tasks": [
+            "mwaskom__seaborn-3069",
+            "psf__requests-1766",
+            "pylint-dev__pylint-6386",
+            "pytest-dev__pytest-10081",
+            "pytest-dev__pytest-5840",
+            "sphinx-doc__sphinx-8265"
+          ]
+        }
+      ]
+    }
+  },
+  "limits": [
+    "All tasks are exposed; batch-adaptive choices and repository dependence remain.",
+    "Official and external tasks are separate cohorts, never a Kaggle score forecast.",
+    "Unknown scores are not normal failures; empty patches with normal scores remain normal pairs.",
+    "Bootstrap resamples independent task IDs within normal-score pairs; no multiple-comparison correction.",
+    "Known job durations include grading and cleanup; token subtotals omit unknown usage rather than imputing zero."
+  ]
+}

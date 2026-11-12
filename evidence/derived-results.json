@@ -1,0 +1,2905 @@
+{
+  "schema_version": 3,
+  "manuscript_version": "v0.3",
+  "purpose": "Existing-evidence revision with separately recorded post-hoc Codex review; no new runs or grading",
+  "checking_official54_aligned": [
+    {
+      "batch": "R01",
+      "scope": "official54",
+      "tasks_per_arm": 54,
+      "v5_target_counterevidence": 17,
+      "v5_counterevidence_and_replay": 15,
+      "v5_confirmed_passes": 27,
+      "v5_technical_unknowns": 1,
+      "v1_target_counterevidence": 27,
+      "v1_counterevidence_and_replay": 20,
+      "v1_confirmed_passes": 25,
+      "v1_technical_unknowns": 3
+    },
+    {
+      "batch": "R02",
+      "scope": "official54",
+      "tasks_per_arm": 54,
+      "v5_target_counterevidence": 14,
+      "v5_counterevidence_and_replay": 11,
+      "v5_confirmed_passes": 23,
+      "v5_technical_unknowns": 2,
+      "v1_target_counterevidence": 29,
+      "v1_counterevidence_and_replay": 23,
+      "v1_confirmed_passes": 26,
+      "v1_technical_unknowns": 2
+    },
+    {
+      "batch": "R03",
+      "scope": "official54",
+      "tasks_per_arm": 54,
+      "v5_target_counterevidence": 15,
+      "v5_counterevidence_and_replay": 14,
+      "v5_confirmed_passes": 25,
+      "v5_technical_unknowns": 3,
+      "v1_target_counterevidence": 28,
+      "v1_counterevidence_and_replay": 25,
+      "v1_confirmed_passes": 26,
+      "v1_technical_unknowns": 3
+    }
+  ],
+  "checking_behavior": [
+    {
+      "batch": "R01",
+      "scope": "all83",
+      "arm": "v5",
+      "tasks": 83,
+      "pre_target_confirmed": 31,
+      "target_and_replay_confirmed": 26,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/0/arms/v5"
+    },
+    {
+      "batch": "R01",
+      "scope": "all83",
+      "arm": "trigger_probe_v1",
+      "tasks": 83,
+      "pre_target_confirmed": 45,
+      "target_and_replay_confirmed": 35,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/0/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R01",
+      "scope": "official54",
+      "arm": "v5",
+      "tasks": 54,
+      "pre_target_confirmed": 17,
+      "target_and_replay_confirmed": 15,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/1/arms/v5"
+    },
+    {
+      "batch": "R01",
+      "scope": "official54",
+      "arm": "trigger_probe_v1",
+      "tasks": 54,
+      "pre_target_confirmed": 27,
+      "target_and_replay_confirmed": 20,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/1/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R01",
+      "scope": "external29",
+      "arm": "v5",
+      "tasks": 29,
+      "pre_target_confirmed": 14,
+      "target_and_replay_confirmed": 11,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/2/arms/v5"
+    },
+    {
+      "batch": "R01",
+      "scope": "external29",
+      "arm": "trigger_probe_v1",
+      "tasks": 29,
+      "pre_target_confirmed": 18,
+      "target_and_replay_confirmed": 15,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "pointer": "/summaries/2/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R02",
+      "scope": "all95",
+      "arm": "v5",
+      "tasks": 95,
+      "pre_target_confirmed": 41,
+      "target_and_replay_confirmed": 28,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/0/arms/v5"
+    },
+    {
+      "batch": "R02",
+      "scope": "all95",
+      "arm": "trigger_probe_v1",
+      "tasks": 95,
+      "pre_target_confirmed": 59,
+      "target_and_replay_confirmed": 47,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/0/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R02",
+      "scope": "all95",
+      "arm": "trigger_reuse_v2",
+      "tasks": 95,
+      "pre_target_confirmed": 56,
+      "target_and_replay_confirmed": 43,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/0/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R02",
+      "scope": "official54",
+      "arm": "v5",
+      "tasks": 54,
+      "pre_target_confirmed": 14,
+      "target_and_replay_confirmed": 11,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/1/arms/v5"
+    },
+    {
+      "batch": "R02",
+      "scope": "official54",
+      "arm": "trigger_probe_v1",
+      "tasks": 54,
+      "pre_target_confirmed": 29,
+      "target_and_replay_confirmed": 23,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/1/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R02",
+      "scope": "official54",
+      "arm": "trigger_reuse_v2",
+      "tasks": 54,
+      "pre_target_confirmed": 28,
+      "target_and_replay_confirmed": 22,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/1/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R02",
+      "scope": "old_external29",
+      "arm": "v5",
+      "tasks": 29,
+      "pre_target_confirmed": 18,
+      "target_and_replay_confirmed": 12,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/2/arms/v5"
+    },
+    {
+      "batch": "R02",
+      "scope": "old_external29",
+      "arm": "trigger_probe_v1",
+      "tasks": 29,
+      "pre_target_confirmed": 20,
+      "target_and_replay_confirmed": 17,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/2/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R02",
+      "scope": "old_external29",
+      "arm": "trigger_reuse_v2",
+      "tasks": 29,
+      "pre_target_confirmed": 18,
+      "target_and_replay_confirmed": 13,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/2/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R02",
+      "scope": "new_scope12",
+      "arm": "v5",
+      "tasks": 12,
+      "pre_target_confirmed": 9,
+      "target_and_replay_confirmed": 5,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/3/arms/v5"
+    },
+    {
+      "batch": "R02",
+      "scope": "new_scope12",
+      "arm": "trigger_probe_v1",
+      "tasks": 12,
+      "pre_target_confirmed": 10,
+      "target_and_replay_confirmed": 7,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/3/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R02",
+      "scope": "new_scope12",
+      "arm": "trigger_reuse_v2",
+      "tasks": 12,
+      "pre_target_confirmed": 10,
+      "target_and_replay_confirmed": 8,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "pointer": "/summaries/3/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R03",
+      "scope": "all95",
+      "arm": "v5",
+      "tasks": 95,
+      "pre_target_confirmed": 39,
+      "target_and_replay_confirmed": 37,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/0/arms/v5"
+    },
+    {
+      "batch": "R03",
+      "scope": "all95",
+      "arm": "trigger_probe_v1",
+      "tasks": 95,
+      "pre_target_confirmed": 60,
+      "target_and_replay_confirmed": 53,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/0/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R03",
+      "scope": "all95",
+      "arm": "trigger_reuse_v2",
+      "tasks": 95,
+      "pre_target_confirmed": 56,
+      "target_and_replay_confirmed": 39,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/0/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R03",
+      "scope": "official54",
+      "arm": "v5",
+      "tasks": 54,
+      "pre_target_confirmed": 15,
+      "target_and_replay_confirmed": 14,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/1/arms/v5"
+    },
+    {
+      "batch": "R03",
+      "scope": "official54",
+      "arm": "trigger_probe_v1",
+      "tasks": 54,
+      "pre_target_confirmed": 28,
+      "target_and_replay_confirmed": 25,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/1/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R03",
+      "scope": "official54",
+      "arm": "trigger_reuse_v2",
+      "tasks": 54,
+      "pre_target_confirmed": 25,
+      "target_and_replay_confirmed": 18,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/1/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R03",
+      "scope": "old_external29",
+      "arm": "v5",
+      "tasks": 29,
+      "pre_target_confirmed": 14,
+      "target_and_replay_confirmed": 14,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/2/arms/v5"
+    },
+    {
+      "batch": "R03",
+      "scope": "old_external29",
+      "arm": "trigger_probe_v1",
+      "tasks": 29,
+      "pre_target_confirmed": 21,
+      "target_and_replay_confirmed": 18,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/2/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R03",
+      "scope": "old_external29",
+      "arm": "trigger_reuse_v2",
+      "tasks": 29,
+      "pre_target_confirmed": 20,
+      "target_and_replay_confirmed": 15,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/2/arms/trigger_reuse_v2"
+    },
+    {
+      "batch": "R03",
+      "scope": "new_scope12",
+      "arm": "v5",
+      "tasks": 12,
+      "pre_target_confirmed": 10,
+      "target_and_replay_confirmed": 9,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/3/arms/v5"
+    },
+    {
+      "batch": "R03",
+      "scope": "new_scope12",
+      "arm": "trigger_probe_v1",
+      "tasks": 12,
+      "pre_target_confirmed": 11,
+      "target_and_replay_confirmed": 10,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/3/arms/trigger_probe_v1"
+    },
+    {
+      "batch": "R03",
+      "scope": "new_scope12",
+      "arm": "trigger_reuse_v2",
+      "tasks": 12,
+      "pre_target_confirmed": 11,
+      "target_and_replay_confirmed": 6,
+      "source": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "pointer": "/summaries/3/arms/trigger_reuse_v2"
+    }
+  ],
+  "checking_outcomes": [
+    {
+      "scope": "official54",
+      "policy": "trigger_probe_v1",
+      "tasks": 54,
+      "repeats": 3,
+      "task_seed_pairs": 162,
+      "v5_passes": 75,
+      "policy_passes": 77,
+      "delta_pp": 1.2345679012345678,
+      "ci95_low_pp": -3.7037037037037033,
+      "ci95_high_pp": 6.172839506172839,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 143,
+        "reference_confirmed_resolved": 75,
+        "candidate_confirmed_resolved": 75,
+        "gains": 7,
+        "losses": 7
+      },
+      "unknown_score_bounds": {
+        "lower": -0.024691358024691357,
+        "upper": 0.06172839506172839,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 75,
+        "scored_failed": 72,
+        "no_patch": 9,
+        "technical_unknown": 6,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 77,
+        "scored_failed": 75,
+        "no_patch": 2,
+        "technical_unknown": 8,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/0"
+    },
+    {
+      "scope": "official54",
+      "policy": "trigger_reuse_v2",
+      "tasks": 54,
+      "repeats": 2,
+      "task_seed_pairs": 108,
+      "v5_passes": 48,
+      "policy_passes": 47,
+      "delta_pp": -0.9259259259259258,
+      "ci95_low_pp": -7.4074074074074066,
+      "ci95_high_pp": 5.555555555555555,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 93,
+        "reference_confirmed_resolved": 48,
+        "candidate_confirmed_resolved": 44,
+        "gains": 5,
+        "losses": 9
+      },
+      "unknown_score_bounds": {
+        "lower": -0.05555555555555555,
+        "upper": 0.027777777777777776,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 48,
+        "scored_failed": 47,
+        "no_patch": 8,
+        "technical_unknown": 5,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 47,
+        "scored_failed": 55,
+        "no_patch": 2,
+        "technical_unknown": 4,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/1"
+    },
+    {
+      "scope": "old_external29",
+      "policy": "trigger_probe_v1",
+      "tasks": 29,
+      "repeats": 3,
+      "task_seed_pairs": 87,
+      "v5_passes": 48,
+      "policy_passes": 47,
+      "delta_pp": -1.1494252873563218,
+      "ci95_low_pp": -9.195402298850574,
+      "ci95_high_pp": 8.045977011494251,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 78,
+        "reference_confirmed_resolved": 47,
+        "candidate_confirmed_resolved": 44,
+        "gains": 4,
+        "losses": 7
+      },
+      "unknown_score_bounds": {
+        "lower": -0.011494252873563218,
+        "upper": -0.011494252873563218,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 48,
+        "scored_failed": 33,
+        "no_patch": 6,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 47,
+        "scored_failed": 37,
+        "no_patch": 3,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/3"
+    },
+    {
+      "scope": "old_external29",
+      "policy": "trigger_reuse_v2",
+      "tasks": 29,
+      "repeats": 2,
+      "task_seed_pairs": 58,
+      "v5_passes": 33,
+      "policy_passes": 32,
+      "delta_pp": -1.7241379310344827,
+      "ci95_low_pp": -13.793103448275861,
+      "ci95_high_pp": 10.344827586206897,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 52,
+        "reference_confirmed_resolved": 32,
+        "candidate_confirmed_resolved": 30,
+        "gains": 2,
+        "losses": 4
+      },
+      "unknown_score_bounds": {
+        "lower": -0.017241379310344827,
+        "upper": -0.017241379310344827,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 33,
+        "scored_failed": 21,
+        "no_patch": 4,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 32,
+        "scored_failed": 24,
+        "no_patch": 2,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/4"
+    },
+    {
+      "scope": "new_scope12",
+      "policy": "trigger_probe_v1",
+      "tasks": 12,
+      "repeats": 2,
+      "task_seed_pairs": 24,
+      "v5_passes": 13,
+      "policy_passes": 14,
+      "delta_pp": 4.166666666666666,
+      "ci95_low_pp": 0.0,
+      "ci95_high_pp": 12.5,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 24,
+        "reference_confirmed_resolved": 13,
+        "candidate_confirmed_resolved": 14,
+        "gains": 1,
+        "losses": 0
+      },
+      "unknown_score_bounds": {
+        "lower": 0.041666666666666664,
+        "upper": 0.041666666666666664,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 13,
+        "scored_failed": 11,
+        "no_patch": 0,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 14,
+        "scored_failed": 10,
+        "no_patch": 0,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/6"
+    },
+    {
+      "scope": "new_scope12",
+      "policy": "trigger_reuse_v2",
+      "tasks": 12,
+      "repeats": 2,
+      "task_seed_pairs": 24,
+      "v5_passes": 13,
+      "policy_passes": 12,
+      "delta_pp": -4.166666666666666,
+      "ci95_low_pp": -16.666666666666664,
+      "ci95_high_pp": 8.333333333333332,
+      "normal_pair_sensitivity": {
+        "task_seed_pairs": 23,
+        "reference_confirmed_resolved": 12,
+        "candidate_confirmed_resolved": 12,
+        "gains": 1,
+        "losses": 1
+      },
+      "unknown_score_bounds": {
+        "lower": -0.041666666666666664,
+        "upper": -0.041666666666666664,
+        "note": "Technical/environment unknowns may resolve or fail; no_patch remains known without a delivered patch. Bounds are not confidence intervals."
+      },
+      "v5_outcomes": {
+        "resolved": 13,
+        "scored_failed": 11,
+        "no_patch": 0,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "policy_outcomes": {
+        "resolved": 12,
+        "scored_failed": 11,
+        "no_patch": 1,
+        "technical_unknown": 0,
+        "environment_failure": 0
+      },
+      "source": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "pointer": "/comparisons/7"
+    }
+  ],
+  "feedback_batches": [
+    {
+      "batch": "R01",
+      "fixed_tasks": 54,
+      "draft_passes": 21,
+      "control_passes": 21,
+      "feedback_passes": 19,
+      "draft_normal_failures": 31,
+      "draft_to_control": {
+        "normal_pairs": 52,
+        "gains": 0,
+        "losses": 0,
+        "delta_pp": 0,
+        "original_bootstrap_ci_pp": [
+          0.0,
+          0.0
+        ],
+        "pointer": "/comparisons/1"
+      },
+      "draft_to_feedback": {
+        "normal_pairs": 52,
+        "gains": 0,
+        "losses": 2,
+        "delta_pp": -3.8461538461538463,
+        "original_bootstrap_ci_pp": [
+          -9.615384615384617,
+          0.0
+        ],
+        "pointer": "/comparisons/2"
+      },
+      "control_to_feedback": {
+        "normal_pairs": 52,
+        "gains": 0,
+        "losses": 2,
+        "delta_pp": -3.8461538461538463,
+        "original_bootstrap_ci_pp": [
+          -9.615384615384617,
+          0.0
+        ],
+        "pointer": "/comparisons/0"
+      },
+      "output_slots": 9,
+      "supported_target_reached_slots": 3,
+      "counterevidence_slots": 0,
+      "official_statuses": {
+        "draft": {
+          "resolved": 21,
+          "scored_failed": 31,
+          "technical_error": 2
+        },
+        "control": {
+          "resolved": 21,
+          "scored_failed": 31,
+          "technical_error": 2
+        },
+        "feedback": {
+          "scored_failed": 33,
+          "resolved": 19,
+          "technical_error": 2
+        }
+      },
+      "unscored_by_arm": {
+        "draft": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "control": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "feedback": [
+          "fastapi_14978",
+          "rich_3930"
+        ]
+      },
+      "draft_seed": 2026101401,
+      "checker_seed": 2026101411,
+      "continuation_seed": 2026101421,
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json",
+      "coverage_source": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R01.json",
+      "plan_source": "research/cycles/2026-10-14-feedback-refinement/plan-R01.json",
+      "full_list_delta": -2,
+      "loose_missing_outcome_bounds_pp": [
+        -7.407407407407407,
+        0.0
+      ],
+      "reserved_seconds_per_path": 480
+    },
+    {
+      "batch": "R02",
+      "fixed_tasks": 54,
+      "draft_passes": 20,
+      "control_passes": 20,
+      "feedback_passes": 21,
+      "draft_normal_failures": 31,
+      "draft_to_control": {
+        "normal_pairs": 51,
+        "gains": 1,
+        "losses": 1,
+        "delta_pp": 0,
+        "original_bootstrap_ci_pp": [
+          -5.88235294117647,
+          5.88235294117647
+        ],
+        "pointer": "/comparisons/1"
+      },
+      "draft_to_feedback": {
+        "normal_pairs": 51,
+        "gains": 1,
+        "losses": 0,
+        "delta_pp": 1.9607843137254901,
+        "original_bootstrap_ci_pp": [
+          0.0,
+          5.88235294117647
+        ],
+        "pointer": "/comparisons/2"
+      },
+      "control_to_feedback": {
+        "normal_pairs": 51,
+        "gains": 2,
+        "losses": 1,
+        "delta_pp": 1.9607843137254901,
+        "original_bootstrap_ci_pp": [
+          -3.9215686274509802,
+          7.8431372549019605
+        ],
+        "pointer": "/comparisons/0"
+      },
+      "output_slots": 12,
+      "supported_target_reached_slots": 3,
+      "counterevidence_slots": 1,
+      "official_statuses": {
+        "draft": {
+          "scored_failed": 31,
+          "resolved": 20,
+          "technical_error": 3
+        },
+        "control": {
+          "resolved": 20,
+          "scored_failed": 31,
+          "technical_error": 3
+        },
+        "feedback": {
+          "scored_failed": 30,
+          "resolved": 21,
+          "technical_error": 3
+        }
+      },
+      "unscored_by_arm": {
+        "draft": [
+          "fastapi_14978",
+          "rich_3930",
+          "fastapi_13786"
+        ],
+        "control": [
+          "fastapi_14978",
+          "rich_3930",
+          "fastapi_13786"
+        ],
+        "feedback": [
+          "fastapi_14978",
+          "rich_3930",
+          "fastapi_13786"
+        ]
+      },
+      "draft_seed": 2026101402,
+      "checker_seed": 2026101412,
+      "continuation_seed": 2026101422,
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json",
+      "coverage_source": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R02.json",
+      "plan_source": "research/cycles/2026-10-14-feedback-refinement/plan-R02.json",
+      "full_list_delta": 1,
+      "loose_missing_outcome_bounds_pp": [
+        -3.7037037037037037,
+        7.407407407407407
+      ],
+      "reserved_seconds_per_path": 480
+    },
+    {
+      "batch": "R03",
+      "fixed_tasks": 54,
+      "draft_passes": 20,
+      "control_passes": 21,
+      "feedback_passes": 21,
+      "draft_normal_failures": 32,
+      "draft_to_control": {
+        "normal_pairs": 52,
+        "gains": 1,
+        "losses": 0,
+        "delta_pp": 1.9230769230769231,
+        "original_bootstrap_ci_pp": [
+          0.0,
+          5.769230769230769
+        ],
+        "pointer": "/comparisons/1"
+      },
+      "draft_to_feedback": {
+        "normal_pairs": 52,
+        "gains": 2,
+        "losses": 1,
+        "delta_pp": 1.9230769230769231,
+        "original_bootstrap_ci_pp": [
+          -3.8461538461538463,
+          9.615384615384617
+        ],
+        "pointer": "/comparisons/2"
+      },
+      "control_to_feedback": {
+        "normal_pairs": 52,
+        "gains": 1,
+        "losses": 1,
+        "delta_pp": 0,
+        "original_bootstrap_ci_pp": [
+          -5.769230769230769,
+          5.769230769230769
+        ],
+        "pointer": "/comparisons/0"
+      },
+      "output_slots": 40,
+      "supported_target_reached_slots": 9,
+      "counterevidence_slots": 3,
+      "official_statuses": {
+        "draft": {
+          "resolved": 20,
+          "scored_failed": 32,
+          "technical_error": 2
+        },
+        "control": {
+          "resolved": 21,
+          "scored_failed": 31,
+          "technical_error": 2
+        },
+        "feedback": {
+          "scored_failed": 31,
+          "resolved": 21,
+          "technical_error": 2
+        }
+      },
+      "unscored_by_arm": {
+        "draft": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "control": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "feedback": [
+          "fastapi_14978",
+          "rich_3930"
+        ]
+      },
+      "draft_seed": 2026101403,
+      "checker_seed": 2026101413,
+      "continuation_seed": 2026101423,
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json",
+      "coverage_source": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R03.json",
+      "plan_source": "research/cycles/2026-10-14-feedback-refinement/plan-R03.json",
+      "full_list_delta": 0,
+      "loose_missing_outcome_bounds_pp": [
+        -3.7037037037037037,
+        3.7037037037037037
+      ],
+      "reserved_seconds_per_path": 540
+    },
+    {
+      "batch": "R04",
+      "fixed_tasks": 54,
+      "draft_passes": 20,
+      "control_passes": 22,
+      "feedback_passes": 21,
+      "draft_normal_failures": 32,
+      "draft_to_control": {
+        "normal_pairs": 52,
+        "gains": 2,
+        "losses": 0,
+        "delta_pp": 3.8461538461538463,
+        "original_bootstrap_ci_pp": [
+          0.0,
+          9.615384615384617
+        ],
+        "pointer": "/comparisons/1"
+      },
+      "draft_to_feedback": {
+        "normal_pairs": 51,
+        "gains": 1,
+        "losses": 0,
+        "delta_pp": 1.9607843137254901,
+        "original_bootstrap_ci_pp": [
+          0.0,
+          5.88235294117647
+        ],
+        "pointer": "/comparisons/2"
+      },
+      "control_to_feedback": {
+        "normal_pairs": 51,
+        "gains": 1,
+        "losses": 2,
+        "delta_pp": -1.9607843137254901,
+        "original_bootstrap_ci_pp": [
+          -9.803921568627452,
+          3.9215686274509802
+        ],
+        "pointer": "/comparisons/0"
+      },
+      "output_slots": 45,
+      "supported_target_reached_slots": 11,
+      "counterevidence_slots": 4,
+      "official_statuses": {
+        "draft": {
+          "resolved": 20,
+          "scored_failed": 32,
+          "no_patch": 1,
+          "technical_error": 1
+        },
+        "control": {
+          "resolved": 22,
+          "scored_failed": 30,
+          "no_patch": 1,
+          "technical_error": 1
+        },
+        "feedback": {
+          "resolved": 21,
+          "scored_failed": 30,
+          "no_patch": 1,
+          "technical_error": 2
+        }
+      },
+      "unscored_by_arm": {
+        "draft": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "control": [
+          "fastapi_14978",
+          "rich_3930"
+        ],
+        "feedback": [
+          "fastapi_14978",
+          "fastapi_15763",
+          "rich_3930"
+        ]
+      },
+      "draft_seed": 2026101404,
+      "checker_seed": 2026101414,
+      "continuation_seed": 2026101424,
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json",
+      "coverage_source": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R04.json",
+      "plan_source": "research/cycles/2026-10-14-feedback-refinement/plan-R04.json",
+      "full_list_delta": -1,
+      "loose_missing_outcome_bounds_pp": [
+        -5.555555555555555,
+        3.7037037037037037
+      ],
+      "reserved_seconds_per_path": 540
+    }
+  ],
+  "stage_budgets": [
+    {
+      "batch": "R01",
+      "limits": {
+        "draft": [
+          240,
+          16,
+          40
+        ],
+        "checker": [
+          60,
+          3,
+          12
+        ],
+        "execution": [
+          30,
+          1,
+          0
+        ],
+        "continuation": [
+          150,
+          8,
+          28
+        ]
+      },
+      "per_path_total": [
+        480,
+        28,
+        80
+      ],
+      "context": {
+        "adk_cache": {
+          "enabled": true,
+          "min_tokens": 2048,
+          "ttl_seconds": 1800,
+          "cache_intervals": 10
+        },
+        "compaction": {
+          "enabled": true,
+          "compaction_interval": 5,
+          "overlap_size": 2,
+          "token_threshold": 14336,
+          "event_retention_size": 5
+        }
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "runtime_versions": {
+        "wheelhouse": 30,
+        "swegemma": "0.2.11",
+        "adk-submission": "0.2.13"
+      },
+      "concurrency": 8,
+      "source": "research/cycles/2026-10-14-feedback-refinement/plan-R01.json"
+    },
+    {
+      "batch": "R02",
+      "limits": {
+        "draft": [
+          240,
+          16,
+          40
+        ],
+        "checker": [
+          60,
+          1,
+          12
+        ],
+        "execution": [
+          30,
+          1,
+          0
+        ],
+        "continuation": [
+          150,
+          8,
+          28
+        ]
+      },
+      "per_path_total": [
+        480,
+        26,
+        80
+      ],
+      "context": {
+        "adk_cache": {
+          "enabled": true,
+          "min_tokens": 2048,
+          "ttl_seconds": 1800,
+          "cache_intervals": 10
+        },
+        "compaction": {
+          "enabled": true,
+          "compaction_interval": 5,
+          "overlap_size": 2,
+          "token_threshold": 14336,
+          "event_retention_size": 5
+        }
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "runtime_versions": {
+        "wheelhouse": 30,
+        "swegemma": "0.2.11",
+        "adk-submission": "0.2.13"
+      },
+      "concurrency": 8,
+      "source": "research/cycles/2026-10-14-feedback-refinement/plan-R02.json"
+    },
+    {
+      "batch": "R03",
+      "limits": {
+        "draft": [
+          240,
+          16,
+          40
+        ],
+        "checker": [
+          120,
+          1,
+          12
+        ],
+        "execution": [
+          30,
+          1,
+          0
+        ],
+        "continuation": [
+          150,
+          8,
+          28
+        ]
+      },
+      "per_path_total": [
+        540,
+        26,
+        80
+      ],
+      "context": {
+        "adk_cache": {
+          "enabled": true,
+          "min_tokens": 2048,
+          "ttl_seconds": 1800,
+          "cache_intervals": 10
+        },
+        "compaction": {
+          "enabled": true,
+          "compaction_interval": 5,
+          "overlap_size": 2,
+          "token_threshold": 14336,
+          "event_retention_size": 5
+        }
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "runtime_versions": {
+        "wheelhouse": 30,
+        "swegemma": "0.2.11",
+        "adk-submission": "0.2.13"
+      },
+      "concurrency": 8,
+      "source": "research/cycles/2026-10-14-feedback-refinement/plan-R03.json"
+    },
+    {
+      "batch": "R04",
+      "limits": {
+        "draft": [
+          240,
+          16,
+          40
+        ],
+        "checker": [
+          120,
+          1,
+          12
+        ],
+        "execution": [
+          30,
+          1,
+          0
+        ],
+        "continuation": [
+          150,
+          8,
+          28
+        ]
+      },
+      "per_path_total": [
+        540,
+        26,
+        80
+      ],
+      "context": {
+        "adk_cache": {
+          "enabled": true,
+          "min_tokens": 2048,
+          "ttl_seconds": 1800,
+          "cache_intervals": 10
+        },
+        "compaction": {
+          "enabled": true,
+          "compaction_interval": 5,
+          "overlap_size": 2,
+          "token_threshold": 14336,
+          "event_retention_size": 5
+        }
+      },
+      "model": {
+        "temperature": 0.2,
+        "top_p": 0.95,
+        "top_k": null,
+        "max_output_tokens": 8192,
+        "thinking": true,
+        "thinking_budget": 4096,
+        "http_timeout_seconds": 240,
+        "context_tokens": 32768,
+        "max_model_calls": null,
+        "include_thoughts": true
+      },
+      "runtime_versions": {
+        "wheelhouse": 30,
+        "swegemma": "0.2.11",
+        "adk-submission": "0.2.13"
+      },
+      "concurrency": 8,
+      "source": "research/cycles/2026-10-14-feedback-refinement/plan-R04.json"
+    }
+  ],
+  "counterevidence_descriptive_subgroup": [
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "resolved",
+      "C_actual_modification": "无修改",
+      "F_actual_modification": "源码已修改",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json",
+      "packet_sha256": "340e5ef4e312485b89ecdea6b80e8f6e2ec8f088524d1b577e0e2072441e30ac",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "resolved",
+      "C_actual_modification": "编辑失败",
+      "F_actual_modification": "源码已修改",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json",
+      "packet_sha256": "27549f0cd872198ec5b2d24ad123b692b24363c49983a906265e2c275110b53c",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "D": "scored_failed",
+      "C": "resolved",
+      "F": "resolved",
+      "C_actual_modification": "源码已修改",
+      "F_actual_modification": "源码已修改",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json",
+      "packet_sha256": "602194409a54738920dc9e4efcdd81ca75563effd09a0f793c30796812bbcd4e",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "scored_failed",
+      "C_actual_modification": "无修改",
+      "F_actual_modification": "编辑失败",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json",
+      "packet_sha256": "5ce2e86c51b7ee756f6f850c81b7d38059fa1ad804a36370ce8fdffaa36c0f41",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "scored_failed",
+      "C_actual_modification": "编辑失败",
+      "F_actual_modification": "编辑失败",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json",
+      "packet_sha256": "68f1edb30e0c9091448c951380e8dcc6e788d2bff6b817711636dfc5cc1cf970",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "scored_failed",
+      "C_actual_modification": "编辑失败",
+      "F_actual_modification": "编辑失败",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json",
+      "packet_sha256": "dbf81be5bde0bd7a36a686316c6f5363502a434ee6e863fec38c6e80c3921ac3",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "scored_failed",
+      "C_actual_modification": "无修改",
+      "F_actual_modification": "编辑失败",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json",
+      "packet_sha256": "e41f1fe54c8ffa6b1b02dca237b7d79091199f338a8b80e7ce48832c08f630ab",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15589",
+      "D": "scored_failed",
+      "C": "scored_failed",
+      "F": "scored_failed",
+      "C_actual_modification": "无修改",
+      "F_actual_modification": "无修改",
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15589.json",
+      "packet_sha256": "56ba80e661dd38155e061a78a98c3304257d97069c5ced7e3b67e8c94b19c927",
+      "analysis_kind": "post-hoc descriptive subgroup; original frozen labels"
+    }
+  ],
+  "coverage_realizations": {
+    "realizations": 216,
+    "distinct_tasks": 54,
+    "output_slots": 106,
+    "supported_target_reached_slots": 26,
+    "counterevidence_slots": 8
+  },
+  "annotation_partition_metadata": [
+    {
+      "batch": "R01",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-a.json",
+      "sha256": "3ee865d85ae907d7243b2b6220f2c43b2ca2369cb6ba0bd8bd67a13cbfa5a276",
+      "reviewer_identifier": "/root/competition",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T19:42:11.949646+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R01",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-b.json",
+      "sha256": "17547d736770d5b9d58aad90e69faf5ed2cba83fe290b86a8ca314d6735018eb",
+      "reviewer_identifier": "/root/literature",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T19:46:14.156834Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 18
+    },
+    {
+      "batch": "R01",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-c.json",
+      "sha256": "32b95bec3d4203d55be77c72ada61344d19d1ff85567ab019501b21a0c57de53",
+      "reviewer_identifier": "/root/runtime",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T19:45:27.502227+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R02",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-a.json",
+      "sha256": "4fd66b1e57e135150aac41a3f1b4735d9fe8b3672ce56b46b0f1b34a8fceb13c",
+      "reviewer_identifier": "/root/competition",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T21:32:06.091Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R02",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-b.json",
+      "sha256": "699f52373bae36cdbffd8337b135c4c183743fdbe0f738708272d0834f2cd618",
+      "reviewer_identifier": "/root/literature",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T21:35:24.294530+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 18
+    },
+    {
+      "batch": "R02",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-c.json",
+      "sha256": "73fab16fd2328a4943a0fee2bdd95141bd3ca8b4c80212042e91e4b6392c3ca0",
+      "reviewer_identifier": "/root/runtime",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T21:35:24.680605+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R03",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-a.json",
+      "sha256": "f1b5f841cc83aa140ccb06becc962cc0e8beeace5cb1c1e9ec1b86db21243da6",
+      "reviewer_identifier": "/root/competition",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T23:40:21.270Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R03",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-b.json",
+      "sha256": "3b2b58507a93d4286e5c1543545912253c27b40087ac189be26b64c6e59ea6dc",
+      "reviewer_identifier": "/root/literature",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T23:40:30Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 18
+    },
+    {
+      "batch": "R03",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-c.json",
+      "sha256": "1fe9e56aaf679b384e0bb6dbfe7cf9e14eb6dd04d57f998f326641494f1eb346",
+      "reviewer_identifier": "/root/runtime",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-13T23:39:43.129053+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R04",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-a.json",
+      "sha256": "1a9551ab33df250c06f6d8d4bea0c6106efa1d5c34871cbe3f500f8286c57e1d",
+      "reviewer_identifier": "/root/competition",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-14T01:40:16Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    },
+    {
+      "batch": "R04",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-b.json",
+      "sha256": "e59a7501692ecac887d19d5678f15157b348c69da53f8f56abaefa064e3193ca",
+      "reviewer_identifier": "/root/literature",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-14T01:45:31Z",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 18
+    },
+    {
+      "batch": "R04",
+      "file": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-c.json",
+      "sha256": "1f7f0b295aa50d2df609f085887628bfe92b457786932b2e6f0b864ac507697a",
+      "reviewer_identifier": "/root/runtime",
+      "score_results_accessed": false,
+      "reviewed_at_utc": "2026-10-14T01:41:15.293684+00:00",
+      "task_count": 18,
+      "row_reviewer_fields_missing": 0
+    }
+  ],
+  "selected_public_packet_identity_checks": [
+    {
+      "batch": "R01",
+      "task": "fastapi_14873",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14873",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9555",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "requests_6592",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7433",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15589",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "source_and_material_equal": true,
+      "returned_patch_hash_matches_grading": {
+        "draft": true,
+        "control": true,
+        "feedback": true
+      }
+    }
+  ],
+  "missing_endpoints": [
+    {
+      "batch": "R01",
+      "task": "fastapi_14978",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "d8088046d0eb7f5fdbc81f36f1cc95a289be35095e83aac3d671976e2f1d2eda",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14978",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "d8088046d0eb7f5fdbc81f36f1cc95a289be35095e83aac3d671976e2f1d2eda",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14978",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "d8088046d0eb7f5fdbc81f36f1cc95a289be35095e83aac3d671976e2f1d2eda",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3930",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "4ea75baccdfe6161b0fdeb55b25908a250b1e3f51e898ff4f5d8778559c7abfd",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3930",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "19da4ff5047b6ddb8c5662cae62dfbd1ba7f21ac5879fbcd65c73d59c767208e",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "rich_3930",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "4ea75baccdfe6161b0fdeb55b25908a250b1e3f51e898ff4f5d8778559c7abfd",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14978",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "1ac0560ff35cdb495d7b09d6acbd7ae2ada4592e48f1c712d361a8677767f2cc",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14978",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "1ac0560ff35cdb495d7b09d6acbd7ae2ada4592e48f1c712d361a8677767f2cc",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14978",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "1ac0560ff35cdb495d7b09d6acbd7ae2ada4592e48f1c712d361a8677767f2cc",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_3930",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "101e320a013bce1ed52d0fdb643d1a43557d34336c77906e85a874a950b62c60",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_3930",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "1e6ccc52aa2466b476c537d65e49f5721ff7f6200d6b9e5af65fe9e691da62c2",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "rich_3930",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "101e320a013bce1ed52d0fdb643d1a43557d34336c77906e85a874a950b62c60",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13786",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "28fb4c6ce2df511ecf616ead3ead847e7575b6c3f33a6917f00df835ef489e84",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13786",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "28fb4c6ce2df511ecf616ead3ead847e7575b6c3f33a6917f00df835ef489e84",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13786",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "5971820eb851a5372b7c014f7da10bd0ab04c4d31f072f5d6b9582f68cf40748",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14978",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "cc0ffa4e0de994ada13882514fb73457823609f02dcdd8d9e14959f345fdb12b",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14978",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "dacb19c475e40cc79821aa4874195b2a689d4dc57cf799a369121fa02ed00bd1",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R03",
+      "task": "fastapi_14978",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "88aed9049ff26b45766a6cdd5225edf88c64f397e136e7420ff07c3133c15dd0",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3930",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "7e33d66dde55d8c76e5795fff272ad989547c8a7cf33f85c9625efad9c6d50d2",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3930",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "7a328a30006764fa8f213a079fcd21ece0bcb5aecb98a46ade8d141a588044c7",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3930",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "7e33d66dde55d8c76e5795fff272ad989547c8a7cf33f85c9625efad9c6d50d2",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14978",
+      "arm": "draft",
+      "status": "no_patch",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14978",
+      "arm": "control",
+      "status": "no_patch",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14978",
+      "arm": "feedback",
+      "status": "no_patch",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15763",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "fe3ba7d5d75aa45d33af05efff95c7ec7c561c9deeb0430cd6c4ff70c5b925c2",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3930",
+      "arm": "draft",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "af0b856a755d1c7ce4425bf02489691b74557e4cd5fae1564bd1b589d17a2612",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3930",
+      "arm": "control",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "af0b856a755d1c7ce4425bf02489691b74557e4cd5fae1564bd1b589d17a2612",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3930",
+      "arm": "feedback",
+      "status": "technical_error",
+      "score_present": false,
+      "resolved": null,
+      "patch_nonempty": true,
+      "patch_available": true,
+      "patch_sha256": "af0b856a755d1c7ce4425bf02489691b74557e4cd5fae1564bd1b589d17a2612",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json"
+    }
+  ],
+  "normally_graded_empty_passes": [
+    {
+      "batch": "R01",
+      "task": "fastapi_14873",
+      "arm": "draft",
+      "status": "resolved",
+      "score_present": true,
+      "resolved": true,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_14873",
+      "arm": "control",
+      "status": "resolved",
+      "score_present": true,
+      "resolved": true,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14873",
+      "arm": "draft",
+      "status": "resolved",
+      "score_present": true,
+      "resolved": true,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14873",
+      "arm": "control",
+      "status": "resolved",
+      "score_present": true,
+      "resolved": true,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_14873",
+      "arm": "feedback",
+      "status": "resolved",
+      "score_present": true,
+      "resolved": true,
+      "patch_nonempty": false,
+      "patch_available": true,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json"
+    }
+  ],
+  "grading_accounting": {
+    "endpoints": 648,
+    "normal": 620,
+    "technical_unknown": 25,
+    "unscored_no_patch": 3
+  },
+  "configuration_coverage": [
+    {
+      "phase": "Construction development",
+      "batches": [
+        "R01",
+        "R02"
+      ],
+      "task_realizations": 108,
+      "distinct_tasks": 54,
+      "output_slots": 21,
+      "supported_target_slots": 6,
+      "counterevidence_slots": 1
+    },
+    {
+      "phase": "Repeated final configuration",
+      "batches": [
+        "R03",
+        "R04"
+      ],
+      "task_realizations": 108,
+      "distinct_tasks": 54,
+      "output_slots": 85,
+      "supported_target_slots": 20,
+      "counterevidence_slots": 7
+    },
+    {
+      "phase": "All configurations (descriptive)",
+      "batches": [
+        "R01",
+        "R02",
+        "R03",
+        "R04"
+      ],
+      "task_realizations": 216,
+      "distinct_tasks": 54,
+      "output_slots": 106,
+      "supported_target_slots": 26,
+      "counterevidence_slots": 8
+    }
+  ],
+  "feedback_responses": [
+    {
+      "batch": "R01",
+      "tasks_per_branch": 54,
+      "control": {
+        "same_check_reacquisition_label": 9,
+        "source_edited_label": 3,
+        "edit_failed_label": 3
+      },
+      "feedback": {
+        "same_check_reacquisition_label": 4,
+        "source_edited_label": 3,
+        "edit_failed_label": 3
+      }
+    },
+    {
+      "batch": "R02",
+      "tasks_per_branch": 54,
+      "control": {
+        "same_check_reacquisition_label": 11,
+        "source_edited_label": 3,
+        "edit_failed_label": 2
+      },
+      "feedback": {
+        "same_check_reacquisition_label": 5,
+        "source_edited_label": 2,
+        "edit_failed_label": 8
+      }
+    },
+    {
+      "batch": "R03",
+      "tasks_per_branch": 54,
+      "control": {
+        "same_check_reacquisition_label": 38,
+        "source_edited_label": 5,
+        "edit_failed_label": 7
+      },
+      "feedback": {
+        "same_check_reacquisition_label": 24,
+        "source_edited_label": 5,
+        "edit_failed_label": 5
+      }
+    },
+    {
+      "batch": "R04",
+      "tasks_per_branch": 54,
+      "control": {
+        "same_check_reacquisition_label": 44,
+        "source_edited_label": 6,
+        "edit_failed_label": 8
+      },
+      "feedback": {
+        "same_check_reacquisition_label": 20,
+        "source_edited_label": 5,
+        "edit_failed_label": 7
+      }
+    }
+  ],
+  "checker_delivery_diagnostics": [
+    {
+      "batch": "R01",
+      "check_availability": {
+        "no_final_response": 44,
+        "available": 9,
+        "invalid_final_json": 1
+      },
+      "checker_recorded_errors": {
+        "Agent exceeded session timeout (1 min)": 44,
+        "none": 10
+      },
+      "no_completed_model_call": 4,
+      "execution_exit_codes": {
+        "1": 4,
+        "0": 4,
+        "2": 1
+      },
+      "note": "Exit codes are mechanical observations, not semantic diagnostic labels.",
+      "source": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R01.json",
+      "source_sha256": "9ab6d7580f3cbf207fb1a46ecc04f313f11fc9e9e75ab8d60ac451eb0017de88"
+    },
+    {
+      "batch": "R02",
+      "check_availability": {
+        "no_final_response": 40,
+        "checker_declared_unavailable": 2,
+        "available": 12
+      },
+      "checker_recorded_errors": {
+        "Agent exceeded session timeout (1 min)": 42,
+        "none": 12
+      },
+      "no_completed_model_call": 18,
+      "execution_exit_codes": {
+        "2": 6,
+        "0": 4,
+        "1": 2
+      },
+      "note": "Exit codes are mechanical observations, not semantic diagnostic labels.",
+      "source": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R02.json",
+      "source_sha256": "e6343c8c16d1fbb4023ad31d4e60d10cefe8c42803aab347a29d87c8843bd959"
+    },
+    {
+      "batch": "R03",
+      "check_availability": {
+        "no_final_response": 11,
+        "available": 40,
+        "checker_declared_unavailable": 3
+      },
+      "checker_recorded_errors": {
+        "Agent exceeded session timeout (2 min)": 12,
+        "none": 40,
+        "Agent exceeded tool call budget (1 calls)": 2
+      },
+      "no_completed_model_call": 1,
+      "execution_exit_codes": {
+        "2": 21,
+        "0": 9,
+        "1": 10
+      },
+      "note": "Exit codes are mechanical observations, not semantic diagnostic labels.",
+      "source": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R03.json",
+      "source_sha256": "6ceb59564d528e890257cb954426afbf1e8fd86939cff14424104224f40b6cad"
+    },
+    {
+      "batch": "R04",
+      "check_availability": {
+        "available": 45,
+        "checker_declared_unavailable": 5,
+        "no_final_response": 4
+      },
+      "checker_recorded_errors": {
+        "none": 43,
+        "Agent exceeded tool call budget (1 calls)": 5,
+        "Agent exceeded session timeout (2 min)": 6
+      },
+      "no_completed_model_call": 0,
+      "execution_exit_codes": {
+        "1": 13,
+        "2": 17,
+        "0": 15
+      },
+      "note": "Exit codes are mechanical observations, not semantic diagnostic labels.",
+      "source": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R04.json",
+      "source_sha256": "72e1256d6daefd4fecf7ea6bdd959b30dcf1525a9d6ed2dc5c64ad090dab1fd9"
+    }
+  ],
+  "all_normal_cf_discordances": [
+    {
+      "batch": "R01",
+      "task": "requests_7433",
+      "scores": {
+        "draft": "resolved",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "仅检查或辅助文件改变",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R01",
+      "task": "fastapi_9555",
+      "scores": {
+        "draft": "resolved",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "未知",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "仅检查或辅助文件改变",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "requests_7433",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "源码已修改",
+        "feedback": "仅检查或辅助文件改变"
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_9555",
+      "scores": {
+        "draft": "resolved",
+        "control": "scored_failed",
+        "feedback": "resolved"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "未知",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "源码已修改",
+        "feedback": "仅检查或辅助文件改变"
+      }
+    },
+    {
+      "batch": "R02",
+      "task": "fastapi_13537",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "resolved"
+      },
+      "common_availability": "执行且可用",
+      "common_semantics": "公开反证",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "无修改",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "requests_7433",
+      "scores": {
+        "draft": "resolved",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "仅检查或辅助文件改变",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R03",
+      "task": "rich_3067",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "resolved"
+      },
+      "common_availability": "执行且可用",
+      "common_semantics": "公开反证",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "编辑失败",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3067",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "不可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "源码已修改",
+        "feedback": "源码已修改"
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3718",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "resolved",
+        "feedback": "scored_failed"
+      },
+      "common_availability": "执行且可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "源码已修改",
+        "feedback": "编辑失败"
+      }
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_14361",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "resolved"
+      },
+      "common_availability": "执行且可用",
+      "common_semantics": "无诊断力",
+      "same_cf_patch": false,
+      "source_change_labels": {
+        "control": "编辑失败",
+        "feedback": "源码已修改"
+      }
+    }
+  ],
+  "budget_rejected_feedback_edit_slots": [
+    {
+      "batch": "R03",
+      "task": "fastapi_14986",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "scored_failed"
+      },
+      "source_change_labels": {
+        "control": "无修改",
+        "feedback": "编辑失败"
+      },
+      "feedback_patch_equals_draft": true,
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json",
+      "packet_sha256": "5ce2e86c51b7ee756f6f850c81b7d38059fa1ad804a36370ce8fdffaa36c0f41",
+      "budget_rejected_feedback_edit_requests": [
+        {
+          "event_pointer": "/stages/feedback/official_tool_events/events/9",
+          "wire_pointer": "/steps/11",
+          "filepath": "fastapi/applications.py",
+          "elapsed_seconds": 91.75433683395386,
+          "nominal_seconds_remaining": 58.24566316604614,
+          "rejection": "Tool call budget exhausted (8 calls)",
+          "requested_old_string_sha256": "692137d9cb505575ad791b54d1228e9c47afd62efb2d315341e8e12169a55774",
+          "requested_new_string_sha256": "15d20f18d9310059aa2ae598d3dda895f061d211651ced7c8790947b2a4d397f"
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_15800",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "scored_failed"
+      },
+      "source_change_labels": {
+        "control": "编辑失败",
+        "feedback": "编辑失败"
+      },
+      "feedback_patch_equals_draft": true,
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json",
+      "packet_sha256": "68f1edb30e0c9091448c951380e8dcc6e788d2bff6b817711636dfc5cc1cf970",
+      "budget_rejected_feedback_edit_requests": [
+        {
+          "event_pointer": "/stages/feedback/official_tool_events/events/9",
+          "wire_pointer": "/steps/11",
+          "filepath": "fastapi/applications.py",
+          "elapsed_seconds": 119.9490475654602,
+          "nominal_seconds_remaining": 30.050952434539795,
+          "rejection": "Tool call budget exhausted (8 calls)",
+          "requested_old_string_sha256": "f0b8567951eb04afdb4805ece2b5e91c35f020146f37dab292fdad112c4366fd",
+          "requested_new_string_sha256": "1937743ea94e214d69b095cba688498e1aba3e2f6caecf76612115108d37d672"
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "rich_3518",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "scored_failed"
+      },
+      "source_change_labels": {
+        "control": "编辑失败",
+        "feedback": "编辑失败"
+      },
+      "feedback_patch_equals_draft": true,
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json",
+      "packet_sha256": "dbf81be5bde0bd7a36a686316c6f5363502a434ee6e863fec38c6e80c3921ac3",
+      "budget_rejected_feedback_edit_requests": [
+        {
+          "event_pointer": "/stages/feedback/official_tool_events/events/8",
+          "wire_pointer": "/steps/10",
+          "filepath": "rich/table.py",
+          "elapsed_seconds": 71.53225588798523,
+          "nominal_seconds_remaining": 78.46774411201477,
+          "rejection": "Tool call budget exhausted (8 calls)",
+          "requested_old_string_sha256": "057d106dc1a80fe8ebb4bfd2a43ab58f800636c10f031b4cf50e964a3a1ab6b1",
+          "requested_new_string_sha256": "b7a73c345d3f2391b9bb4d5444784f9627543e51433875d1aa7ef5b0e6598013"
+        },
+        {
+          "event_pointer": "/stages/feedback/official_tool_events/events/11",
+          "wire_pointer": "/steps/13",
+          "filepath": "rich/table.py",
+          "elapsed_seconds": 113.71769690513611,
+          "nominal_seconds_remaining": 36.28230309486389,
+          "rejection": "Tool call budget exhausted (8 calls)",
+          "requested_old_string_sha256": "057d106dc1a80fe8ebb4bfd2a43ab58f800636c10f031b4cf50e964a3a1ab6b1",
+          "requested_new_string_sha256": "b7a73c345d3f2391b9bb4d5444784f9627543e51433875d1aa7ef5b0e6598013"
+        }
+      ]
+    },
+    {
+      "batch": "R04",
+      "task": "fastapi_13786",
+      "scores": {
+        "draft": "scored_failed",
+        "control": "scored_failed",
+        "feedback": "scored_failed"
+      },
+      "source_change_labels": {
+        "control": "无修改",
+        "feedback": "编辑失败"
+      },
+      "feedback_patch_equals_draft": true,
+      "packet_path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json",
+      "packet_sha256": "e41f1fe54c8ffa6b1b02dca237b7d79091199f338a8b80e7ce48832c08f630ab",
+      "budget_rejected_feedback_edit_requests": [
+        {
+          "event_pointer": "/stages/feedback/official_tool_events/events/9",
+          "wire_pointer": "/steps/11",
+          "filepath": "fastapi/security/api_key.py",
+          "elapsed_seconds": 91.3032078742981,
+          "nominal_seconds_remaining": 58.696792125701904,
+          "rejection": "Tool call budget exhausted (8 calls)",
+          "requested_old_string_sha256": "deea705f14847450456e7f3d0731fea2914c86ec6c05ee91a51ecd87a9ba31b1",
+          "requested_new_string_sha256": "4831701cec248c2ad6d9140b8fb10e049be6d5aa6d7c7a939cf406c2c0b07044"
+        }
+      ]
+    }
+  ],
+  "revision_review_summary": {
+    "source_branch_records": 32,
+    "source_categories": {
+      "removed_requested_draft_logic": 4,
+      "retained_code_revision": 24,
+      "docstring_only": 2,
+      "quote_syntax_repair": 1,
+      "temporary_edit_restored": 1
+    },
+    "source_categories_by_branch": {
+      "control": {
+        "retained_code_revision": 14,
+        "removed_requested_draft_logic": 1,
+        "quote_syntax_repair": 1,
+        "docstring_only": 1
+      },
+      "feedback": {
+        "removed_requested_draft_logic": 3,
+        "docstring_only": 1,
+        "retained_code_revision": 10,
+        "temporary_edit_restored": 1
+      }
+    },
+    "checks_reviewed": 42,
+    "positive_checks_reviewed": 26,
+    "negative_checks_sampled": 16,
+    "negative_sampling_seed": 2026110903,
+    "joint_label_disagreements": 0,
+    "category_disagreements": 0,
+    "unique_public_packets_verified": 63,
+    "independent_annotation_validation": false
+  },
+  "posthoc_additions": [
+    "Common-counterevidence subgroup outcomes using original frozen annotations.",
+    "Loose all-list missing-result bounds; these are not confidence intervals.",
+    "Same-scope figure and draft-transition extraction from original counts.",
+    "Complete C/F behavior and discordance splits from original frozen labels.",
+    "Outcome-informed Codex review of all 32 source-edited branches and 42 fixed-scope checks."
+  ],
+  "notes": [
+    "Exposed tasks; the two studies overlap. Realizations are not independent tasks.",
+    "A intervals retain all repeats per task and come from the original exploratory analysis.",
+    "B intervals condition on two normal scores, including scored empty patches.",
+    "B configurations evolve; no pooled effect of four repeats of one policy.",
+    "Original semantic labels are reused; the new Codex review is not independent annotation validation.",
+    "Source records include public packets stored locally, not a public reproducibility release."
+  ],
+  "sources": [
+    {
+      "path": "paper/feedback-to-fixes/evidence/revision-review-scope-v03.json",
+      "sha256": "727dad2f5a0700fe462a9f8de2f02993b10bb478eae5ce9b56c21ec98189f042"
+    },
+    {
+      "path": "paper/feedback-to-fixes/evidence/review-judgments-v03.json",
+      "sha256": "d6571843d18ad966d8bc7d85b745712e25a3f941bd945ab3f4e7f6026b63d6d6"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/analysis-R01.json",
+      "sha256": "64431197a4d0e0406c739452f9195c393578bcd35d630d9decfedee553040796"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-freeze-R01.json",
+      "sha256": "4b48474021d07bbb4515f0ef33db1c831cfa1604d194290e413ab6244a9c6e58"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-a.json",
+      "sha256": "3ee865d85ae907d7243b2b6220f2c43b2ca2369cb6ba0bd8bd67a13cbfa5a276"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-b.json",
+      "sha256": "17547d736770d5b9d58aad90e69faf5ed2cba83fe290b86a8ca314d6735018eb"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R01-part-c.json",
+      "sha256": "32b95bec3d4203d55be77c72ada61344d19d1ff85567ab019501b21a0c57de53"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R01.json",
+      "sha256": "7215ee1723bb8daeb1917f62a875c57eb580a296701442fe2475e865d9361fbb"
+    },
+    {
+      "path": "paper/feedback-to-fixes/review/reviewer-data-v02-20261109.json",
+      "sha256": "386289e76419cfa8368a2ebd45f9df45153a5ac2231342b974befd8f13294ff0"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R01.json",
+      "sha256": "9ab6d7580f3cbf207fb1a46ecc04f313f11fc9e9e75ab8d60ac451eb0017de88"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/analysis-R02.json",
+      "sha256": "5cdc242edba2c2c56637399c4837697b6d8d3ac97f037ba42f33fd57c7b77b28"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-freeze-R02.json",
+      "sha256": "09573310a6cfee166ea2d16c5bc4429fb2d537ceebc2253807397c0915b6840b"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-a.json",
+      "sha256": "4fd66b1e57e135150aac41a3f1b4735d9fe8b3672ce56b46b0f1b34a8fceb13c"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-b.json",
+      "sha256": "699f52373bae36cdbffd8337b135c4c183743fdbe0f738708272d0834f2cd618"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R02-part-c.json",
+      "sha256": "73fab16fd2328a4943a0fee2bdd95141bd3ca8b4c80212042e91e4b6392c3ca0"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R02.json",
+      "sha256": "b5ff03008a82867b4a5ad015ea67ad917573c17c26cef764850a8f775141492d"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R02.json",
+      "sha256": "e6343c8c16d1fbb4023ad31d4e60d10cefe8c42803aab347a29d87c8843bd959"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13537.json",
+      "sha256": "340e5ef4e312485b89ecdea6b80e8f6e2ec8f088524d1b577e0e2072441e30ac"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/analysis-R03.json",
+      "sha256": "7e0e0eaa061bc981be37648128a65ffe62bf4cd6006da08e1b173694175097ab"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-freeze-R03.json",
+      "sha256": "2d2fc2cadc4acf074d4abb9f8ca6ad8fd2f7224b5302e7567969c0ab4506664f"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-a.json",
+      "sha256": "f1b5f841cc83aa140ccb06becc962cc0e8beeace5cb1c1e9ec1b86db21243da6"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-b.json",
+      "sha256": "3b2b58507a93d4286e5c1543545912253c27b40087ac189be26b64c6e59ea6dc"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R03-part-c.json",
+      "sha256": "1fe9e56aaf679b384e0bb6dbfe7cf9e14eb6dd04d57f998f326641494f1eb346"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R03.json",
+      "sha256": "0290445721b24153758b09cfce746d064c6d0f945c9a68ea73cb595f2e3b65b4"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R03.json",
+      "sha256": "6ceb59564d528e890257cb954426afbf1e8fd86939cff14424104224f40b6cad"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3067.json",
+      "sha256": "27549f0cd872198ec5b2d24ad123b692b24363c49983a906265e2c275110b53c"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6592.json",
+      "sha256": "602194409a54738920dc9e4efcdd81ca75563effd09a0f793c30796812bbcd4e"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14986.json",
+      "sha256": "5ce2e86c51b7ee756f6f850c81b7d38059fa1ad804a36370ce8fdffaa36c0f41"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/analysis-R04.json",
+      "sha256": "5a3bccfa7daada97d7cccd3222d0c2cb527d6b1a0b90d16b85c4a9b784c66b97"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-freeze-R04.json",
+      "sha256": "fe46fb2ac1d8e0b53f57f4ef9bdf916ada9dec23485461735ac22e1c10d5d396"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-a.json",
+      "sha256": "1a9551ab33df250c06f6d8d4bea0c6106efa1d5c34871cbe3f500f8286c57e1d"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-b.json",
+      "sha256": "e59a7501692ecac887d19d5678f15157b348c69da53f8f56abaefa064e3193ca"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-R04-part-c.json",
+      "sha256": "1f7f0b295aa50d2df609f085887628bfe92b457786932b2e6f0b864ac507697a"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/behavior-summary-R04.json",
+      "sha256": "21d4d4b788093862bdc368a3a215ec40461c4e4c990ade9bcf77dd5b45de3680"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/checker-diagnostics-R04.json",
+      "sha256": "72e1256d6daefd4fecf7ea6bdd959b30dcf1525a9d6ed2dc5c64ad090dab1fd9"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15800.json",
+      "sha256": "68f1edb30e0c9091448c951380e8dcc6e788d2bff6b817711636dfc5cc1cf970"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3518.json",
+      "sha256": "dbf81be5bde0bd7a36a686316c6f5363502a434ee6e863fec38c6e80c3921ac3"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13786.json",
+      "sha256": "e41f1fe54c8ffa6b1b02dca237b7d79091199f338a8b80e7ce48832c08f630ab"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15589.json",
+      "sha256": "56ba80e661dd38155e061a78a98c3304257d97069c5ced7e3b67e8c94b19c927"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_7433.json",
+      "sha256": "b99b85fc21986d7e08709d1cf1935078249f97b43155482e9b0fde2580abfe02"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_9555.json",
+      "sha256": "8471084fdafd45cd99f9f7ef42eb7189504e395003c1d5dccb7f5252d933c87c"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14794.json",
+      "sha256": "2f159ac40f72d873faac850be3d0655cc96fbcb83624076095eb3c592f77c192"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3052.json",
+      "sha256": "f6ee1fa11a9c8167e8ee32270d1e47d81fc77575dc766dbdeb092f7ffb81e6c8"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/rich_3930.json",
+      "sha256": "c4536210673e2a89c49d42eeb376d09b73ec04cbbe11b8008505baedc624d28b"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_7433.json",
+      "sha256": "2d3c8cc5540cb7f716b1fcce0ade865441410f8b52b01be24f9743e51569563d"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9555.json",
+      "sha256": "1d8d96e9690a171e9e1f8e43a4185a50862f6745670ffaec78010c92d1a4c1af"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_3930.json",
+      "sha256": "ad772dd9a787b0f2f52f1a4d54aa4d9ecdd2485064832ee8199778d0b04b37da"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_13786.json",
+      "sha256": "8dd62426dfe56ce4e491529ebbbc214351cf1f5b298211cb36104033f02e2893"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7433.json",
+      "sha256": "17a1dcef8753ec9cba7055562debac64882a7b2c70c0eb207601336112b18b68"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3469.json",
+      "sha256": "f4c89c028ff664b31aaf95eca7a6ead2d7918df864886a24bd65a0e7a003d485"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/httpx_3672.json",
+      "sha256": "674e791c01931d846fa007b268455ec29bbee7f44e3306b7eaadd3de51abb8e9"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3535.json",
+      "sha256": "965c4737867fdf56f9bd62bb7a1d7e7d68afc4f0cdf2aeeb8f861af8ffb1fb6f"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14482.json",
+      "sha256": "0b44427dc8580e035b2b2f8eb2df830419618e24029e8e424af2166098314bbf"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_13786.json",
+      "sha256": "2e501d834720f0184d9c081aa99d9eb00695a0455c96dbbd0930bba1426dd897"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3067.json",
+      "sha256": "ec504e31fe0133637086798df6a0544ce62a95c4e70b5de1b13628f23eb9c70f"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3278.json",
+      "sha256": "0a6e91be4b8ed7a793c36eb7bb3c61cfb0eade780aacb774c867c348f9ad756c"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3506.json",
+      "sha256": "d792ddb26ac7f8a48874c6f12995228a8b99f7ec493af388c7c109d91b2f84ca"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_15763.json",
+      "sha256": "2e65256742011d6c16460cf08585b600129c7a202b122f6ef6be281de630a0f8"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14986.json",
+      "sha256": "5051d45286b3ee5ba6a213b29fe3cdcb52aa3319cf284e2e229cda8fce4b5829"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3718.json",
+      "sha256": "1b79da90adf7cd3db29a23f9b00ae76097b96d053965614e2c96362dbf39135f"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14361.json",
+      "sha256": "0201762cadb7e10e83254ee3cdd05824e702969e3cad41aca9b992be045290be"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13920.json",
+      "sha256": "fdc133478b03a3558b75c826ca2aaee169e6c1dda0dd01c4bc630c9e72aebc38"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3052.json",
+      "sha256": "5c36d85591cc2b89918b1447ba6dcb15a54ca59305575a486769e3ff4460f37d"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6592.json",
+      "sha256": "109095876e6aa40f28797c9be328bbae3e5516efc1234377749ec94d2dd9f56d"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14953.json",
+      "sha256": "a385ca649ba6cdb6f0e7c4d2613dff3ab1da2d4474005c9205c0d78fd1bca9d5"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14371.json",
+      "sha256": "2639dcca2cfe9fe3025afd64ec6fa2148f644893698aa99103d96170da89d40d"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14246.json",
+      "sha256": "744d7e589faa0e0ae094464f39ce7ac066915591ada9159ed776c8a972e7e91c"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/requests_6644.json",
+      "sha256": "b2865c6b4ad7996afefaec329a8f23338c8d0ae4606c945fce8804d914b629e9"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_13537.json",
+      "sha256": "47818b7e188c03ea3b0bedfb80e0d7d8fc0f08c0359f312229839e7e91e2f311"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/requests_6592.json",
+      "sha256": "3fa24f6d4cdcf9d30ffdd35d3e6593897c93ab5b8f481c6d8ca0a0fb9092caab"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14303.json",
+      "sha256": "115336b93eee85dff604046da33780ab6ecf521f3ec0574199dc39ea0685a579"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14372.json",
+      "sha256": "0f62266b09a51f79851997939afbf1aecd9ff01ebeac062aab75904c3f38ea5e"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_9425.json",
+      "sha256": "7e5ea105f1355232bb4e5b6bb45283470ef1753d0624bac0be7a9b4fa170ab58"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/rich_4075.json",
+      "sha256": "57fcf1c3732c5058667de9a0cf055ac466b40987a1b052298f2149e2e6c12306"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14794.json",
+      "sha256": "e45bf19168bd394eddecb0fabbcf2df805507481b335c929a4fb76a1780aa81f"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9753.json",
+      "sha256": "62f615d4af3e221dda1f9a9724f00e2e2a3853a9ccd991c0714dcb4dde8b4e59"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_7309.json",
+      "sha256": "0bc9c9d86ebf5b6debe6a9eb0a6a461f32519bf353691f15537626502adc839a"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_9555.json",
+      "sha256": "3afd3ba85937c9144564d2fa4017a19f4dd20ace451a3e722ff69326f87d6fd2"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3052.json",
+      "sha256": "5d2ad0db40ca20152da6a60733a68a9d0eeb599aaeec35b589f995b5a01a86e6"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14463.json",
+      "sha256": "3c84e68033cbb81c74275127352a98fdeb94ee59c2b9dbde9a936caaccaf9450"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_15763.json",
+      "sha256": "60a197db8c8960cfd97bdc14337524c71e9584fb5799f827cfa828453c777160"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/requests_6644.json",
+      "sha256": "31a64278102e149f545bd4fd3b3a1bfc4c540c3166c99ff05a5d1ec8468610be"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/rich_3278.json",
+      "sha256": "fa5c09f7863432fbb16fc179c16914e5a391f796d4eac991d52815219a44e664"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R03-analysis/fastapi_14360.json",
+      "sha256": "8dde46563b83ab8ac97d6585239b9b1a2389ce41300136bf84efed841f1a9dad"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/httpx_3672.json",
+      "sha256": "7d72bfa4007916131de657b673aadc5d36f4d1a3670bdb28209a839c61b4be50"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7309.json",
+      "sha256": "d1ffa6f4b6ab5c41737be0b1601de42ae26bd3c742124a7a92583224a05b5c46"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_9555.json",
+      "sha256": "9e9729ab0b0dbac2167417fffdd39be52e3d4d9609fbd2f36664730be43c87a4"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6592.json",
+      "sha256": "80df0b8b6a0cc0d6f190ebefc1f91f14f76d288917f7e423ad8bad1704f4503b"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/rich_3535.json",
+      "sha256": "a1c979a585f7a6636084f33aa9c2261f210e0df4e6e2da6e28fec1056dc290dd"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_6629.json",
+      "sha256": "c23cfb78f98fad3afd9cc24aeef5eb3659ab9dd17f9be4ea117fe55f68e04830"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_13537.json",
+      "sha256": "7782672807c1a3c939413d6e8c9b76559edc02c1116ae606db9595a32af6b4fa"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14873.json",
+      "sha256": "e014351c80d657b6f6c1c02891dc140b6f97b720be5ca3b568561f1893b21283"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/fastapi_14583.json",
+      "sha256": "9a14ebb12f308c04181f3150e8334aefdaf2b7a5987b57c576600acd3259193d"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R04-analysis/requests_7505.json",
+      "sha256": "817a3f0c27564271c4e5769701d62036f9d7e76949c3e5cd2c15518d634bbf68"
+    },
+    {
+      "path": "paper/feedback-to-fixes/review/evidence-audit.json",
+      "sha256": "96a42b27350f2337e01c25dd13e9df9b1421cea8ce89b614901537795fde114a"
+    },
+    {
+      "path": "research/cycles/2026-10-12-trigger-validity/analysis-repeats-R01-R02-R03.json",
+      "sha256": "ed479d4eb738cd1c156c0ed567018a0955a9550f1838e9a475ab2635789bc01d"
+    },
+    {
+      "path": "research/cycles/2026-10-12-trigger-validity/behavior-census-R02-summary.json",
+      "sha256": "2a66faf857ad323a0756be3d536ea80da96980e03b52830854fc005622586f99"
+    },
+    {
+      "path": "research/cycles/2026-10-12-trigger-validity/behavior-census-R03-summary.json",
+      "sha256": "e5e5fbc74c1241a9c6f579c3227fbc5c84ddf7f98b0d8ba08c8c63f60a3dff0c"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/cycle-summary.json",
+      "sha256": "a20f90df9cc0039ac393263394df79eaac037fdd6d9c77141876162c4fb13116"
+    },
+    {
+      "path": "research/cycles/2026-10-12-trigger-validity/behavior-census-R01-summary.json",
+      "sha256": "eb5e1de190934e134e9ddfd90a17007d9aa9af9490e7074e5c945b9d07aba521"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R01-analysis/fastapi_14873.json",
+      "sha256": "5f3c9af1100d45b301ece0ed3d26125ea6fbae2f8e49dd38836118e40e2ccb66"
+    },
+    {
+      "path": "experiments/runs/2026-10-14-feedback-refinement-R02-analysis/fastapi_14873.json",
+      "sha256": "2f2dad6cbcbe6ee8ee77f1178439ac02383431708d3466e97af6658d3628937a"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/plan-R01.json",
+      "sha256": "3ac0c977dfc7f488e67f2b94a7171e4afc417a2e27f749557b4c6df2a3e2ad10"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/plan-R02.json",
+      "sha256": "3e6fc55a7a70f67504680c6ec274a75ba0447282971ef772040b378a7211430d"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/plan-R03.json",
+      "sha256": "2a629994c4e7da7f1d99bcf485480c5d8e73a3d856111ddb1c97f57a05a78ef5"
+    },
+    {
+      "path": "research/cycles/2026-10-14-feedback-refinement/plan-R04.json",
+      "sha256": "b26d1b2fe8aac966e48a8a64d39a99d0cc18206511727818159d07d6a769f799"
+    }
+  ]
+}

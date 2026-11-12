@@ -1,0 +1,83 @@
+{
+  "version": "v0.4 native SVG Figure 1",
+  "date": "2026-11-12",
+  "svg": "figures/study-design-v04.svg",
+  "svg_sha256": "e6a86eece0e1fb7c993c3663a3d6c09bfc093ede9ae308a143ff122c6752de8c",
+  "generator": "scripts/build_study_design_svg.py",
+  "generator_sha256": "555bbcab7e915471305be113ee282f0a5995d89bfee9fda3134d8232d2e54451",
+  "budgets": {
+    "draft_seconds": 240,
+    "draft_calls": 16,
+    "constructor_seconds": 120,
+    "constructor_reads": 1,
+    "execution_seconds": 30,
+    "continuation_seconds": 150,
+    "continuation_calls": 8
+  },
+  "visible_text": [
+    "Study B | R03/R04",
+    "1",
+    "Generate & freeze D",
+    "240 s | 16 tool calls",
+    "2",
+    "Propose a check",
+    "Read-only | 120 s | ≤1 file read",
+    "3",
+    "Run the check on D",
+    "30 s timeout | at most once",
+    "Shared inputs to both arms",
+    "!",
+    "Frozen draft D",
+    "Public issue",
+    "Check specification",
+    "+ expected outcome",
+    "Precomputed result",
+    "or unavailable notice",
+    "C",
+    "Ordinary continuation",
+    "150 s | 8 tool calls",
+    "Inspect",
+    "Edit",
+    "Run",
+    "F",
+    "Advance-result continuation",
+    "150 s | 8 tool calls",
+    "Inspect",
+    "Edit",
+    "Run",
+    "Result",
+    "Fresh contexts | matched seed | no draft conversation history",
+    "Both arms may inspect, edit, and run checks."
+  ],
+  "source_date_epoch": 1794441600,
+  "exporter": {
+    "browser": "151.0.7922.34",
+    "png_pixels": [
+      3072,
+      2048
+    ],
+    "pypdf": "6.21.4"
+  },
+  "exports": {
+    "png": {
+      "path": "figures/study-design-v04.png",
+      "sha256": "6048dbbae31d89897bd6c26cc2dad738beacc83a920e70c88b8c9927cda576a2",
+      "pixels": [
+        3072,
+        2048
+      ]
+    },
+    "pdf": {
+      "path": "figures/study-design-v04.pdf",
+      "sha256": "cdbc824618672e645c5d909923a3db4d83499a80b8825ad9a96488402a8132dc",
+      "pages": 1,
+      "native_text": true,
+      "embedded_raster_images": 0,
+      "page_points": [
+        1152.0,
+        768.0
+      ]
+    }
+  },
+  "scope": "Approved SVG v02. Default rebuild regenerates SVG, verifies the versioned PNG/PDF exports, and counts every visible label. Browser export is optional when artwork changes."
+}
